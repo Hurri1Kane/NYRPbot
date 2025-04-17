@@ -76,6 +76,7 @@ class DatabaseHandler {
             await this.db.collection(this.collectionNames.tickets).createIndex({ creatorId: 1 });
             await this.db.collection(this.collectionNames.tickets).createIndex({ createdAt: -1 });
             await this.db.collection(this.collectionNames.tickets).createIndex({ channelId: 1 }, { unique: true });
+            await this.db.collection(this.collectionNames.tickets).createIndex({ lastActivity: 1 });
             
             // Offices indexes
             await this.db.collection(this.collectionNames.offices).createIndex({ status: 1 });
@@ -284,6 +285,11 @@ class DatabaseHandler {
                 ticket.createdAt = new Date().toISOString();
             }
             
+            // Set last activity to creation time if not specified
+            if (!ticket.lastActivity) {
+                ticket.lastActivity = ticket.createdAt;
+            }
+            
             const result = await this.db.collection(this.collectionNames.tickets).insertOne(ticket);
             return ticket._id || result.insertedId.toString();
         } catch (error) {
@@ -357,6 +363,88 @@ class DatabaseHandler {
                 .toArray();
         } catch (error) {
             console.error('Error getting open tickets:', error);
+            throw error;
+        }
+    }
+    
+    /**
+     * Get all active tickets for a specific user
+     * @param {string} userId - The user ID
+     * @returns {Promise<Array>} - The user's active tickets
+     */
+    async getUserActiveTickets(userId) {
+        try {
+            return await this.db.collection(this.collectionNames.tickets)
+                .find({ 
+                    creatorId: userId,
+                    status: 'open'
+                })
+                .toArray();
+        } catch (error) {
+            console.error('Error getting user active tickets:', error);
+            throw error;
+        }
+    }
+    
+    /**
+     * Get all tickets by status
+     * @param {string} status - The ticket status ('open', 'closed', etc.)
+     * @returns {Promise<Array>} - The matching tickets
+     */
+    async getTicketsByStatus(status) {
+        try {
+            return await this.db.collection(this.collectionNames.tickets)
+                .find({ status: status })
+                .sort({ createdAt: -1 })
+                .toArray();
+        } catch (error) {
+            console.error('Error getting tickets by status:', error);
+            throw error;
+        }
+    }
+    
+    /**
+     * Get tickets that have been inactive for a certain time
+     * @param {number} hoursInactive - Hours of inactivity
+     * @returns {Promise<Array>} - Inactive tickets
+     */
+    async getInactiveTickets(hoursInactive) {
+        try {
+            const cutoffTime = new Date();
+            cutoffTime.setHours(cutoffTime.getHours() - hoursInactive);
+            
+            return await this.db.collection(this.collectionNames.tickets)
+                .find({ 
+                    status: 'open',
+                    lastActivity: { $lt: cutoffTime.toISOString() }
+                })
+                .toArray();
+        } catch (error) {
+            console.error('Error getting inactive tickets:', error);
+            throw error;
+        }
+    }
+    
+    /**
+     * Update the last activity timestamp for a ticket
+     * @param {string} ticketId - The ticket ID
+     * @returns {Promise<boolean>} - True if updated successfully
+     */
+    async updateTicketActivity(ticketId) {
+        try {
+            const result = await this.db.collection(this.collectionNames.tickets).updateOne(
+                { _id: this._validateId(ticketId) },
+                { 
+                    $set: { 
+                        lastActivity: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    }
+                }
+            );
+            
+            return result.modifiedCount > 0;
+        } catch (error) {
+            console.error('Error updating ticket activity:', error);
             throw error;
         }
     }

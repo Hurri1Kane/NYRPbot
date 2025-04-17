@@ -48,7 +48,10 @@ module.exports = {
         staffLog: '1357029741021892748',
         infractionAnnouncement: '1357029740094951513',
         promotionAnnouncement: '1357029740094951513',
-        ticketCategory: '1357029741105594619'
+        ticketCategory: '1357029741105594619', // Parent category for all ticket channels
+        ticketTranscriptGeneral: '1361439312666820700', // Channel for general ticket transcripts
+        ticketTranscriptIngame: '1361678254125224148', // Channel for in-game ticket transcripts
+        ticketTranscriptStaff: '1361678271208624189' // Channel for staff report ticket transcripts
     },
     
     // Cooldowns for commands (in milliseconds)
@@ -67,9 +70,9 @@ module.exports = {
     
     // Ticket categories
     ticketCategories: [
-        { id: 'general', name: 'General Support', emoji: '❓' },
-        { id: 'ingame', name: 'In-Game Report', emoji: '🎮' },
-        { id: 'staff', name: 'Staff Report', emoji: '🛡️' }
+        { id: 'general', name: 'General Support', emoji: '❓', categoryId: '1361439094391177336', transcriptChannelId: '1361439312666820700' },
+        { id: 'ingame', name: 'In-Game Report', emoji: '🎮', categoryId: '1361678031017476197', transcriptChannelId: '1361678254125224148' },
+        { id: 'staff', name: 'Staff Report', emoji: '🛡️', categoryId: '1361678114891239520', transcriptChannelId: '1361678271208624189' }
     ],
     
     // Infraction types
@@ -91,5 +94,14 @@ module.exports = {
         announcePromotions: true,
         minReasonLength: 10,
         dmPromoted: true
+    },
+    
+    // Ticket settings
+    ticketSettings: {
+        autoCloseAfterHours: 72, // Auto-close tickets after 72 hours of inactivity
+        reminderAfterHours: 24,  // Send reminder after 24 hours of inactivity
+        deleteClosedAfterHours: 24, // Delete closed ticket channels after 24 hours
+        maxActivePerUser: 1,     // Maximum active tickets per user
+        transcriptGenerationEnabled: true // Whether to automatically generate transcripts on close
     }
 };

@@ -1,5 +1,5 @@
 // index.js - Main entry point for the NYRP Discord Staff Management Bot
-const { Client, GatewayIntentBits, Partials, Collection, Events } = require('discord.js');
+const { Client, GatewayIntentBits, Partials, Collection, Events, EmbedBuilder } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
@@ -248,6 +248,133 @@ function setupScheduledTasks() {
             }
         } catch (error) {
             console.error('Error checking expired suspensions:', error);
+        }
+    });
+
+    // Check for inactive tickets every 6 hours
+    cron.schedule('0 */6 * * *', async () => {
+        try {
+            console.log('Running ticket inactivity check...');
+            
+            // Get tickets that have been inactive for 24 hours
+            const inactiveTickets = await db.getInactiveTickets(24);
+            console.log(`Found ${inactiveTickets.length} inactive tickets`);
+            
+            for (const ticket of inactiveTickets) {
+                // Get the channel
+                const guild = client.guilds.cache.get(process.env.GUILD_ID);
+                if (!guild) continue;
+                
+                const channel = guild.channels.cache.get(ticket.channelId);
+                if (!channel) continue;
+                
+                // Check if we've already sent a reminder (don't spam reminders)
+                if (ticket.reminderSent) continue;
+                
+                // Send reminder message
+                const reminderEmbed = new EmbedBuilder()
+                    .setTitle('Ticket Reminder')
+                    .setDescription('This ticket has been inactive for 24 hours. If you need further assistance, please respond. Otherwise, you can close this ticket by clicking the Close Ticket button.')
+                    .setColor('#FFA500') // Orange
+                    .setTimestamp();
+                    
+                await channel.send({
+                    content: `<@${ticket.creatorId}> <@${ticket.claimedBy || '&' + config.staffRoles.staffTeam.id}>`,
+                    embeds: [reminderEmbed]
+                });
+                
+                // Mark reminder as sent
+                await db.updateTicket(ticket._id, {
+                    reminderSent: true
+                });
+                
+                console.log(`Sent reminder for ticket ${ticket._id}`);
+            }
+            
+            // Get tickets inactive for 72 hours (3 days) and auto-close them
+            const veryInactiveTickets = await db.getInactiveTickets(72);
+            console.log(`Found ${veryInactiveTickets.length} very inactive tickets to auto-close`);
+            
+            for (const ticket of veryInactiveTickets) {
+                // Get the channel
+                const guild = client.guilds.cache.get(process.env.GUILD_ID);
+                if (!guild) continue;
+                
+                const channel = guild.channels.cache.get(ticket.channelId);
+                if (!channel) continue;
+                
+                // Auto-close the ticket
+                const closingEmbed = new EmbedBuilder()
+                    .setTitle('Ticket Auto-Closed')
+                    .setDescription('This ticket has been automatically closed due to 3 days of inactivity. If you still need assistance, please open a new ticket.')
+                    .setColor('#E74C3C') // Red
+                    .setTimestamp();
+                    
+                await channel.send({
+                    content: `<@${ticket.creatorId}>`,
+                    embeds: [closingEmbed]
+                });
+                
+                // Update ticket in database
+                await db.updateTicket(ticket._id, {
+                    status: 'closed',
+                    closedBy: client.user.id,
+                    closedAt: new Date().toISOString(),
+                    closedReason: 'Auto-closed due to inactivity'
+                });
+                
+                // Add audit log
+                await db.addAuditLog({
+                    actionType: 'TICKET_AUTO_CLOSED',
+                    userId: client.user.id,
+                    targetId: ticket.creatorId,
+                    details: {
+                        ticketId: ticket._id,
+                        channelId: ticket.channelId,
+                        reason: 'Inactivity (72 hours)'
+                    }
+                });
+                
+                // Create transcript and delete after a delay
+                try {
+                    const discordTranscripts = require('discord-html-transcripts');
+                    const transcript = await discordTranscripts.createTranscript(channel, {
+                        limit: -1,
+                        fileName: `transcript-${ticket._id}.html`,
+                        saveImages: true,
+                        footerText: `Transcript of auto-closed ticket ${ticket._id}`,
+                        poweredBy: false
+                    });
+                    
+                    // Send transcript to staff log
+                    const staffLogChannel = client.channels.cache.get(config.channels.staffLog);
+                    if (staffLogChannel) {
+                        await staffLogChannel.send({
+                            content: `Transcript for auto-closed ticket ${ticket._id}:`,
+                            files: [transcript]
+                        });
+                    }
+                    
+                    // Schedule channel deletion after 24 hours
+                    setTimeout(async () => {
+                        try {
+                            if (channel.deletable) {
+                                await channel.delete();
+                                console.log(`Deleted channel for auto-closed ticket ${ticket._id}`);
+                            }
+                        } catch (deleteError) {
+                            console.error(`Error deleting channel for ticket ${ticket._id}:`, deleteError);
+                        }
+                    }, 24 * 60 * 60 * 1000); // 24 hours
+                    
+                } catch (transcriptError) {
+                    console.error(`Error creating transcript for ticket ${ticket._id}:`, transcriptError);
+                }
+                
+                console.log(`Auto-closed ticket ${ticket._id}`);
+            }
+        } catch (error) {
+            console.error('Error in ticket inactivity check:', error);
         }
     });
     
