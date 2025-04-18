@@ -108,6 +108,9 @@ async function showUserInfractions(interaction, client, targetUser) {
             // Create field content
             let fieldContent = `Type: ${formattedType}\nDate: ${timestamp}\nIssued by: ${issuerName}\nStatus: ${statusText}`;
             
+            // Add appealable status
+            fieldContent += `\nAppealable: ${infraction.appealable === true ? '✅ Yes' : infraction.appealable === false ? '❌ No' : '❓ Unknown'}`;
+            
             // Add additional information based on type
             if (infraction.type.startsWith('suspension_') && infraction.duration) {
                 fieldContent += `\nDuration: ${infraction.duration}`;
@@ -115,6 +118,11 @@ async function showUserInfractions(interaction, client, targetUser) {
             
             // Add reason
             fieldContent += `\nReason: ${infraction.reason}`;
+            
+            // Add evidence if available
+            if (infraction.evidence && infraction.evidence.length > 0) {
+                fieldContent += `\nEvidence: ${infraction.evidence.map((link, index) => `[Link ${index + 1}](${link})`).join(', ')}`;
+            }
             
             embed.addFields({
                 name: `Infraction ID: ${infraction._id}`,
@@ -227,13 +235,21 @@ async function showRecentInfractions(interaction, client) {
             // Create field content
             let fieldContent = `User: ${userName}\nType: ${formattedType}\nDate: ${timestamp}\nIssued by: ${issuerName}\nStatus: ${statusText}`;
             
+            // Add appealable status
+            fieldContent += `\nAppealable: ${infraction.appealable === true ? '✅ Yes' : infraction.appealable === false ? '❌ No' : '❓ Unknown'}`;
+            
             // Add reason (shortened if too long)
-            const maxReasonLength = 100;
+            const maxReasonLength = 75;
             const reason = infraction.reason.length > maxReasonLength 
                 ? infraction.reason.substring(0, maxReasonLength) + '...' 
                 : infraction.reason;
             
             fieldContent += `\nReason: ${reason}`;
+            
+            // Add evidence if available (shortened for overview)
+            if (infraction.evidence && infraction.evidence.length > 0) {
+                fieldContent += `\nEvidence: ${infraction.evidence.length} link(s) provided`;
+            }
             
             embed.addFields({
                 name: `Infraction ID: ${infraction._id}`,

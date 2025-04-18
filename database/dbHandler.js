@@ -145,30 +145,32 @@ class DatabaseHandler {
     // =========================================================================
     
     /**
-     * Add a new infraction to the database
-     * @param {Object} infraction - The infraction data
-     * @returns {Promise<string>} - The ID of the inserted infraction
-     */
-    async addInfraction(infraction) {
-        try {
-            // Set created timestamp if not already set
-            if (!infraction.timestamp) {
-                infraction.timestamp = new Date().toISOString();
-            }
-            
-            // Set defaults for optional fields
-            const infractionData = {
-                status: 'pending_approval',
-                ...infraction
-            };
-            
-            const result = await this.db.collection(this.collectionNames.infractions).insertOne(infractionData);
-            return infraction._id || result.insertedId.toString();
-        } catch (error) {
-            console.error('Error adding infraction:', error);
-            throw error;
+ * Add a new infraction to the database
+ * @param {Object} infraction - The infraction data
+ * @returns {Promise<string>} - The ID of the inserted infraction
+ */
+async addInfraction(infraction) {
+    try {
+        // Set created timestamp if not already set
+        if (!infraction.timestamp) {
+            infraction.timestamp = new Date().toISOString();
         }
+        
+        // Set defaults for optional fields
+        const infractionData = {
+            status: 'pending_approval',
+            evidence: infraction.evidence || [],
+            appealable: 'appealable' in infraction ? infraction.appealable : null,
+            ...infraction
+        };
+        
+        const result = await this.db.collection(this.collectionNames.infractions).insertOne(infractionData);
+        return infraction._id || result.insertedId.toString();
+    } catch (error) {
+        console.error('Error adding infraction:', error);
+        throw error;
     }
+}
     
     /**
      * Update an infraction's status and additional details

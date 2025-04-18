@@ -14,12 +14,16 @@ module.exports = {
         // Get staff roles configuration
         const staffRoles = client.config.staffRoles;
         
-        // Check if user has Director rank
-        const hasPermission = interaction.member.roles.cache.has(staffRoles.director.id);
+        // Check if user has any Director rank role
+        const hasPermission = interaction.member.roles.cache.some(role =>
+            [staffRoles.assistantDirector.id, staffRoles.leadAssistantDirector.id,
+             staffRoles.viceDeputyDirector.id, staffRoles.deputyDirector.id, 
+             staffRoles.director.id].includes(role.id)
+        );
         
         if (!hasPermission) {
             return interaction.reply({
-                content: 'You must be a Director to use this command.',
+                content: 'You must be an Assistant Director or higher to use this command.',
                 ephemeral: true
             });
         }

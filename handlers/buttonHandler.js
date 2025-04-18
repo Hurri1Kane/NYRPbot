@@ -1,5 +1,5 @@
 // handlers/buttonHandler.js
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits, StringSelectMenuBuilder } = require('discord.js');
 const db = require('../database/dbHandler');
 
 /**
@@ -45,6 +45,87 @@ module.exports = async function handleButtonInteraction(interaction, client) {
             case 'ticket_delete':
                 await handleTicketDelete(interaction, client, params);
                 break;
+
+            // =============================
+            // APPEALABLE/NON-APPEALABLE BUTTONS
+            // =============================
+
+            case 'appealable':
+                await handleAppealableSelection(interaction, client, params);
+                break;
+                
+            // Then add this function at the bottom of the file:
+
+            /**
+             * Handle the selection of whether an infraction is appealable or not
+             */
+            async function handleAppealableSelection(interaction, client, params) {
+                const targetUserId = params[0];
+                const isAppealable = params[1] === 'true';
+                
+                // Get infraction data from temporary storage
+                if (!client.infractionData || !client.infractionData.has(targetUserId)) {
+                    return interaction.reply({
+                        content: 'Infraction data not found. Please try creating the infraction again.',
+                        ephemeral: true
+                    });
+                }
+                
+                const infractionData = client.infractionData.get(targetUserId);
+                
+                // Update the appealable status
+                infractionData.appealable = isAppealable;
+                client.infractionData.set(targetUserId, infractionData);
+                
+                // Get target user information
+                const targetUser = await client.users.fetch(targetUserId);
+                
+                // Create infraction type selection menu
+                const infractionTypesRow = new ActionRowBuilder()
+                    .addComponents(
+                        new StringSelectMenuBuilder()
+                            .setCustomId(`infraction_type:${targetUserId}`)
+                            .setPlaceholder('Select infraction type')
+                            .addOptions([
+                                { label: 'Warning', value: 'warning', description: 'Formal warning with no additional consequences' },
+                                { label: 'Suspension (24h)', value: 'suspension_24h', description: 'Suspend for 24 hours' },
+                                { label: 'Suspension (48h)', value: 'suspension_48h', description: 'Suspend for 48 hours' },
+                                { label: 'Suspension (72h)', value: 'suspension_72h', description: 'Suspend for 72 hours' },
+                                { label: 'Suspension (1 week)', value: 'suspension_1w', description: 'Suspend for 1 week' },
+                                { label: 'Suspension (2 weeks)', value: 'suspension_2w', description: 'Suspend for 2 weeks' },
+                                { label: 'Demotion', value: 'demotion', description: 'Reduce to a lower rank' },
+                                { label: 'Blacklist', value: 'blacklist', description: 'Permanent removal from staff team' },
+                                { label: 'Under Investigation', value: 'under_investigation', description: 'Place under investigation' }
+                            ])
+                    );
+                
+                // Create a new preview embed
+                const previewEmbed = new EmbedBuilder()
+                    .setTitle('Create Staff Infraction')
+                    .setColor('#FF5555')
+                    .setDescription(`You are creating an infraction for ${targetUser.tag}`)
+                    .addFields(
+                        { name: 'Target', value: targetUser.tag, inline: true },
+                        { name: 'Appealable', value: isAppealable ? '✅ Yes' : '❌ No', inline: true },
+                        { name: 'Reason', value: infractionData.reason }
+                    );
+                
+                // Add evidence field if provided
+                if (infractionData.evidence && infractionData.evidence.length > 0) {
+                    previewEmbed.addFields({
+                        name: 'Evidence',
+                        value: infractionData.evidence.map((link, index) => `[Evidence ${index + 1}](${link})`).join('\n')
+                    });
+                }
+                
+                previewEmbed.setFooter({ text: 'Select an infraction type to continue' });
+                
+                // Update the message
+                await interaction.update({
+                    embeds: [previewEmbed],
+                    components: [infractionTypesRow]
+                });
+            }
             
             // =============================
             // INFRACTION SYSTEM BUTTONS
@@ -839,12 +920,24 @@ async function handleInfractionApprove(interaction, client, params) {
                     { name: 'Type', value: formattedType, inline: true },
                     { name: 'Issued By', value: `<@${infraction.issuer}>`, inline: true },
                     { name: 'Approved By', value: `<@${interaction.user.id}>`, inline: true },
-                    { name: 'Reason', value: infraction.reason },
-                    infraction.duration ? 
-                        { name: 'Duration', value: infraction.duration, inline: true } : 
-                        { name: '\u200B', value: '\u200B', inline: true }
-                )
-                .setTimestamp();
+                    { name: 'Appealable', value: infraction.appealable ? '✅ Yes' : '❌ No', inline: true },
+                    { name: 'Reason', value: infraction.reason }
+                );
+                
+            // Add evidence if available
+            if (infraction.evidence && infraction.evidence.length > 0) {
+                embed.addFields({
+                    name: 'Evidence',
+                    value: infraction.evidence.map((link, index) => `[Evidence ${index + 1}](${link})`).join('\n')
+                });
+            }
+                
+            // Add duration if applicable
+            if (infraction.duration) {
+                embed.addFields({ name: 'Duration', value: infraction.duration, inline: true });
+            }
+                
+            embed.setTimestamp();
             
             await announcementChannel.send({ embeds: [embed] });
         }
@@ -871,7 +964,8 @@ async function handleInfractionApprove(interaction, client, params) {
                         .setDescription(`Infraction applied to ${targetMember.user.tag}`)
                         .addFields(
                             { name: 'Type', value: formattedType, inline: true },
-                            { name: 'Approved By', value: interaction.user.tag, inline: true }
+                            { name: 'Approved By', value: interaction.user.tag, inline: true },
+                            { name: 'Appealable', value: infraction.appealable ? '✅ Yes' : '❌ No', inline: true }
                         )
                         .setTimestamp()
                 ]
@@ -886,9 +980,48 @@ async function handleInfractionApprove(interaction, client, params) {
             details: {
                 infractionId: infractionId,
                 type: infraction.type,
-                reason: infraction.reason
+                reason: infraction.reason,
+                appealable: infraction.appealable,
+                evidence: infraction.evidence
             }
         });
+        
+        // Send a direct message to the target user about their infraction
+        try {
+            const appealableText = infraction.appealable 
+                ? "This infraction is appealable. You may contact the Director team to appeal this decision."
+                : "This infraction is NOT appealable. The decision is final.";
+                
+            const dmEmbed = new EmbedBuilder()
+                .setTitle(`Infraction Notification`)
+                .setColor('#FF5555')
+                .setDescription(`You have received a staff infraction.`)
+                .addFields(
+                    { name: 'Type', value: formattedType, inline: true },
+                    { name: 'Issued By', value: `<@${infraction.issuer}>`, inline: true },
+                    { name: 'Reason', value: infraction.reason },
+                    { name: 'Appeal Status', value: appealableText }
+                );
+                
+            // Add evidence if available
+            if (infraction.evidence && infraction.evidence.length > 0) {
+                dmEmbed.addFields({
+                    name: 'Evidence',
+                    value: infraction.evidence.map((link, index) => `[Evidence ${index + 1}](${link})`).join('\n')
+                });
+            }
+                
+            // Add duration if applicable
+            if (infraction.duration) {
+                dmEmbed.addFields({ name: 'Duration', value: infraction.duration, inline: true });
+            }
+                
+            dmEmbed.setTimestamp();
+            
+            await targetMember.send({ embeds: [dmEmbed] });
+        } catch (dmError) {
+            console.log(`Could not DM user ${targetMember.id} about their infraction:`, dmError.message);
+        }
         
     } catch (error) {
         console.error('Error applying infraction:', error);

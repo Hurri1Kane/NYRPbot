@@ -17,124 +17,153 @@ module.exports = async function handleSelectMenuInteraction(interaction, client)
         // Process different select menu actions
         switch (action) {
             // Infraction type selection
-            case 'infraction_type': {
-                const selectedType = interaction.values[0];
-                const targetUserId = params[0];
-                
-                // Get reason from client's temporary storage
-                const reason = client.infractionReasons.get(targetUserId);
-                if (!reason) {
-                    return interaction.update({
-                        content: 'Sorry, the infraction reason could not be found. Please try again.',
+                case 'infraction_type': {
+                    const selectedType = interaction.values[0];
+                    const targetUserId = params[0];
+                    
+                    // Get infraction data from client's temporary storage
+                    if (!client.infractionData || !client.infractionData.has(targetUserId)) {
+                        return interaction.update({
+                            content: 'Infraction data not found. Please try creating the infraction again.',
+                            components: []
+                        });
+                    }
+                    
+                    const infractionData = client.infractionData.get(targetUserId);
+                    
+                    // Check if appealable status has been set
+                    if (infractionData.appealable === null) {
+                        return interaction.update({
+                            content: 'Please select whether the infraction is appealable before choosing the type.',
+                            components: []
+                        });
+                    }
+                    
+                    // Update the infraction type
+                    infractionData.type = selectedType;
+                    client.infractionData.set(targetUserId, infractionData);
+                    
+                    // Create an infraction ID
+                    const infractionId = `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+                    
+                    // Create the infraction record
+                    const infraction = {
+                        _id: infractionId,
+                        userId: targetUserId,
+                        type: selectedType,
+                        issuer: interaction.user.id,
+                        reason: infractionData.reason,
+                        evidence: infractionData.evidence,
+                        appealable: infractionData.appealable,
+                        timestamp: new Date().toISOString(),
+                        status: 'pending_approval'
+                    };
+                    
+                    // Add additional fields based on type
+                    if (selectedType.startsWith('suspension_')) {
+                        const durationMap = {
+                            'suspension_24h': '24 hours',
+                            'suspension_48h': '48 hours',
+                            'suspension_72h': '72 hours',
+                            'suspension_1w': '1 week',
+                            'suspension_2w': '2 weeks'
+                        };
+                        infraction.duration = durationMap[selectedType];
+                        
+                        // Calculate expiry date
+                        const expiry = new Date();
+                        if (selectedType.endsWith('24h')) {
+                            expiry.setHours(expiry.getHours() + 24);
+                        } else if (selectedType.endsWith('48h')) {
+                            expiry.setHours(expiry.getHours() + 48);
+                        } else if (selectedType.endsWith('72h')) {
+                            expiry.setHours(expiry.getHours() + 72);
+                        } else if (selectedType.endsWith('1w')) {
+                            expiry.setDate(expiry.getDate() + 7);
+                        } else if (selectedType.endsWith('2w')) {
+                            expiry.setDate(expiry.getDate() + 14);
+                        }
+                        infraction.expiry = expiry.toISOString();
+                    }
+                    
+                    // Save infraction to database
+                    await db.addInfraction(infraction);
+                    
+                    // Clean up temporary storage
+                    client.infractionData.delete(targetUserId);
+                    
+                    // Format the infraction type for display
+                    const formattedType = formatInfractionType(selectedType);
+                    
+                    // Fetch target user information
+                    const targetUser = await client.users.fetch(targetUserId);
+                    
+                    // Send for Director approval
+                    const approvalChannel = client.channels.cache.get(client.config.channels.infractionApproval);
+                    if (approvalChannel) {
+                        const embed = new EmbedBuilder()
+                            .setTitle(`Infraction Approval Required`)
+                            .setColor('#FF5555')
+                            .setDescription(`An infraction has been created by ${interaction.user.tag}`)
+                            .addFields(
+                                { name: 'Target', value: targetUser.tag, inline: true },
+                                { name: 'Type', value: formattedType, inline: true },
+                                { name: 'Appealable', value: infraction.appealable ? '✅ Yes' : '❌ No', inline: true },
+                                { name: 'Reason', value: infraction.reason }
+                            );
+                        
+                        // Add evidence field if provided
+                        if (infraction.evidence && infraction.evidence.length > 0) {
+                            embed.addFields({
+                                name: 'Evidence',
+                                value: infraction.evidence.map((link, index) => `[Evidence ${index + 1}](${link})`).join('\n')
+                            });
+                        }
+                        
+                        // Add duration field if applicable
+                        if (selectedType.startsWith('suspension_')) {
+                            embed.addFields({ name: 'Duration', value: infraction.duration, inline: true });
+                        }
+                        
+                        embed.setTimestamp();
+                        
+                        const buttons = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId(`infraction_approve:${infractionId}`)
+                                    .setLabel('Approve')
+                                    .setStyle(ButtonStyle.Success),
+                                new ButtonBuilder()
+                                    .setCustomId(`infraction_deny:${infractionId}`)
+                                    .setLabel('Deny')
+                                    .setStyle(ButtonStyle.Danger)
+                            );
+                        
+                        await approvalChannel.send({ embeds: [embed], components: [buttons] });
+                    }
+                    
+                    // Update the original interaction
+                    await interaction.update({
+                        content: `Infraction created and sent for Director approval. Type: ${formattedType}, Appealable: ${infraction.appealable ? 'Yes' : 'No'}`,
                         components: []
                     });
-                }
-                
-                // Create an infraction ID
-                const infractionId = `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-                
-                // Create the infraction record
-                const infraction = {
-                    _id: infractionId,
-                    userId: targetUserId,
-                    type: selectedType,
-                    issuer: interaction.user.id,
-                    reason: reason,
-                    timestamp: new Date().toISOString(),
-                    status: 'pending_approval'
-                };
-                
-                // Add additional fields based on type
-                if (selectedType.startsWith('suspension_')) {
-                    const durationMap = {
-                        'suspension_24h': '24 hours',
-                        'suspension_48h': '48 hours',
-                        'suspension_72h': '72 hours',
-                        'suspension_1w': '1 week',
-                        'suspension_2w': '2 weeks'
-                    };
-                    infraction.duration = durationMap[selectedType];
                     
-                    // Calculate expiry date
-                    const expiry = new Date();
-                    if (selectedType.endsWith('24h')) {
-                        expiry.setHours(expiry.getHours() + 24);
-                    } else if (selectedType.endsWith('48h')) {
-                        expiry.setHours(expiry.getHours() + 48);
-                    } else if (selectedType.endsWith('72h')) {
-                        expiry.setHours(expiry.getHours() + 72);
-                    } else if (selectedType.endsWith('1w')) {
-                        expiry.setDate(expiry.getDate() + 7);
-                    } else if (selectedType.endsWith('2w')) {
-                        expiry.setDate(expiry.getDate() + 14);
-                    }
-                    infraction.expiry = expiry.toISOString();
-                }
-                
-                // Save infraction to database
-                await db.addInfraction(infraction);
-                
-                // Clean up temporary storage
-                client.infractionReasons.delete(targetUserId);
-                
-                // Format the infraction type for display
-                const formattedType = formatInfractionType(selectedType);
-                
-                // Fetch target user information
-                const targetUser = await client.users.fetch(targetUserId);
-                
-                // Send for Director approval
-                const approvalChannel = client.channels.cache.get(client.config.channels.infractionApproval);
-                if (approvalChannel) {
-                    const embed = new EmbedBuilder()
-                        .setTitle(`Infraction Approval Required`)
-                        .setColor('#FF5555')
-                        .setDescription(`An infraction has been created by ${interaction.user.tag}`)
-                        .addFields(
-                            { name: 'Target', value: targetUser.tag, inline: true },
-                            { name: 'Type', value: formattedType, inline: true },
-                            { name: 'Reason', value: reason },
-                            selectedType.startsWith('suspension_') ? 
-                                { name: 'Duration', value: infraction.duration, inline: true } : 
-                                { name: '\u200B', value: '\u200B', inline: true }
-                        )
-                        .setTimestamp();
+                    // Add audit log
+                    await db.addAuditLog({
+                        actionType: 'INFRACTION_CREATED',
+                        userId: interaction.user.id,
+                        targetId: targetUserId,
+                        details: {
+                            infractionId: infractionId,
+                            type: selectedType,
+                            reason: infraction.reason,
+                            appealable: infraction.appealable,
+                            evidence: infraction.evidence
+                        }
+                    });
                     
-                    const buttons = new ActionRowBuilder()
-                        .addComponents(
-                            new ButtonBuilder()
-                                .setCustomId(`infraction_approve:${infractionId}`)
-                                .setLabel('Approve')
-                                .setStyle(ButtonStyle.Success),
-                            new ButtonBuilder()
-                                .setCustomId(`infraction_deny:${infractionId}`)
-                                .setLabel('Deny')
-                                .setStyle(ButtonStyle.Danger)
-                        );
-                    
-                    await approvalChannel.send({ embeds: [embed], components: [buttons] });
+                    break;
                 }
-                
-                // Update the original interaction
-                await interaction.update({
-                    content: `Infraction created and sent for Director approval. Type: ${formattedType}`,
-                    components: []
-                });
-                
-                // Add audit log
-                await db.addAuditLog({
-                    actionType: 'INFRACTION_CREATED',
-                    userId: interaction.user.id,
-                    targetId: targetUserId,
-                    details: {
-                        infractionId: infractionId,
-                        type: selectedType,
-                        reason: reason
-                    }
-                });
-                
-                break;
-            }
             
             // Promotion rank selection
             case 'promotion_rank': {

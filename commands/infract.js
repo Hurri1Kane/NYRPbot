@@ -12,16 +12,23 @@ module.exports = {
         .addStringOption(option => 
             option.setName('reason')
                 .setDescription('The reason for the infraction')
-                .setRequired(true)),
+                .setRequired(true))
+        .addStringOption(option => 
+            option.setName('evidence')
+                .setDescription('Evidence for the infraction (optional)')
+                .setRequired(false)),
     async execute(interaction, client) {
         // Get staff roles configuration
         const staffRoles = client.config.staffRoles;
         
         // Check if user has Internal Affairs or higher rank
+        // Now also include all director roles
         const hasPermission = interaction.member.roles.cache.some(role => 
             [staffRoles.trialInternalAffairs.id, staffRoles.internalAffairs.id, 
              staffRoles.internalAffairsDirector.id, staffRoles.highRank.id,
-             staffRoles.seniorHighRank.id].includes(role.id)
+             staffRoles.seniorHighRank.id, staffRoles.assistantDirector.id, 
+             staffRoles.leadAssistantDirector.id, staffRoles.viceDeputyDirector.id, 
+             staffRoles.deputyDirector.id, staffRoles.director.id].includes(role.id)
         );
         
         if (!hasPermission) {
@@ -33,6 +40,7 @@ module.exports = {
         
         const targetUser = interaction.options.getUser('user');
         const reason = interaction.options.getString('reason');
+        const evidence = interaction.options.getString('evidence') || 'No evidence provided';
         
         // Get the target member
         const guild = interaction.guild;
@@ -67,11 +75,15 @@ module.exports = {
                     ])
             );
         
-        // Store the reason in the client's temporary storage for access when the menu is used
+        // Store the reason and evidence in the client's temporary storage for access when the menu is used
         if (!client.infractionReasons) {
             client.infractionReasons = new Map();
         }
+        if (!client.infractionEvidence) {
+            client.infractionEvidence = new Map();
+        }
         client.infractionReasons.set(targetUser.id, reason);
+        client.infractionEvidence.set(targetUser.id, evidence);
         
         // Create a preview embed for the infraction
         const previewEmbed = new EmbedBuilder()
@@ -81,7 +93,8 @@ module.exports = {
             .addFields(
                 { name: 'Target', value: targetUser.tag, inline: true },
                 { name: 'Current Rank', value: getCurrentRank(targetMember, staffRoles), inline: true },
-                { name: 'Reason', value: reason }
+                { name: 'Reason', value: reason },
+                { name: 'Evidence', value: evidence }
             )
             .setFooter({ text: 'Select an infraction type below' });
         

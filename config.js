@@ -27,9 +27,9 @@ module.exports = {
         director: { id: '1357029738173960287', name: 'Director', category: 'directive' },
 
         // Special Status Roles
-        underInvestigation: { id: '1350198102472261794', name: 'Under Investigation' },
-        blacklisted: { id: '1345024258908229744', name: 'Blacklisted' },
-        suspended: { id: '1353863685717622918', name: 'Suspended' },
+        underInvestigation: { id: '1357029738173960292', name: 'Under Investigation' },
+        blacklisted: { id: '1357029738173960291', name: 'Blacklisted' },
+        suspended: { id: '1362466330699108483', name: 'Suspended' },
 
         // General Roles
         staffTeam: { id: '1357029738052452487', name: 'NYRP Staff Team' },
@@ -38,7 +38,7 @@ module.exports = {
         moderation: { id: '1357029738081947823', name: 'Moderation' },
         administration: { id: '1357029738081947828', name: 'Administration' },
         internalAffairsCategory: { id: '1357029738115240141', name: 'Internal Affairs' },
-        management: { id: '1346911928475193354', name: 'Management' },
+        management: { id: '1357029738144727271', name: 'Management' },
         directiveTeam: { id: '1358014708866875572', name: 'Directive Team' }
     },
     
@@ -75,19 +75,72 @@ module.exports = {
         { id: 'staff', name: 'Staff Report', emoji: '🛡️', categoryId: '1361678114891239520', transcriptChannelId: '1361678271208624189' }
     ],
     
-    // Infraction types
-    infractionTypes: {
-        warning: { name: 'Warning', color: '#FFA500', description: 'Formal warning with no additional consequences' },
-        suspension_24h: { name: 'Suspension (24h)', color: '#FF5555', description: 'Suspend for 24 hours', duration: '24 hours' },
-        suspension_48h: { name: 'Suspension (48h)', color: '#FF5555', description: 'Suspend for 48 hours', duration: '48 hours' },
-        suspension_72h: { name: 'Suspension (72h)', color: '#FF5555', description: 'Suspend for 72 hours', duration: '72 hours' },
-        suspension_1w: { name: 'Suspension (1 week)', color: '#FF5555', description: 'Suspend for 1 week', duration: '1 week' },
-        suspension_2w: { name: 'Suspension (2 weeks)', color: '#FF5555', description: 'Suspend for 2 weeks', duration: '2 weeks' },
-        demotion: { name: 'Demotion', color: '#9A5BAF', description: 'Reduce to a lower rank' },
-        blacklist: { name: 'Blacklist', color: '#000000', description: 'Permanent removal from staff team' },
-        under_investigation: { name: 'Under Investigation', color: '#AF905B', description: 'Place under investigation' }
+    // config.js
+// Update the infractionTypes section
+
+// Infraction types
+infractionTypes: {
+    warning: { 
+        name: 'Warning', 
+        color: '#FFA500', 
+        description: 'Formal warning with no additional consequences',
+        defaultAppealable: true 
     },
-    
+    suspension_24h: { 
+        name: 'Suspension (24h)', 
+        color: '#FF5555', 
+        description: 'Suspend for 24 hours', 
+        duration: '24 hours',
+        defaultAppealable: true 
+    },
+    suspension_48h: { 
+        name: 'Suspension (48h)', 
+        color: '#FF5555', 
+        description: 'Suspend for 48 hours', 
+        duration: '48 hours',
+        defaultAppealable: true 
+    },
+    suspension_72h: { 
+        name: 'Suspension (72h)', 
+        color: '#FF5555', 
+        description: 'Suspend for 72 hours', 
+        duration: '72 hours',
+        defaultAppealable: true 
+    },
+    suspension_1w: { 
+        name: 'Suspension (1 week)', 
+        color: '#FF5555', 
+        description: 'Suspend for 1 week', 
+        duration: '1 week',
+        defaultAppealable: false 
+    },
+    suspension_2w: { 
+        name: 'Suspension (2 weeks)', 
+        color: '#FF5555', 
+        description: 'Suspend for 2 weeks', 
+        duration: '2 weeks',
+        defaultAppealable: false 
+    },
+    demotion: { 
+        name: 'Demotion', 
+        color: '#9A5BAF', 
+        description: 'Reduce to a lower rank',
+        defaultAppealable: false 
+    },
+    blacklist: { 
+        name: 'Blacklist', 
+        color: '#000000', 
+        description: 'Permanent removal from staff team',
+        defaultAppealable: false 
+    },
+    under_investigation: { 
+        name: 'Under Investigation', 
+        color: '#AF905B', 
+        description: 'Place under investigation',
+        defaultAppealable: true 
+    }
+},
+
     // Promotion settings
     promotionSettings: {
         requireReason: true,
