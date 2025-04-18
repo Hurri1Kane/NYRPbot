@@ -5,9 +5,10 @@ const path = require('path');
 const cron = require('node-cron');
 require('dotenv').config();
 
-// Import configuration and database
+// Import configuration, database and helper utilities
 const config = require('./config');
 const db = require('./database/dbHandler');
+const { createSafeInteractionHelper } = require('./utils/interactionHelper');
 
 // Initialize Discord client with necessary intents
 const client = new Client({
@@ -26,8 +27,9 @@ client.config = config;
 // Initialize collections for commands and data
 client.commands = new Collection();
 client.cooldowns = new Collection();
-client.activeInteractions = new Collection();
 client.infractionReasons = new Map();
+client.infractionEvidence = new Map();
+client.infractionData = new Map();
 
 // Load command files
 const commandsPath = path.join(__dirname, 'commands');
@@ -61,8 +63,6 @@ for (const file of eventFiles) {
     console.log(`Loaded event: ${event.name}`);
 }
 
-// Default event handlers
-
 // Ready event - when bot successfully connects to Discord
 client.once(Events.ClientReady, async () => {
     console.log(`Logged in as ${client.user.tag}`);
@@ -84,12 +84,14 @@ client.once(Events.ClientReady, async () => {
     }
 });
 
-// Handle slash commands
+// Handle slash commands with improved error handling
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
     
-    const command = client.commands.get(interaction.commandName);
+    // Create a safe interaction helper for this interaction
+    const safeInteraction = createSafeInteractionHelper(interaction);
     
+    const command = client.commands.get(interaction.commandName);
     if (!command) return;
     
     // Check cooldowns
@@ -101,24 +103,41 @@ client.on(Events.InteractionCreate, async interaction => {
     
     const now = Date.now();
     const timestamps = cooldowns.get(command.data.name);
-    const cooldownAmount = (command.cooldown || config.cooldowns[command.data.name] || 3) * 1000;
+    
+    // Get the configured cooldown from command or config, defaulting to 3 seconds
+    // Also add a safety maximum of 5 minutes (300 seconds)
+    const configuredCooldown = command.cooldown || 
+                              (config.cooldowns[command.data.name] || 3);
+    const maxCooldown = 300; // 5 minutes in seconds
+    const cooldownAmount = Math.min(configuredCooldown, maxCooldown) * 1000;
     
     if (timestamps.has(interaction.user.id)) {
         const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
         
-        if (now < expirationTime) {
-            const timeLeft = (expirationTime - now) / 1000;
-            return interaction.reply({
+        // Add a sanity check to ensure the cooldown doesn't exceed our maximum
+        const maximumExpirationTime = now + (maxCooldown * 1000);
+        const effectiveExpirationTime = Math.min(expirationTime, maximumExpirationTime);
+        
+        if (now < effectiveExpirationTime) {
+            const timeLeft = Math.max(1, (effectiveExpirationTime - now) / 1000);
+            
+            // Log excessive cooldowns for debugging
+            if ((expirationTime - now) / 1000 > maxCooldown) {
+                console.warn(`Excessive cooldown detected for ${interaction.user.tag} (${interaction.user.id}) on command ${command.data.name}. Original: ${((expirationTime - now) / 1000).toFixed(1)}s, Capped to: ${timeLeft.toFixed(1)}s`);
+            }
+            
+            await safeInteraction.send({
                 content: `Please wait ${timeLeft.toFixed(1)} more seconds before using the \`${command.data.name}\` command.`,
                 ephemeral: true
             });
+            return;
         }
     }
     
     timestamps.set(interaction.user.id, now);
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
     
-    // Execute command
+    // Execute command with safe interaction
     try {
         // Log command usage
         const guildName = interaction.guild ? interaction.guild.name : 'DM';
@@ -139,21 +158,18 @@ client.on(Events.InteractionCreate, async interaction => {
         });
         
         // Execute the command
+        // Some commands may expect the raw interaction, so we're not passing
+        // the safeInteraction wrapper directly. Instead, we'll modify
+        // individual commands to use the interactionHelper when refactoring them.
         await command.execute(interaction, client);
     } catch (error) {
         console.error(`Error executing ${interaction.commandName}:`, error);
         
-        // Reply to user with error
-        const errorMessage = {
+        // Use the safe interaction helper to avoid "already replied" errors
+        await safeInteraction.send({
             content: 'There was an error executing this command!',
             ephemeral: true
-        };
-        
-        if (interaction.replied || interaction.deferred) {
-            await interaction.followUp(errorMessage);
-        } else {
-            await interaction.reply(errorMessage);
-        }
+        });
     }
 });
 
@@ -162,13 +178,32 @@ client.on(Events.InteractionCreate, async interaction => {
     // Skip command interactions as they're handled above
     if (interaction.isChatInputCommand()) return;
     
+    // Create a safe interaction helper
+    const safeInteraction = createSafeInteractionHelper(interaction);
+    
     // Import handlers dynamically to keep main file clean
-    if (interaction.isButton()) {
-        require('./handlers/buttonHandler')(interaction, client);
-    } else if (interaction.isStringSelectMenu()) {
-        require('./handlers/selectMenuHandler')(interaction, client);
-    } else if (interaction.isModalSubmit()) {
-        require('./handlers/modalHandler')(interaction, client);
+    try {
+        if (interaction.isButton()) {
+            // Pass the safeInteraction wrapper to the button handler
+            const buttonHandler = require('./handlers/buttonHandler');
+            await buttonHandler(interaction, client, safeInteraction);
+        } else if (interaction.isStringSelectMenu()) {
+            // Pass the safeInteraction wrapper to the select menu handler
+            const selectMenuHandler = require('./handlers/selectMenuHandler');
+            await selectMenuHandler(interaction, client, safeInteraction);
+        } else if (interaction.isModalSubmit()) {
+            // Pass the safeInteraction wrapper to the modal handler
+            const modalHandler = require('./handlers/modalHandler');
+            await modalHandler(interaction, client, safeInteraction);
+        }
+    } catch (error) {
+        console.error(`Error handling ${interaction.type} interaction:`, error);
+        
+        // Use safe interaction helper to avoid "already replied" errors
+        await safeInteraction.send({
+            content: 'There was an error processing your interaction. Please try again later.',
+            ephemeral: true
+        });
     }
 });
 
@@ -335,8 +370,8 @@ function setupScheduledTasks() {
                     }
                 });
                 
-                // Create transcript and delete after a delay
                 try {
+                    // Create and send transcript
                     const discordTranscripts = require('discord-html-transcripts');
                     const transcript = await discordTranscripts.createTranscript(channel, {
                         limit: -1,
