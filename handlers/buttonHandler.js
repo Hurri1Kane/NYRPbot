@@ -5,10 +5,15 @@ const db = require('../database/dbHandler');
 /**
  * Button interaction handler for the NYRP Staff Management Bot
  * This handles all button interactions based on their customId
+ * 
+ * Improved with better error handling and interaction state management
  */
 module.exports = async function handleButtonInteraction(interaction, client) {
     // Parse the customId to determine the action and parameters
     const [action, ...params] = interaction.customId.split(':');
+    
+    // Create a wrapper for safe interaction replies to prevent errors
+    const safeReply = createSafeReplyWrapper(interaction);
     
     try {
         // Get staff roles for permission checking
@@ -21,29 +26,29 @@ module.exports = async function handleButtonInteraction(interaction, client) {
             // =============================
             
             case 'ticket_create':
-                await handleTicketCreate(interaction, client, params);
+                await handleTicketCreate(interaction, client, params, safeReply);
                 break;
                 
             case 'ticket_claim':
-                await handleTicketClaim(interaction, client, params);
+                await handleTicketClaim(interaction, client, params, safeReply);
                 break;
                 
             case 'ticket_priority_low':
             case 'ticket_priority_medium':
             case 'ticket_priority_high':
-                await handleTicketPriority(interaction, client, action, params);
+                await handleTicketPriority(interaction, client, action, params, safeReply);
                 break;
                 
             case 'ticket_close':
-                await handleTicketClose(interaction, client, params);
+                await handleTicketClose(interaction, client, params, safeReply);
                 break;
                 
             case 'ticket_transcript':
-                await handleTicketTranscript(interaction, client, params);
+                await handleTicketTranscript(interaction, client, params, safeReply);
                 break;
                 
             case 'ticket_delete':
-                await handleTicketDelete(interaction, client, params);
+                await handleTicketDelete(interaction, client, params, safeReply);
                 break;
 
             // =============================
@@ -51,7 +56,7 @@ module.exports = async function handleButtonInteraction(interaction, client) {
             // =============================
 
             case 'appealable':
-                await handleAppealableSelection(interaction, client, params);
+                await handleAppealableSelection(interaction, client, params, safeReply);
                 break;
                 
             // =============================
@@ -59,11 +64,11 @@ module.exports = async function handleButtonInteraction(interaction, client) {
             // =============================
             
             case 'infraction_approve':
-                await handleInfractionApprove(interaction, client, params);
+                await handleInfractionApprove(interaction, client, params, safeReply);
                 break;
                 
             case 'infraction_deny':
-                await handleInfractionDeny(interaction, client, params);
+                await handleInfractionDeny(interaction, client, params, safeReply);
                 break;
                 
             // =============================
@@ -71,57 +76,117 @@ module.exports = async function handleButtonInteraction(interaction, client) {
             // =============================
             
             case 'office_close':
-                await handleOfficeClose(interaction, client, params);
+                await handleOfficeClose(interaction, client, params, safeReply);
                 break;
                 
             case 'office_transcript':
-                await handleOfficeTranscript(interaction, client, params);
+                await handleOfficeTranscript(interaction, client, params, safeReply);
                 break;
 
             case 'office_outcome':
-                await handleOfficeOutcome(interaction, client, params);
+                await handleOfficeOutcome(interaction, client, params, safeReply);
                 break;
 
             case 'office_delete_options':
-                await handleOfficeDeleteOptions(interaction, client, params);
+                await handleOfficeDeleteOptions(interaction, client, params, safeReply);
                 break;
                 
             // Default case for unknown buttons
             default:
-                console.log(`Unknown button action: ${action}`);
-                await interaction.reply({
+                await safeReply.send({
                     content: 'This button action is not recognized.',
                     ephemeral: true
                 });
+                break;
         }
     } catch (error) {
         console.error(`Error handling button ${action}:`, error);
         
-        // Try to respond to the interaction with a friendly error message
-        try {
-            const errorMessage = {
-                content: 'There was an error processing this button. Please try again or contact a system administrator.',
-                ephemeral: true
-            };
-            
-            if (interaction.deferred) {
-                await interaction.editReply(errorMessage);
-            } else if (!interaction.replied) {
-                await interaction.reply(errorMessage);
-            }
-        } catch (replyError) {
-            console.error('Error responding to button interaction:', replyError);
-        }
+        // Use our safe reply wrapper to handle errors
+        await safeReply.send({
+            content: 'There was an error processing this button. Please try again or contact a system administrator.',
+            ephemeral: true
+        });
     }
 };
 
-// [EXISTING TICKET FUNCTIONS: handleTicketCreate, handleTicketClaim, handleTicketPriority, etc.]
-// Include the existing ticket functions here...
+/**
+ * Creates a wrapper for interaction responses that handles the state of the interaction
+ * to prevent "interaction already replied" errors
+ */
+function createSafeReplyWrapper(interaction) {
+    let hasResponded = false;
+    
+    return {
+        /**
+         * Safely send a response to an interaction, handling its state correctly
+         */
+        async send(options) {
+            try {
+                if (interaction.replied) {
+                    return await interaction.followUp(options);
+                } else if (interaction.deferred) {
+                    hasResponded = true;
+                    return await interaction.editReply(options);
+                } else {
+                    hasResponded = true;
+                    return await interaction.reply(options);
+                }
+            } catch (error) {
+                console.error('Error responding to interaction:', error);
+                return null;
+            }
+        },
+        
+        /**
+         * Safely update an interaction response
+         */
+        async update(options) {
+            try {
+                if (!hasResponded && !interaction.replied && !interaction.deferred) {
+                    hasResponded = true;
+                    return await interaction.update(options);
+                } else {
+                    console.warn('Attempted to update an interaction that was not in the correct state');
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error updating interaction:', error);
+                return null;
+            }
+        },
+        
+        /**
+         * Safely defer an interaction reply
+         */
+        async defer(options = { ephemeral: false }) {
+            try {
+                if (!hasResponded && !interaction.replied && !interaction.deferred) {
+                    hasResponded = true;
+                    return await interaction.deferReply(options);
+                } else {
+                    console.warn('Attempted to defer an interaction that was already responded to');
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error deferring interaction:', error);
+                return null;
+            }
+        },
+        
+        /**
+         * Check if the interaction has been responded to
+         */
+        hasResponded() {
+            return hasResponded || interaction.replied || interaction.deferred;
+        }
+    };
+}
 
 /**
  * Handle office closing
  */
-async function handleOfficeClose(interaction, client, params) {
+async function handleOfficeClose(interaction, client, params, safeReply) {
     const officeId = params[0];
     const staffRoles = client.config.staffRoles;
     
@@ -132,27 +197,30 @@ async function handleOfficeClose(interaction, client, params) {
     );
     
     if (!hasPermission) {
-        return interaction.reply({
+        await safeReply.send({
             content: 'You must be an Internal Affairs member or higher to close offices.',
             ephemeral: true
         });
+        return;
     }
     
     // Get the office from database
     const office = await db.getOfficeById(officeId);
     if (!office) {
-        return interaction.reply({
+        await safeReply.send({
             content: 'This office could not be found in the database.',
             ephemeral: true
         });
+        return;
     }
     
     // Ensure office is open
     if (office.status !== 'open') {
-        return interaction.reply({
+        await safeReply.send({
             content: 'This office is already closed.',
             ephemeral: true
         });
+        return;
     }
     
     try {
@@ -196,7 +264,7 @@ async function handleOfficeClose(interaction, client, params) {
             );
         
         // Send confirmation message
-        await interaction.reply({
+        await safeReply.send({
             embeds: [confirmationEmbed],
             components: [outcomeRow, deleteOptionsRow]
         });
@@ -229,20 +297,16 @@ async function handleOfficeClose(interaction, client, params) {
                 channelId: interaction.channel.id
             }
         });
-        
     } catch (error) {
         console.error('Error closing office:', error);
-        await interaction.reply({
-            content: 'There was an error closing this office. Please try again later.',
-            ephemeral: true
-        });
+        throw error;
     }
 }
 
 /**
  * Handle office transcript generation
  */
-async function handleOfficeTranscript(interaction, client, params) {
+async function handleOfficeTranscript(interaction, client, params, safeReply) {
     const officeId = params[0];
     const staffRoles = client.config.staffRoles;
     
@@ -253,23 +317,25 @@ async function handleOfficeTranscript(interaction, client, params) {
     );
     
     if (!hasPermission) {
-        return interaction.reply({
+        await safeReply.send({
             content: 'You must be an Internal Affairs member or higher to generate office transcripts.',
             ephemeral: true
         });
+        return;
     }
     
     // Defer reply as this might take some time
-    await interaction.deferReply();
+    await safeReply.defer();
     
     try {
         // Get the office from database
         const office = await db.getOfficeById(officeId);
         if (!office) {
-            return interaction.editReply({
+            await safeReply.send({
                 content: 'This office could not be found in the database.',
                 ephemeral: true
             });
+            return;
         }
         
         // Create transcript
@@ -294,7 +360,7 @@ async function handleOfficeTranscript(interaction, client, params) {
         }
         
         // Reply with transcript
-        await interaction.editReply({
+        await safeReply.send({
             content: 'Office transcript generated successfully!',
             files: [transcript]
         });
@@ -311,17 +377,14 @@ async function handleOfficeTranscript(interaction, client, params) {
         });
     } catch (error) {
         console.error('Error generating office transcript:', error);
-        await interaction.editReply({
-            content: 'There was an error generating the transcript. Please try again later.',
-            ephemeral: true
-        });
+        throw error;
     }
 }
 
 /**
  * Handle office outcome selection
  */
-async function handleOfficeOutcome(interaction, client, params) {
+async function handleOfficeOutcome(interaction, client, params, safeReply) {
     const officeId = params[0];
     const outcome = params[1]; // 'no_action', 'warning', or 'infraction'
     const staffRoles = client.config.staffRoles;
@@ -333,28 +396,31 @@ async function handleOfficeOutcome(interaction, client, params) {
     );
     
     if (!hasPermission) {
-        return interaction.reply({
+        await safeReply.send({
             content: 'You must be an Internal Affairs member or higher to set office outcomes.',
             ephemeral: true
         });
+        return;
     }
     
     try {
         // Get the office from database
         const office = await db.getOfficeById(officeId);
         if (!office) {
-            return interaction.reply({
+            await safeReply.send({
                 content: 'This office could not be found in the database.',
                 ephemeral: true
             });
+            return;
         }
         
         // Ensure office is closed
         if (office.status !== 'closed') {
-            return interaction.reply({
+            await safeReply.send({
                 content: 'This office must be closed before setting an outcome.',
                 ephemeral: true
             });
+            return;
         }
         
         // Update the office with the outcome
@@ -367,7 +433,7 @@ async function handleOfficeOutcome(interaction, client, params) {
         // Handle different outcomes
         switch (outcome) {
             case 'no_action':
-                await interaction.reply({
+                await safeReply.send({
                     content: 'This office has been marked as "No Action Required".',
                     ephemeral: false
                 });
@@ -375,7 +441,7 @@ async function handleOfficeOutcome(interaction, client, params) {
                 
             case 'warning':
                 // For warnings, we'll create an informal record but not a formal infraction
-                await interaction.reply({
+                await safeReply.send({
                     content: 'This office has been marked as "Warning". The user has been warned but no formal infraction has been created.',
                     ephemeral: false
                 });
@@ -410,7 +476,7 @@ async function handleOfficeOutcome(interaction, client, params) {
                             .setStyle(ButtonStyle.Danger)
                     );
                 
-                await interaction.reply({
+                await safeReply.send({
                     content: 'This office has been marked for "Infraction". Please create a formal infraction using the button below or the `/infract` command.',
                     components: [createInfractionButton],
                     ephemeral: false
@@ -418,7 +484,7 @@ async function handleOfficeOutcome(interaction, client, params) {
                 break;
                 
             default:
-                await interaction.reply({
+                await safeReply.send({
                     content: 'Unknown outcome selected.',
                     ephemeral: true
                 });
@@ -459,20 +525,16 @@ async function handleOfficeOutcome(interaction, client, params) {
                 outcome: outcome
             }
         });
-        
     } catch (error) {
         console.error('Error setting office outcome:', error);
-        await interaction.reply({
-            content: 'There was an error setting the office outcome. Please try again later.',
-            ephemeral: true
-        });
+        throw error;
     }
 }
 
 /**
  * Handle office deletion options display
  */
-async function handleOfficeDeleteOptions(interaction, client, params) {
+async function handleOfficeDeleteOptions(interaction, client, params, safeReply) {
     const officeId = params[0];
     const staffRoles = client.config.staffRoles;
     
@@ -483,28 +545,31 @@ async function handleOfficeDeleteOptions(interaction, client, params) {
     );
     
     if (!hasPermission) {
-        return interaction.reply({
+        await safeReply.send({
             content: 'You must be an Internal Affairs member or higher to manage office deletion.',
             ephemeral: true
         });
+        return;
     }
     
     try {
         // Get the office data
         const office = await db.getOfficeById(officeId);
         if (!office) {
-            return interaction.reply({
+            await safeReply.send({
                 content: 'This office could not be found in the database.',
                 ephemeral: true
             });
+            return;
         }
         
         // Ensure the office is closed
         if (office.status !== 'closed') {
-            return interaction.reply({
+            await safeReply.send({
                 content: 'This office must be closed before it can be deleted.',
                 ephemeral: true
             });
+            return;
         }
         
         // Create the deletion options selection menu
@@ -557,34 +622,36 @@ async function handleOfficeDeleteOptions(interaction, client, params) {
             .setFooter({ text: 'Please make your selection below' });
         
         // Send the message with the selection menu
-        await interaction.reply({
+        await safeReply.send({
             embeds: [explanationEmbed],
             components: [deleteOptionsRow],
             ephemeral: true
         });
-        
     } catch (error) {
         console.error('Error displaying office deletion options:', error);
-        await interaction.reply({
-            content: 'There was an error displaying deletion options. Please try again later.',
-            ephemeral: true
-        });
+        throw error;
     }
 }
 
 /**
  * Handle the selection of whether an infraction is appealable or not
  */
-async function handleAppealableSelection(interaction, client, params) {
+async function handleAppealableSelection(interaction, client, params, safeReply) {
     const targetUserId = params[0];
     const isAppealable = params[1] === 'true';
     
+    // Initialize or access the infraction data map
+    if (!client.infractionData) {
+        client.infractionData = new Map();
+    }
+    
     // Get infraction data from temporary storage
-    if (!client.infractionData || !client.infractionData.has(targetUserId)) {
-        return interaction.reply({
+    if (!client.infractionData.has(targetUserId)) {
+        await safeReply.send({
             content: 'Infraction data not found. Please try creating the infraction again.',
             ephemeral: true
         });
+        return;
     }
     
     const infractionData = client.infractionData.get(targetUserId);
@@ -630,21 +697,57 @@ async function handleAppealableSelection(interaction, client, params) {
     if (infractionData.evidence && infractionData.evidence.length > 0) {
         previewEmbed.addFields({
             name: 'Evidence',
-            value: infractionData.evidence.map((link, index) => `[Evidence ${index + 1}](${link})`).join('\n')
+            value: infractionData.evidence
         });
     }
     
     previewEmbed.setFooter({ text: 'Select an infraction type to continue' });
     
     // Update the message
-    await interaction.update({
+    await safeReply.update({
         embeds: [previewEmbed],
         components: [infractionTypesRow]
     });
 }
 
-// [INCLUDE EXISTING FUNCTIONS: handleInfractionApprove, handleInfractionDeny, etc.]
-// Include the remaining handler functions here...
+/**
+ * Implement the rest of your handler functions here, using the same pattern
+ * with the safeReply wrapper to prevent interaction errors
+ */
+
+// Placeholder for handleTicketCreate, etc. - implement these following the pattern above
+async function handleTicketCreate(interaction, client, params, safeReply) {
+    // Implementation would go here
+    // This is a placeholder - you'll need to implement the actual functionality
+}
+
+async function handleTicketClaim(interaction, client, params, safeReply) {
+    // Implementation would go here
+}
+
+async function handleTicketPriority(interaction, client, action, params, safeReply) {
+    // Implementation would go here
+}
+
+async function handleTicketClose(interaction, client, params, safeReply) {
+    // Implementation would go here
+}
+
+async function handleTicketTranscript(interaction, client, params, safeReply) {
+    // Implementation would go here
+}
+
+async function handleTicketDelete(interaction, client, params, safeReply) {
+    // Implementation would go here
+}
+
+async function handleInfractionApprove(interaction, client, params, safeReply) {
+    // Implementation would go here
+}
+
+async function handleInfractionDeny(interaction, client, params, safeReply) {
+    // Implementation would go here
+}
 
 // Helper function to format infraction type for display
 function formatInfractionType(type) {

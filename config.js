@@ -60,7 +60,7 @@ module.exports = {
     cooldowns: {
         infract: 5000,
         promote: 10000,
-        ticket: 60000,
+        ticket: 3000,
         officecreate: 30000
     },
     
