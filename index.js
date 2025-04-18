@@ -28,9 +28,6 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.activeInteractions = new Collection();
 client.infractionReasons = new Map();
-client.infractionEvidence = new Map();
-client.infractionData = new Map(); // Add this line to initialize the infractionData Map
-
 
 // Load command files
 const commandsPath = path.join(__dirname, 'commands');
@@ -104,29 +101,13 @@ client.on(Events.InteractionCreate, async interaction => {
     
     const now = Date.now();
     const timestamps = cooldowns.get(command.data.name);
-    
-    // Get the configured cooldown from command or config, defaulting to 3 seconds
-    // Also add a safety maximum of 5 minutes (300 seconds)
-    const configuredCooldown = command.cooldown || 
-                              (config.cooldowns[command.data.name] || 3);
-    const maxCooldown = 300; // 5 minutes in seconds
-    const cooldownAmount = Math.min(configuredCooldown, maxCooldown) * 1000;
+    const cooldownAmount = (command.cooldown || config.cooldowns[command.data.name] || 3) * 1000;
     
     if (timestamps.has(interaction.user.id)) {
         const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
         
-        // Add a sanity check to ensure the cooldown doesn't exceed our maximum
-        const maximumExpirationTime = now + (maxCooldown * 1000);
-        const effectiveExpirationTime = Math.min(expirationTime, maximumExpirationTime);
-        
-        if (now < effectiveExpirationTime) {
-            const timeLeft = Math.max(1, (effectiveExpirationTime - now) / 1000);
-            
-            // Log excessive cooldowns for debugging
-            if ((expirationTime - now) / 1000 > maxCooldown) {
-                console.warn(`Excessive cooldown detected for ${interaction.user.tag} (${interaction.user.id}) on command ${command.data.name}. Original: ${((expirationTime - now) / 1000).toFixed(1)}s, Capped to: ${timeLeft.toFixed(1)}s`);
-            }
-            
+        if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
             return interaction.reply({
                 content: `Please wait ${timeLeft.toFixed(1)} more seconds before using the \`${command.data.name}\` command.`,
                 ephemeral: true
@@ -136,44 +117,6 @@ client.on(Events.InteractionCreate, async interaction => {
     
     timestamps.set(interaction.user.id, now);
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
-    
-    // Execute command
-    try {
-        // Log command usage
-        const guildName = interaction.guild ? interaction.guild.name : 'DM';
-        console.log(`[${new Date().toISOString()}] ${interaction.user.tag} in ${guildName} triggered /${interaction.commandName}`);
-        
-        // Add audit log entry
-        await db.addAuditLog({
-            actionType: 'COMMAND_USED',
-            userId: interaction.user.id,
-            details: {
-                command: interaction.commandName,
-                options: interaction.options._hoistedOptions.map(opt => ({
-                    name: opt.name,
-                    value: opt.value
-                }))
-            },
-            timestamp: new Date().toISOString()
-        });
-        
-        // Execute the command
-        await command.execute(interaction, client);
-    } catch (error) {
-        console.error(`Error executing ${interaction.commandName}:`, error);
-        
-        // Reply to user with error
-        const errorMessage = {
-            content: 'There was an error executing this command!',
-            ephemeral: true
-        };
-        
-        if (interaction.replied || interaction.deferred) {
-            await interaction.followUp(errorMessage);
-        } else {
-            await interaction.reply(errorMessage);
-        }
-    }
     
     // Execute command
     try {
