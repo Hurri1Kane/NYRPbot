@@ -51,7 +51,9 @@ module.exports = {
         ticketCategory: '1357029741105594619', // Parent category for all ticket channels
         ticketTranscriptGeneral: '1361439312666820700', // Channel for general ticket transcripts
         ticketTranscriptIngame: '1361678254125224148', // Channel for in-game ticket transcripts
-        ticketTranscriptStaff: '1361678271208624189' // Channel for staff report ticket transcripts
+        ticketTranscriptStaff: '1361678271208624189', // Channel for staff report ticket transcripts
+        internalAffairsCategory: '1361449627672379623',
+        internalAffairsTranscript: '1361450466591899668' // Channel for internal affairs transcripts
     },
     
     // Cooldowns for commands (in milliseconds)

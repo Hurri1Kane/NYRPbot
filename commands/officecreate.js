@@ -82,6 +82,7 @@ async execute(interaction, client) {
         const officeChannel = await guild.channels.create({
             name: `ia-office-${targetUser.username.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
             type: 0, // Text channel
+            parent: client.config.channels.internalAffairsCategory, // Use the configured category
             permissionOverwrites: [
                 {
                     id: guild.id, // @everyone role
