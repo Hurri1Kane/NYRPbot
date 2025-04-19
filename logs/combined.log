@@ -1,0 +1,108 @@
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:08:47.183Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:08:47.188Z"}
+{"level":"warn","message":"Database configuration missing in config object, using defaults","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:08:47.190Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:08:47.190Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:08:47.873Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:30.868Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:30.876Z"}
+{"level":"warn","message":"Database configuration missing in config object, using defaults","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:30.879Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:30.879Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.524Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.526Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.528Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.561Z"}
+{"level":"warn","message":"The command at C:\\NYRPbot\\src\\discord\\commands\\infraction\\ticketCommand.js is missing a required \"data\" or \"execute\" property.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.565Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.593Z"}
+{"level":"info","message":"Successfully loaded 2 commands.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.596Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.601Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.602Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.603Z"}
+{"level":"info","message":"Initialized office counter: 0","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:31.828Z"}
+{"level":"info","message":"Deploying slash commands...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:32.542Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:32.544Z"}
+{"level":"warn","message":"The command at C:\\NYRPbot\\src\\discord\\commands\\infraction\\ticketCommand.js is missing a required \"data\" property or toJSON method.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:32.550Z"}
+{"level":"info","message":"Loaded 2 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:32.553Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:32.554Z"}
+{"level":"info","message":"Successfully deployed 2 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:09:32.851Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:16.593Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:16.605Z"}
+{"level":"warn","message":"Database configuration missing in config object, using defaults","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:16.608Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:16.609Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.272Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.275Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.277Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.305Z"}
+{"level":"warn","message":"The command at C:\\NYRPbot\\src\\discord\\commands\\infraction\\ticketCommand.js is missing a required \"data\" or \"execute\" property.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.307Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.336Z"}
+{"level":"info","message":"Successfully loaded 2 commands.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.338Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.343Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.344Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.345Z"}
+{"level":"info","message":"Initialized office counter: 0","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:17.569Z"}
+{"level":"info","message":"Deploying slash commands...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.234Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.236Z"}
+{"level":"warn","message":"The command at C:\\NYRPbot\\src\\discord\\commands\\infraction\\ticketCommand.js is missing a required \"data\" property or toJSON method.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.241Z"}
+{"level":"info","message":"Loaded 2 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.244Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.245Z"}
+{"level":"info","message":"Successfully deployed 2 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.505Z"}
+{"level":"info","message":"Slash commands deployed successfully.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.506Z"}
+{"level":"info","message":"Starting suspension expiration checker...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.507Z"}
+{"level":"warn","message":"infractionSettings.checkExpirationInterval missing in config, using default value (5 minutes)","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.509Z"}
+{"level":"info","message":"Starting suspension checker to run every 5 minutes","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.512Z"}
+{"level":"info","message":"Starting background tasks...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.514Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.516Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.517Z"}
+{"level":"info","message":"Started task: ticketActivityCheck","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.519Z"}
+{"level":"info","message":"Started task: officeCleanup","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.520Z"}
+{"level":"info","message":"Started 2 background tasks","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.521Z"}
+{"level":"info","message":"Bot initialization complete!","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:12:18.522Z"}
+{"channelId":"1357029740376101091","commandName":"office","context":"Office Create Command","errorId":"ERR-M9O4D8TR-ZP5UJ","interactionId":"1363110108975988786","level":"error","message":"Cannot read properties of undefined (reading 'nameFormat')","service":"nyrp-staff-bot","stack":"TypeError: Cannot read properties of undefined (reading 'nameFormat')\n    at handleCreateOffice (C:\\NYRPbot\\src\\discord\\commands\\offices\\officeCommand.js:255:49)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Object.execute (C:\\NYRPbot\\src\\discord\\commands\\offices\\officeCommand.js:167:13)\n    at async handleChatCommand (C:\\NYRPbot\\src\\discord\\events\\interactionCreate.js:153:5)\n    at async Object.execute (C:\\NYRPbot\\src\\discord\\events\\interactionCreate.js:42:9)","timestamp":"2025-04-19T11:12:55.791Z","userId":"538620090523058178"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:03.915Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:03.927Z"}
+{"level":"warn","message":"Database configuration missing in config object, using defaults","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:03.930Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:03.932Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.729Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.732Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.733Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.761Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.788Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.804Z"}
+{"level":"info","message":"Successfully loaded 3 commands.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.805Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.809Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.810Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:04.811Z"}
+{"level":"error","message":"Failed to initialize ticket counter: Cannot read properties of undefined (reading 'match')","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.045Z"}
+{"level":"info","message":"Initialized office counter: 0","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.070Z"}
+{"level":"info","message":"Deploying slash commands...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.707Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.709Z"}
+{"level":"info","message":"Loaded 3 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.717Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.718Z"}
+{"level":"info","message":"Successfully deployed 3 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.988Z"}
+{"level":"info","message":"Slash commands deployed successfully.","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.989Z"}
+{"level":"info","message":"Starting suspension expiration checker...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.989Z"}
+{"level":"warn","message":"infractionSettings.checkExpirationInterval missing in config, using default value (5 minutes)","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.990Z"}
+{"level":"info","message":"Starting suspension checker to run every 5 minutes","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.992Z"}
+{"level":"info","message":"Starting background tasks...","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.993Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.995Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.996Z"}
+{"level":"info","message":"Started task: ticketActivityCheck","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.997Z"}
+{"level":"info","message":"Started task: officeCleanup","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.998Z"}
+{"level":"info","message":"Started 2 background tasks","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:05.999Z"}
+{"level":"info","message":"Bot initialization complete!","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:31:06.000Z"}
+{"level":"info","message":"MongoDB connection reestablished","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:49:00.300Z"}
+{"level":"info","message":"MongoDB connection reestablished","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:49:00.312Z"}
+{"level":"warn","message":"MongoDB connection disconnected","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:49:01.275Z"}
+{"level":"info","message":"MongoDB connection reestablished","service":"nyrp-staff-bot","timestamp":"2025-04-19T11:49:01.299Z"}
+{"channelId":"1357029739868455080","commandName":"ticket","context":"Ticket Create Command","errorId":"ERR-M9O5RD3Y-94PB7","interactionId":"1363119916944986203","level":"error","message":"Ticket.find(...).count is not a function","service":"nyrp-staff-bot","stack":"TypeError: Ticket.find(...).count is not a function\n    at handleCreateTicket (C:\\NYRPbot\\src\\discord\\commands\\infraction\\ticketCommand.js:250:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Object.execute (C:\\NYRPbot\\src\\discord\\commands\\infraction\\ticketCommand.js:193:13)\n    at async handleChatCommand (C:\\NYRPbot\\src\\discord\\events\\interactionCreate.js:153:5)\n    at async Object.execute (C:\\NYRPbot\\src\\discord\\events\\interactionCreate.js:42:9)","timestamp":"2025-04-19T11:51:54.142Z","userId":"538620090523058178"}
+{"context":"BackgroundTask:ticketActivityCheck:scheduled","errorId":"ERR-M9O636XP-NQFT7","level":"error","message":"Cannot read properties of undefined (reading 'reminderAfterHours')","service":"nyrp-staff-bot","stack":"TypeError: Cannot read properties of undefined (reading 'reminderAfterHours')\n    at Object.task (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:217:81)\n    at BackgroundTaskManager.runTask (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:177:22)\n    at Timeout._onTimeout (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:113:12)\n    at listOnTimeout (node:internal/timers:594:17)\n    at process.processTimers (node:internal/timers:529:7)","timestamp":"2025-04-19T12:01:06.014Z"}
+{"level":"error","message":"Error in scheduled execution of task 'ticketActivityCheck': Cannot read properties of undefined (reading 'reminderAfterHours') (Error ID: ERR-M9O636XP-NQFT7)","service":"nyrp-staff-bot","timestamp":"2025-04-19T12:01:06.016Z"}
+{"level":"info","message":"MongoDB connection reestablished","service":"nyrp-staff-bot","timestamp":"2025-04-19T12:21:51.224Z"}
+{"level":"info","message":"MongoDB connection reestablished","service":"nyrp-staff-bot","timestamp":"2025-04-19T12:21:51.260Z"}
+{"context":"SuspensionChecker:checkExpiredSuspensions","errorId":"ERR-M9ODEV9B-K87IQ","level":"error","message":"getaddrinfo ENOTFOUND ac-flwzoq1-shard-00-02.5jlnac1.mongodb.net","service":"nyrp-staff-bot","stack":"MongoServerSelectionError: getaddrinfo ENOTFOUND ac-flwzoq1-shard-00-02.5jlnac1.mongodb.net\n    at Topology.selectServer (C:\\NYRPbot\\node_modules\\mongodb\\lib\\sdam\\topology.js:321:38)\n    at runNextTicks (node:internal/process/task_queues:65:5)\n    at process.processTimers (node:internal/timers:526:9)\n    at async tryOperation (C:\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:145:18)\n    at async executeOperation (C:\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:75:16)\n    at async FindCursor._initialize (C:\\NYRPbot\\node_modules\\mongodb\\lib\\cursor\\find_cursor.js:61:26)\n    at async FindCursor.cursorInit (C:\\NYRPbot\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:633:27)\n    at async FindCursor.fetchBatch (C:\\NYRPbot\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:667:13)\n    at async FindCursor.next (C:\\NYRPbot\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:347:17)\n    at async [Symbol.asyncIterator] (C:\\NYRPbot\\node_modules\\mongodb\\lib\\cursor\\abstract_cursor.js:255:34)","timestamp":"2025-04-19T15:26:08.064Z"}
+{"level":"error","message":"Error checking expired suspensions: getaddrinfo ENOTFOUND ac-flwzoq1-shard-00-02.5jlnac1.mongodb.net (Error ID: ERR-M9ODEV9B-K87IQ)","service":"nyrp-staff-bot","timestamp":"2025-04-19T15:26:08.176Z"}
+{"context":"BackgroundTask:ticketActivityCheck:scheduled","errorId":"ERR-M9ODEVF7-AP511","level":"error","message":"Cannot read properties of undefined (reading 'reminderAfterHours')","service":"nyrp-staff-bot","stack":"TypeError: Cannot read properties of undefined (reading 'reminderAfterHours')\n    at Object.task (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:217:81)\n    at BackgroundTaskManager.runTask (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:177:22)\n    at Timeout._onTimeout (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:113:12)\n    at listOnTimeout (node:internal/timers:594:17)\n    at process.processTimers (node:internal/timers:529:7)","timestamp":"2025-04-19T15:26:08.276Z"}
+{"level":"error","message":"Error in scheduled execution of task 'ticketActivityCheck': Cannot read properties of undefined (reading 'reminderAfterHours') (Error ID: ERR-M9ODEVF7-AP511)","service":"nyrp-staff-bot","timestamp":"2025-04-19T15:26:08.296Z"}
+{"level":"warn","message":"MongoDB connection disconnected","service":"nyrp-staff-bot","timestamp":"2025-04-19T15:26:09.654Z"}
+{"level":"info","message":"MongoDB connection reestablished","service":"nyrp-staff-bot","timestamp":"2025-04-19T15:26:09.711Z"}
+{"context":"BackgroundTask:ticketActivityCheck:scheduled","errorId":"ERR-M9OEHGBD-QPN67","level":"error","message":"Cannot read properties of undefined (reading 'reminderAfterHours')","service":"nyrp-staff-bot","stack":"TypeError: Cannot read properties of undefined (reading 'reminderAfterHours')\n    at Object.task (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:217:81)\n    at BackgroundTaskManager.runTask (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:177:22)\n    at Timeout._onTimeout (C:\\NYRPbot\\src\\discord\\utils\\backgroundTasks.js:113:12)\n    at listOnTimeout (node:internal/timers:594:17)\n    at process.processTimers (node:internal/timers:529:7)","timestamp":"2025-04-19T15:56:08.281Z"}
+{"level":"error","message":"Error in scheduled execution of task 'ticketActivityCheck': Cannot read properties of undefined (reading 'reminderAfterHours') (Error ID: ERR-M9OEHGBD-QPN67)","service":"nyrp-staff-bot","timestamp":"2025-04-19T15:56:08.328Z"}

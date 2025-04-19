@@ -2,7 +2,16 @@
 const mongoose = require('mongoose');
 const logger = require('../utils/logger');
 const ErrorHandler = require('../utils/errorHandler');
-const config = require('../config/config');
+
+// Define default configuration if config module fails to load
+const DEFAULT_CONFIG = {
+  database: {
+    connectionString: process.env.MONGODB_URI,
+    maxConnectionAttempts: 5,
+    autoReconnect: true,
+    collectionPrefix: 'nyrp_'
+  }
+};
 
 // Connection state tracking
 let connectionAttempts = 0;
@@ -21,6 +30,20 @@ async function connectDatabase() {
   
   // Increment connection attempts counter
   connectionAttempts++;
+  
+  // Try to load the config module, fall back to defaults if it fails
+  let config;
+  try {
+    config = require('../config/config');
+    // Make sure database config exists
+    if (!config.database) {
+      logger.warn('Database configuration missing in config object, using defaults');
+      config.database = DEFAULT_CONFIG.database;
+    }
+  } catch (configError) {
+    logger.warn(`Failed to load config module: ${configError.message}. Using default database settings.`);
+    config = DEFAULT_CONFIG;
+  }
   
   // Check if we've exceeded max attempts
   const maxAttempts = config.database.maxConnectionAttempts || 5;
@@ -43,11 +66,18 @@ async function connectDatabase() {
       maxPoolSize: 10
     };
     
+    // Use the connection string from config or environment variable
+    const connectionString = config.database.connectionString || process.env.MONGODB_URI;
+    
+    if (!connectionString) {
+      throw new Error('MongoDB connection string not provided. Set MONGODB_URI in .env file.');
+    }
+    
     // Log connection attempt
     logger.info(`Connecting to MongoDB (Attempt ${connectionAttempts}/${maxAttempts})...`);
     
     // Connect to MongoDB
-    await mongoose.connect(config.database.connectionString, options);
+    await mongoose.connect(connectionString, options);
     
     // Reset connection attempts on successful connection
     connectionAttempts = 0;
@@ -56,7 +86,7 @@ async function connectDatabase() {
     logger.info('Successfully connected to MongoDB');
     
     // Set up event listeners for the connection
-    setupConnectionListeners(mongoose.connection);
+    setupConnectionListeners(mongoose.connection, config);
     
     return mongoose.connection;
   } catch (error) {
@@ -90,8 +120,9 @@ async function connectDatabase() {
 /**
  * Setup event listeners for the database connection
  * @param {mongoose.Connection} connection - Mongoose connection
+ * @param {Object} config - Configuration object
  */
-function setupConnectionListeners(connection) {
+function setupConnectionListeners(connection, config) {
   // Handle connection errors
   connection.on('error', (error) => {
     isConnected = false;

@@ -5,9 +5,17 @@ const User = require('../../database/models/User');
 const AuditLog = require('../../database/models/AuditLog');
 const { roleIds, roleNames } = require('../../config/roles');
 const { channelIds } = require('../../config/channels');
-const config = require('../../config/config');
 const logger = require('../../utils/logger');
 const ErrorHandler = require('../../utils/errorHandler');
+
+// Default config values if main config fails to load
+const DEFAULT_CONFIG = {
+  infractionSettings: {
+    checkExpirationInterval: 300000, // 5 minutes default
+    notifyOnExpiration: true,
+    autoRemoveRolesOnSuspension: true
+  }
+};
 
 /**
  * Suspension expiration checker system
@@ -16,9 +24,28 @@ const ErrorHandler = require('../../utils/errorHandler');
 class SuspensionChecker {
   constructor(client) {
     this.client = client;
-    this.checkInterval = config.infractionSettings.checkExpirationInterval || 300000; // 5 minutes default
+    
+    // Try to load config, fall back to defaults if needed
+    let config;
+    try {
+      config = require('../../config/config');
+      if (!config.infractionSettings || !config.infractionSettings.checkExpirationInterval) {
+        logger.warn('infractionSettings.checkExpirationInterval missing in config, using default value (5 minutes)');
+        config.infractionSettings = config.infractionSettings || {};
+        config.infractionSettings.checkExpirationInterval = DEFAULT_CONFIG.infractionSettings.checkExpirationInterval;
+      }
+    } catch (configError) {
+      logger.warn(`Failed to load config module: ${configError.message}. Using default suspension settings.`);
+      config = DEFAULT_CONFIG;
+    }
+    
+    this.checkInterval = config.infractionSettings.checkExpirationInterval;
+    this.notifyOnExpiration = config.infractionSettings.notifyOnExpiration !== false; // Default to true if not explicitly set to false
+    this.autoRemoveRolesOnSuspension = config.infractionSettings.autoRemoveRolesOnSuspension !== false; // Default to true if not explicitly set to false
     this.intervalId = null;
     this.isRunning = false;
+    
+    logger.debug(`SuspensionChecker initialized with interval: ${this.checkInterval}ms`);
   }
   
   /**
@@ -228,7 +255,7 @@ class SuspensionChecker {
     }
     
     // Send DM to user if configured
-    if (config.infractionSettings.notifyOnExpiration) {
+    if (this.notifyOnExpiration) {
       try {
         await member.send({
           embeds: [
@@ -326,7 +353,7 @@ class SuspensionChecker {
     await user.save();
     
     // Send DM to user if configured
-    if (config.infractionSettings.notifyOnExpiration) {
+    if (this.notifyOnExpiration) {
       try {
         await member.send({
           embeds: [
