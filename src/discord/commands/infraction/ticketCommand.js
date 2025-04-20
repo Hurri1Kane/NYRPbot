@@ -29,13 +29,17 @@ const {
   // Initialize ticket counter from DB
   async function initTicketCounter() {
     try {
-      const latestTicket = await Ticket.findOne({}).sort({ ticketId: -1 }).limit(1);
-      if (latestTicket) {
+      const latestTicket = await Ticket.findOne({}).sort({ createdAt: -1 }).limit(1);
+      if (latestTicket && latestTicket.ticketId) {
         // Extract the number from the ticket ID (format: TICKET-1234)
         const match = latestTicket.ticketId.match(/TICKET-(\d+)/);
         if (match && match[1]) {
           ticketCounter = parseInt(match[1], 10);
+        } else {
+          ticketCounter = 1000; // Default if no match found
         }
+      } else {
+        ticketCounter = 1000; // Default if no tickets exist
       }
       logger.info(`Initialized ticket counter: ${ticketCounter}`);
     } catch (error) {
@@ -244,10 +248,10 @@ const {
       const priority = interaction.options.getString('priority') || 'Medium';
       
       // Check if user has reached the maximum number of active tickets
-      const activeTickets = await Ticket.find({
+      const activeTickets = await Ticket.countDocuments({
         'creator.userId': interaction.user.id,
         status: 'Open'
-      }).count();
+      });
       
       const maxTickets = config.ticketSettings?.maxActivePerUser || 1;
       
@@ -1256,6 +1260,113 @@ module.exports.buttons = {
     }
   }
 };
+
+// Add this to the bottom of src/discord/commands/infraction/ticketCommand.js
+
+// Button handlers for ticket buttons
+module.exports.buttons = {
+    async create(interaction, args) {
+      try {
+        const category = args[0];
+        
+        // Create a modal for ticket details
+        const modal = new ModalBuilder()
+          .setCustomId(`ticket:createModal:${category}`)
+          .setTitle(`Create ${category} Ticket`);
+        
+        const subjectInput = new TextInputBuilder()
+          .setCustomId('subject')
+          .setLabel('Subject')
+          .setStyle(TextInputStyle.Short)
+          .setMinLength(3)
+          .setMaxLength(100)
+          .setPlaceholder('Brief summary of your issue')
+          .setRequired(true);
+        
+        const descriptionInput = new TextInputBuilder()
+          .setCustomId('description')
+          .setLabel('Description')
+          .setStyle(TextInputStyle.Paragraph)
+          .setMinLength(10)
+          .setMaxLength(4000)
+          .setPlaceholder('Please describe your issue in detail')
+          .setRequired(true);
+        
+        const priorityInput = new TextInputBuilder()
+          .setCustomId('priority')
+          .setLabel('Priority (Low, Medium, High)')
+          .setStyle(TextInputStyle.Short)
+          .setMinLength(3)
+          .setMaxLength(6)
+          .setPlaceholder('Medium')
+          .setRequired(false);
+        
+        const firstActionRow = new ActionRowBuilder().addComponents(subjectInput);
+        const secondActionRow = new ActionRowBuilder().addComponents(descriptionInput);
+        const thirdActionRow = new ActionRowBuilder().addComponents(priorityInput);
+        
+        modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
+        
+        await interaction.showModal(modal);
+      } catch (error) {
+        logger.error(`Error showing ticket creation modal: ${error.message}`);
+        await interaction.reply({
+          content: 'An error occurred while creating the ticket modal.',
+          ephemeral: true
+        });
+      }
+    }
+  };
+  
+  // Modal handlers for ticket creation
+  module.exports.modals = {
+    async createModal(interaction, args) {
+      const interactionKey = `${interaction.id}-${interaction.user.id}`;
+      await safeDefer(interaction, { ephemeral: true }, interactionKey);
+      
+      try {
+        const category = args[0];
+        const subject = interaction.fields.getTextInputValue('subject');
+        const description = interaction.fields.getTextInputValue('description');
+        
+        // Get priority (default to Medium if invalid)
+        let priority = interaction.fields.getTextInputValue('priority') || 'Medium';
+        priority = priority.trim();
+        
+        // Validate priority
+        if (!['Low', 'Medium', 'High'].includes(priority)) {
+          if (priority.toLowerCase() === 'low' || priority.toLowerCase() === 'l') {
+            priority = 'Low';
+          } else if (priority.toLowerCase() === 'high' || priority.toLowerCase() === 'h') {
+            priority = 'High';
+          } else {
+            priority = 'Medium';
+          }
+        }
+        
+        // Set options as if it came from the command
+        interaction.options = {
+          getSubcommand: () => 'create',
+          getString: (name) => {
+            if (name === 'category') return category;
+            if (name === 'subject') return subject;
+            if (name === 'description') return description;
+            if (name === 'priority') return priority;
+            return null;
+          }
+        };
+        
+        // Call the same handler used by the command
+        await handleCreateTicket(interaction, interactionKey);
+      } catch (error) {
+        logger.error(`Error creating ticket from modal: ${error.message}`);
+        await safeReply(interaction, {
+          content: 'An error occurred while creating your ticket.',
+          ephemeral: true
+        }, interactionKey);
+      }
+    }
+  };    
 
 // Modal handlers for ticket inputs
 module.exports.modals = {

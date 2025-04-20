@@ -276,7 +276,7 @@ const {
         },
         // Target can see the channel
         {
-          id: target.id,
+          id: target.id, // Make sure target is a valid User object
           allow: [
             PermissionFlagsBits.ViewChannel,
             PermissionFlagsBits.SendMessages,
@@ -286,7 +286,7 @@ const {
         },
         // Creator can see the channel
         {
-          id: interaction.user.id,
+          id: interaction.user.id, // Make sure interaction.user is a valid User object
           allow: [
             PermissionFlagsBits.ViewChannel,
             PermissionFlagsBits.SendMessages,
@@ -304,19 +304,41 @@ const {
             PermissionFlagsBits.ManageChannels,
             PermissionFlagsBits.ManageMessages
           ]
-        },
-        // Internal Affairs team can see the channel
-        {
-          id: roleIds.InternalAffairsCategory,
+        }
+      ];
+
+      // For role permissions, ensure the roles exist in cache
+      const internalAffairsRole = guild.roles.cache.get(roleIds.InternalAffairsCategory);
+      if (internalAffairsRole) {
+        permissionOverwrites.push({
+          id: internalAffairsRole.id,
           allow: [
             PermissionFlagsBits.ViewChannel,
             PermissionFlagsBits.SendMessages,
             PermissionFlagsBits.ReadMessageHistory,
             PermissionFlagsBits.AttachFiles
           ]
-        }
-      ];
-      
+        });
+      } else {
+        logger.warn(`Internal Affairs role (${roleIds.InternalAffairsCategory}) not found in cache`);
+      }
+
+      // Add Management role to permissions
+      const managementRole = guild.roles.cache.get(roleIds.ManagementCategory);
+      if (managementRole) {
+        permissionOverwrites.push({
+          id: managementRole.id,
+          allow: [
+            PermissionFlagsBits.ViewChannel,
+            PermissionFlagsBits.SendMessages,
+            PermissionFlagsBits.ReadMessageHistory,
+            PermissionFlagsBits.AttachFiles
+          ]
+        });
+      } else {
+        logger.warn(`Management role (${roleIds.ManagementCategory}) not found in cache`);
+      }
+
       // Create the channel
       const channel = await guild.channels.create({
         name: channelName,

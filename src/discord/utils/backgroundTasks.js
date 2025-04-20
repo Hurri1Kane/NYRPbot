@@ -202,111 +202,120 @@ function createBackgroundTasks(client) {
   const taskManager = new BackgroundTaskManager(client);
   
   // Register ticket activity check task
-  taskManager.registerTask(
-    'ticketActivityCheck',
-    async () => {
-      const now = new Date();
-      const guild = client.guilds.cache.first();
-      
-      if (!guild) {
-        logger.warn('No guild available for ticket activity check');
-        return;
-      }
-      
-      // Find inactive tickets that need a reminder
-      const reminderThreshold = new Date(now.getTime() - (config.ticketSettings.reminderAfterHours * 3600000));
-      const ticketsNeedingReminder = await Ticket.find({
-        status: 'Open',
-        lastActivity: { $lt: reminderThreshold },
-        autoCloseWarningIssued: false
-      });
-      
-      // Send reminders
-      for (const ticket of ticketsNeedingReminder) {
-        try {
-          const channel = await guild.channels.fetch(ticket.channelId).catch(() => null);
+// Fix for src/discord/utils/backgroundTasks.js
+
+// Update the ticketActivityCheck task
+taskManager.registerTask(
+  'ticketActivityCheck',
+  async () => {
+    const now = new Date();
+    const guild = client.guilds.cache.first();
+    
+    if (!guild) {
+      logger.warn('No guild available for ticket activity check');
+      return;
+    }
+    
+    // Make sure config values exist or use defaults
+    const reminderHours = config?.ticketSettings?.reminderAfterHours || 24;
+    const autoCloseHours = config?.ticketSettings?.autoCloseAfterHours || 72;
+    
+    // Find inactive tickets that need a reminder
+    const reminderThreshold = new Date(now.getTime() - (reminderHours * 3600000));
+    const ticketsNeedingReminder = await Ticket.find({
+      status: 'Open',
+      lastActivity: { $lt: reminderThreshold },
+      autoCloseWarningIssued: false
+    });
+    
+    // Send reminders
+    for (const ticket of ticketsNeedingReminder) {
+      try {
+        const channel = await guild.channels.fetch(ticket.channelId).catch(() => null);
+        
+        if (channel) {
+          await channel.send({
+            content: `⚠️ **Inactivity Warning** ⚠️\n\nThis ticket has been inactive for ${reminderHours} hours. It will be automatically closed in ${autoCloseHours - reminderHours} hours if there is no further activity.`
+          });
           
-          if (channel) {
-            await channel.send({
-              content: `⚠️ **Inactivity Warning** ⚠️\n\nThis ticket has been inactive for ${config.ticketSettings.reminderAfterHours} hours. It will be automatically closed in ${config.ticketSettings.autoCloseAfterHours - config.ticketSettings.reminderAfterHours} hours if there is no further activity.`
-            });
-            
-            // Update the ticket
-            ticket.autoCloseWarningIssued = true;
-            await ticket.save();
-            
-            logger.info(`Sent inactivity reminder for ticket ${ticket.ticketId} in channel ${channel.name}`);
-          }
-        } catch (error) {
-          const errorId = ErrorHandler.handleBackgroundError(error, `TicketReminder:${ticket.ticketId}`);
-          logger.error(`Failed to send reminder for ticket ${ticket.ticketId}: ${error.message} (Error ID: ${errorId})`);
+          // Update the ticket
+          ticket.autoCloseWarningIssued = true;
+          await ticket.save();
+          
+          logger.info(`Sent inactivity reminder for ticket ${ticket.ticketId} in channel ${channel.name}`);
         }
+      } catch (error) {
+        const errorId = ErrorHandler.handleBackgroundError(error, `TicketReminder:${ticket.ticketId}`);
+        logger.error(`Failed to send reminder for ticket ${ticket.ticketId}: ${error.message} (Error ID: ${errorId})`);
       }
-      
-      // Find inactive tickets that need to be closed
-      const closeThreshold = new Date(now.getTime() - (config.ticketSettings.autoCloseAfterHours * 3600000));
-      const ticketsToClose = await Ticket.find({
-        status: 'Open',
-        lastActivity: { $lt: closeThreshold }
-      });
-      
-      // Close inactive tickets
-      for (const ticket of ticketsToClose) {
-        try {
-          const channel = await guild.channels.fetch(ticket.channelId).catch(() => null);
+    }
+    
+    // Find inactive tickets that need to be closed
+    const closeThreshold = new Date(now.getTime() - (autoCloseHours * 3600000));
+    const ticketsToClose = await Ticket.find({
+      status: 'Open',
+      lastActivity: { $lt: closeThreshold }
+    });
+    
+    // Close inactive tickets
+    for (const ticket of ticketsToClose) {
+      try {
+        const channel = await guild.channels.fetch(ticket.channelId).catch(() => null);
+        
+        if (channel) {
+          // Generate transcript if enabled
+          let transcriptUrl = null;
+          if (config?.ticketSettings?.transcriptGenerationEnabled) {
+            // This would call a transcript generation function
+            // transcriptUrl = await generateTranscript(channel, ticket);
+            transcriptUrl = "Auto-close transcript not yet implemented";
+          }
           
-          if (channel) {
-            // Generate transcript if enabled
-            let transcriptUrl = null;
-            if (config.ticketSettings.transcriptGenerationEnabled) {
-              // This would call a transcript generation function
-              // transcriptUrl = await generateTranscript(channel, ticket);
-              transcriptUrl = "Auto-close transcript not yet implemented";
-            }
-            
-            // Send close message
-            await channel.send({
-              content: `🔒 **Ticket Auto-Closed** 🔒\n\nThis ticket has been automatically closed due to ${config.ticketSettings.autoCloseAfterHours} hours of inactivity.`
-            });
-            
-            // Update the ticket
-            ticket.status = 'Closed';
-            ticket.closedBy = {
-              userId: client.user.id,
-              username: client.user.username,
-              closedAt: now,
-              reason: `Automatically closed after ${config.ticketSettings.autoCloseAfterHours} hours of inactivity`
-            };
-            ticket.transcriptUrl = transcriptUrl;
-            await ticket.save();
-            
-            logger.info(`Auto-closed ticket ${ticket.ticketId} in channel ${channel.name}`);
-            
-            // Schedule channel for deletion if configured
-            if (config.ticketSettings.deleteClosedAfterHours > 0) {
-              setTimeout(async () => {
-                try {
-                  // Double-check the channel still exists
-                  const channelToDelete = await guild.channels.fetch(ticket.channelId).catch(() => null);
-                  if (channelToDelete) {
-                    await channelToDelete.delete(`Ticket auto-deleted after ${config.ticketSettings.deleteClosedAfterHours} hours of being closed`);
-                    logger.info(`Auto-deleted ticket channel for ${ticket.ticketId}`);
-                  }
-                } catch (deleteError) {
-                  const errorId = ErrorHandler.handleBackgroundError(deleteError, `TicketDelete:${ticket.ticketId}`);
-                  logger.error(`Failed to delete ticket channel ${ticket.channelId}: ${deleteError.message} (Error ID: ${errorId})`);
+          // Send close message
+          await channel.send({
+            content: `🔒 **Ticket Auto-Closed** 🔒\n\nThis ticket has been automatically closed due to ${autoCloseHours} hours of inactivity.`
+          });
+          
+          // Update the ticket
+          ticket.status = 'Closed';
+          ticket.closedBy = {
+            userId: client.user.id,
+            username: client.user.username,
+            closedAt: now,
+            reason: `Automatically closed after ${autoCloseHours} hours of inactivity`
+          };
+          ticket.transcriptUrl = transcriptUrl;
+          await ticket.save();
+          
+          logger.info(`Auto-closed ticket ${ticket.ticketId} in channel ${channel.name}`);
+          
+          // Schedule channel for deletion if configured
+          const deleteHours = config?.ticketSettings?.deleteClosedAfterHours || 0;
+          if (deleteHours > 0) {
+            const deleteTime = deleteHours * 3600000;
+            setTimeout(async () => {
+              try {
+                // Double-check the channel still exists
+                const channelToDelete = await guild.channels.fetch(ticket.channelId).catch(() => null);
+                if (channelToDelete) {
+                  await channelToDelete.delete(`Ticket auto-deleted after ${deleteHours} hours of being closed`);
+                  logger.info(`Auto-deleted ticket channel for ${ticket.ticketId}`);
                 }
-              }, config.ticketSettings.deleteClosedAfterHours * 3600000);
-            }
+              } catch (deleteError) {
+                const errorId = ErrorHandler.handleBackgroundError(deleteError, `TicketDelete:${ticket.ticketId}`);
+                logger.error(`Failed to delete ticket channel ${ticket.channelId}: ${deleteError.message} (Error ID: ${errorId})`);
+              }
+            }, deleteTime);
           }
-        } catch (error) {
-          const errorId = ErrorHandler.handleBackgroundError(error, `TicketAutoClose:${ticket.ticketId}`);
-          logger.error(`Failed to auto-close ticket ${ticket.ticketId}: ${error.message} (Error ID: ${errorId})`);
         }
+      } catch (error) {
+        const errorId = ErrorHandler.handleBackgroundError(error, `TicketAutoClose:${ticket.ticketId}`);
+        logger.error(`Failed to auto-close ticket ${ticket.ticketId}: ${error.message} (Error ID: ${errorId})`);
       }
-    },
-    30 * 60000 // Check every 30 minutes
-  );
+    }
+  },
+  30 * 60000 // Check every 30 minutes
+);
   
   // Register office cleanup task
   taskManager.registerTask(

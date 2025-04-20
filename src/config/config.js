@@ -1,4 +1,4 @@
-// src/config/config.js
+// src/config/config.js - Complete with all required defaults
 /**
  * Main configuration file for the NYRP Staff Management Bot
  */
@@ -118,3 +118,6 @@ const config = {
     maintenanceSchedule: '0 3 * * 0' // Weekly maintenance on Sunday at 3 AM
   }
 };
+
+// Export the config
+module.exports = config;
