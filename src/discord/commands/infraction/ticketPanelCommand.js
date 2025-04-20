@@ -1,7 +1,10 @@
 // src/discord/commands/infraction/ticketPanelCommand.js
+
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { PERMISSION_PRESETS } = require('../../utils/permissionManager');
 const logger = require('../../../utils/logger');
+const { safeReply } = require('../../events/interactionCreate');
+const ticketCommand = require('./ticketCommand'); // Import the ticket command to reuse its button handlers
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,6 +31,12 @@ module.exports = {
   
   // Only administrators or higher can deploy ticket panels
   permissions: PERMISSION_PRESETS.ADMINISTRATOR_PLUS,
+  
+  // Reuse button handlers from ticketCommand
+  buttons: ticketCommand.buttons,
+  
+  // Reuse modal handlers from ticketCommand
+  modals: ticketCommand.modals,
   
   async execute(interaction) {
     await interaction.deferReply({ ephemeral: true });

@@ -1031,4 +1031,121 @@ const {
         ephemeral: true
       }, interactionKey);
     }
+  
+    // Button handlers for office actions
+    { module.exports.buttons = {
+     async close(interaction, args) {
+      try {
+      const officeId = args[0];
+      
+      // Create a modal to collect closure information
+      const modal = new ModalBuilder()
+        .setCustomId(`office:closeModal:${officeId}`)
+        .setTitle('Close Office');
+      
+      const outcomeInput = new TextInputBuilder()
+        .setCustomId('outcome')
+        .setLabel('Outcome')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true)
+        .setPlaceholder('Select an outcome')
+        .setValue('No Action Required'); // Default value
+      
+      const notesInput = new TextInputBuilder()
+        .setCustomId('notes')
+        .setLabel('Closing Notes')
+        .setStyle(TextInputStyle.Paragraph)
+        .setRequired(true)
+        .setPlaceholder('Enter notes about the closure...')
+        .setMaxLength(1000);
+      
+      const retentionInput = new TextInputBuilder()
+        .setCustomId('retention')
+        .setLabel('Channel Retention (Keep/Delete After 24h/Delete Immediately)')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true)
+        .setPlaceholder('Keep')
+        .setValue('Keep');
+      
+      const firstActionRow = new ActionRowBuilder().addComponents(outcomeInput);
+      const secondActionRow = new ActionRowBuilder().addComponents(notesInput);
+      const thirdActionRow = new ActionRowBuilder().addComponents(retentionInput);
+      
+      modal.addComponents(firstActionRow, secondActionRow, thirdActionRow);
+      
+      await interaction.showModal(modal);
+    } catch (error) {
+      const errorId = ErrorHandler.handleInteractionError(error, interaction, 'Office Close Button');
+      logger.error(`Error showing office close modal: ${error.message} (Error ID: ${errorId})`);
+    }
+  },
+  
+  async transcript(interaction, args) {
+    try {
+      const officeId = args[0];
+      const interactionKey = `${interaction.id}-${interaction.user.id}`;
+      
+      // Set options as if it came from the command
+      interaction.options = {
+        getSubcommand: () => 'transcript'
+      };
+      
+      // Call the same handler used by the command
+      await handleGenerateTranscript(interaction, interactionKey);
+    } catch (error) {
+      const errorId = ErrorHandler.handleInteractionError(error, interaction, 'Office Transcript Button');
+      logger.error(`Error generating transcript: ${error.message} (Error ID: ${errorId})`);
+    }
   }
+};
+
+// Modal handlers for office closure
+module.exports.modals = {
+  async closeModal(interaction, args) {
+    try {
+      const officeId = args[0];
+      const outcome = interaction.fields.getTextInputValue('outcome');
+      const notes = interaction.fields.getTextInputValue('notes');
+      const retention = interaction.fields.getTextInputValue('retention');
+      
+      // Validate retention option
+      let validRetention = 'Keep';
+      if (['Keep', 'Delete After 24h', 'Delete Immediately'].includes(retention)) {
+        validRetention = retention;
+      }
+      
+      // Validate outcome option
+      const validOutcomes = [
+        'No Action Required',
+        'Warning Issued',
+        'Infraction Created',
+        'Case Dismissed',
+        'Referred to Higher Authority'
+      ];
+      
+      let validOutcome = 'No Action Required';
+      if (validOutcomes.includes(outcome)) {
+        validOutcome = outcome;
+      }
+      
+      // Set options as if it came from the command
+      interaction.options = {
+        getSubcommand: () => 'close',
+        getString: (name) => {
+          if (name === 'outcome') return validOutcome;
+          if (name === 'notes') return notes;
+          if (name === 'retention') return validRetention;
+          return null;
+        }
+      };
+      
+      // Call the same handler used by the command
+      const interactionKey = `${interaction.id}-${interaction.user.id}`;
+      await handleCloseOffice(interaction, interactionKey);
+    } catch (error) {
+      const errorId = ErrorHandler.handleInteractionError(error, interaction, 'Office Close Modal');
+      logger.error(`Error closing office: ${error.message} (Error ID: ${errorId})`);
+    }
+  }
+}}
+}
