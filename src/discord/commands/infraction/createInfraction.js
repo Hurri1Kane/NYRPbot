@@ -1,5 +1,15 @@
 // src/discord/commands/infraction/createInfraction.js
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { 
+  SlashCommandBuilder, 
+  EmbedBuilder, 
+  ActionRowBuilder, 
+  ButtonBuilder, 
+  ButtonStyle,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+} = require('discord.js'); 
+
 const { PERMISSION_PRESETS } = require('../../utils/permissionManager');
 const ErrorHandler = require('../../../utils/errorHandler');
 const logger = require('../../../utils/logger');
@@ -33,6 +43,7 @@ module.exports = {
               { name: 'Warning', value: 'Warning' },
               { name: 'Suspension', value: 'Suspension' },
               { name: 'Demotion', value: 'Demotion' },
+              { name: 'Termination', value: 'Termination' },
               { name: 'Blacklist', value: 'Blacklist' },
               { name: 'Under Investigation', value: 'Under Investigation' }
             )
@@ -429,6 +440,9 @@ async function handleApprove(interaction) {
     
     // Find the infraction
     const infraction = await Infraction.findById(infractionId);
+
+    // Log the infraction details for debugging
+    logger.info(`Infraction evidence: ${JSON.stringify(infraction.evidence)}`);
     
     if (!infraction) {
       return await interaction.editReply({
@@ -509,6 +523,11 @@ async function handleApprove(interaction) {
         // Handle demotion logic
         await executeDemotion(interaction, targetMember, infraction);
         break;
+
+      case 'Termination':
+        // Handle termination logic
+        await executeTermination(interaction, targetMember, infraction);
+        break;
         
       case 'Blacklist':
         // Remove all staff roles, add Blacklisted role
@@ -518,18 +537,29 @@ async function handleApprove(interaction) {
     
     // Send a DM to the target user
     try {
+      const dmEmbed = new EmbedBuilder()
+        .setColor('#FF0000')
+        .setTitle(`${infraction.type} Received`)
+        .setDescription(`You have received a ${infraction.type.toLowerCase()} from the staff team.`)
+        .addFields(
+          { name: 'Reason', value: infraction.reason },
+          { name: 'Appealable', value: infraction.appealable ? 'Yes' : 'No' }
+        )
+        .setTimestamp();
+      
+      // Add evidence to DM if available - make sure we're checking correctly
+      if (infraction.evidence && infraction.evidence.length > 0) {
+        dmEmbed.addFields({ 
+          name: 'Evidence', 
+          value: infraction.evidence.join('\n') 
+        });
+        
+        // Let's also log it to confirm evidence is present
+        logger.debug(`Sending evidence in DM: ${JSON.stringify(infraction.evidence)}`);
+      }
+      
       await targetMember.send({
-        embeds: [
-          new EmbedBuilder()
-            .setColor('#FF0000')
-            .setTitle(`${infraction.type} Received`)
-            .setDescription(`You have received a ${infraction.type.toLowerCase()} from the staff team.`)
-            .addFields(
-              { name: 'Reason', value: infraction.reason },
-              { name: 'Appealable', value: infraction.appealable ? 'Yes' : 'No' }
-            )
-            .setTimestamp()
-        ]
+        embeds: [dmEmbed]
       });
     } catch (dmError) {
       logger.warn(`Could not send DM to ${targetMember.user.tag}: ${dmError.message}`);
@@ -578,7 +608,7 @@ async function handleApprove(interaction) {
     
     // Announce the infraction in the announcement channel
     try {
-      const announcementChannel = await interaction.guild.channels.fetch(channelIds.infractionPromotionAnnouncement);
+      const announcementChannel = await interaction.guild.channels.fetch('1357029740376101088');
       
       if (announcementChannel) {
         const announcementEmbed = new EmbedBuilder()
@@ -593,6 +623,14 @@ async function handleApprove(interaction) {
             { name: 'Approved By', value: `<@${interaction.user.id}> (${interaction.user.username})`, inline: true }
           )
           .setTimestamp();
+
+          // Add evidence to announcement if available
+        if (infraction.evidence && infraction.evidence.length > 0) {
+          announcementEmbed.addFields({ 
+            name: 'Evidence', 
+            value: infraction.evidence.join('\n') 
+          });
+        }
         
         if (infraction.type === 'Suspension' && infraction.suspensionData) {
           announcementEmbed.addFields({ 
@@ -811,7 +849,7 @@ async function handleView(interaction) {
     
     // Add evidence if available
     if (infraction.evidence && infraction.evidence.length > 0) {
-      embed.addFields({ name: 'Evidence', value: infraction.evidence.join('\n'), inline: false });
+      embed.addFields({ name: 'Evidence', value: infraction.evidence.join('\n'), inline: true });
     }
     
     // Add approval data if available
@@ -1106,6 +1144,74 @@ async function executeDemotion(interaction, targetMember, infraction) {
 }
 
 /**
+ * Execute a termination
+ */
+async function executeTermination(interaction, targetMember, infraction) {
+  try {
+    // Record the user's current roles
+    const currentRoles = targetMember.roles.cache.filter(role => 
+      // Only include staff roles, not @everyone or other non-staff roles
+      role.id !== interaction.guild.id && 
+      !role.managed &&
+      role.id !== roleIds.Suspended &&
+      role.id !== roleIds.Blacklisted &&
+      role.id !== roleIds.UnderInvestigation
+    ).map(role => role.id);
+    
+    // Update the User model
+    await User.findOneAndUpdate(
+      { userId: targetMember.id },
+      { 
+        isActive: false,
+        // Store previous roles in case of future reinstatement
+        'terminationData': {
+          previousRoles: currentRoles,
+          terminatedAt: new Date(),
+          reason: infraction.reason
+        }
+      },
+      { upsert: true }
+    );
+    
+    // Remove all staff roles from the user
+    for (const roleId of currentRoles) {
+      try {
+        await targetMember.roles.remove(roleId);
+      } catch (removeError) {
+        logger.warn(`Could not remove role ${roleId} from ${targetMember.user.tag}: ${removeError.message}`);
+      }
+    }
+    
+    // Create a log entry for role changes
+    const logEntry = new AuditLog({
+      actionType: 'Roles_Updated',
+      performedBy: {
+        userId: interaction.user.id,
+        username: interaction.user.username
+      },
+      targetUser: {
+        userId: targetMember.id,
+        username: targetMember.user.username
+      },
+      details: {
+        action: 'Termination',
+        removedRoles: currentRoles
+      },
+      relatedIds: {
+        infractionId: infraction._id
+      }
+    });
+    
+    await logEntry.save();
+    
+    logger.info(`Termination executed for ${targetMember.user.tag} (${targetMember.id}).`);
+  } catch (error) {
+    logger.error(`Error executing termination: ${error.message}`);
+    throw error;
+  }
+} 
+
+/**
  * Execute a blacklist
  */
 async function executeBlacklist(interaction, targetMember, infraction) {
@@ -1179,19 +1285,19 @@ module.exports.buttons = {
       const infractionId = args[0];
       
       // Create a modal to collect notes
-      const modal = new Modal()
+      const modal = new ModalBuilder()
         .setCustomId(`infraction:approveModal:${infractionId}`)
         .setTitle('Approve Infraction');
-      
-      const notesInput = new TextInputComponent()
+
+       const notesInput = new TextInputBuilder()
         .setCustomId('notes')
         .setLabel('Approval Notes (Optional)')
-        .setStyle('PARAGRAPH')
+        .setStyle(TextInputStyle.Paragraph)
         .setRequired(false)
         .setPlaceholder('Enter any notes about this approval...')
         .setMaxLength(1000);
-      
-      const firstActionRow = new MessageActionRow().addComponents(notesInput);
+
+      const firstActionRow = new ActionRowBuilder().addComponents(notesInput);
       modal.addComponents(firstActionRow);
       
       await interaction.showModal(modal);
