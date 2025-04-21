@@ -7,6 +7,13 @@ const ErrorHandler = require('./utils/errorHandler');
 const SuspensionChecker = require('./discord/utils/suspensionChecker');
 const { deployCommands } = require('./discord/utils/deployCommands');
 const { createBackgroundTasks } = require('./discord/utils/backgroundTasks');
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 4000;
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 // Store global instances
 let suspensionChecker;
