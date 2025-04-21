@@ -1,5 +1,6 @@
 // src/index.js
 require('dotenv').config();
+const express = require('express');
 const { client, loadCommands, registerEvents } = require('./discord/client');
 const connectDatabase = require('./database/connect');
 const logger = require('./utils/logger');
@@ -7,17 +8,40 @@ const ErrorHandler = require('./utils/errorHandler');
 const SuspensionChecker = require('./discord/utils/suspensionChecker');
 const { deployCommands } = require('./discord/utils/deployCommands');
 const { createBackgroundTasks } = require('./discord/utils/backgroundTasks');
-const express = require('express')
-const app = express()
+
+// === EXPRESS SETUP FOR RENDER ===
+const app = express();
 const port = process.env.PORT || 4000;
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// Optional basic route for health check or ping
+app.get('/', (req, res) => {
+  res.send('Bot backend is running');
+});
 
-// Store global instances
-let suspensionChecker;
-let backgroundTasks;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Web service listening on port ${port}`);
+});
+
+// === DISCORD + DATABASE SETUP ===
+connectDatabase()
+  .then(() => {
+    logger.info('Connected to database');
+    return client.login(process.env.TOKEN);
+  })
+  .then(() => {
+    loadCommands();
+    registerEvents();
+    deployCommands();
+
+    // Store global instances
+    global.suspensionChecker = new SuspensionChecker(client);
+    global.backgroundTasks = createBackgroundTasks(client);
+
+    logger.info('Bot is up and running');
+  })
+  .catch(err => {
+    ErrorHandler.handleFatalError(err);
+  });
 
 /**
  * Initialize the bot
