@@ -1,5 +1,14 @@
 // src/discord/commands/staff/promoteCommand.js
-const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { 
+  SlashCommandBuilder, 
+  EmbedBuilder, 
+  ActionRowBuilder, 
+  ButtonBuilder, 
+  ButtonStyle,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle
+} = require('discord.js');
 const { PERMISSION_PRESETS } = require('../../utils/permissionManager');
 const ErrorHandler = require('../../../utils/errorHandler');
 const logger = require('../../../utils/logger');
@@ -66,16 +75,16 @@ module.exports = {
     )
     .addStringOption(option => 
       option
+        .setName('reason')
+        .setDescription('Reason for the promotion')
+        .setRequired(true)
+    )
+    .addStringOption(option => 
+      option
         .setName('rank')
         .setDescription('The rank to promote to (optional, will suggest available ranks)')
         .setRequired(false)
         .setAutocomplete(true)
-    )
-    .addStringOption(option => 
-      option
-        .setName('reason')
-        .setDescription('Reason for the promotion')
-        .setRequired(true)
     ),
   
   // Only directors can promote staff
@@ -431,19 +440,17 @@ module.exports = {
       // Send DM to the promoted user if configured
       if (config.promotionSettings.dmPromotedUsers) {
         try {
-          await user.send({
-            embeds: [
-              new EmbedBuilder()
-                .setColor('#00FF00')
-                .setTitle('You Have Been Promoted!')
-                .setDescription(`Congratulations! You have been promoted from ${currentRoleName} to ${newRoleName}.`)
-                .addFields(
-                  { name: 'Reason', value: reason, inline: false },
-                  { name: 'Promoted By', value: interaction.user.username, inline: true }
-                )
-                .setTimestamp()
-            ]
-          });
+          const dmEmbed = new EmbedBuilder()
+            .setColor('#00FF00')
+            .setTitle('You Have Been Promoted!')
+            .setDescription(`Congratulations! You have been promoted from ${currentRoleName} to ${newRoleName}.`)
+            .addFields(
+              { name: 'Reason', value: reason, inline: false },
+              { name: 'Promoted By', value: interaction.user.username, inline: true }
+            )
+            .setTimestamp();
+          
+          await user.send({ embeds: [dmEmbed] });
         } catch (dmError) {
           logger.warn(`Failed to send promotion DM to ${user.tag}: ${dmError.message}`);
         }

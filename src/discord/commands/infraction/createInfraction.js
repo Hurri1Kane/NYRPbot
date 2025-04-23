@@ -1289,7 +1289,7 @@ module.exports.buttons = {
         .setCustomId(`infraction:approveModal:${infractionId}`)
         .setTitle('Approve Infraction');
 
-       const notesInput = new TextInputBuilder()
+      const notesInput = new TextInputBuilder()
         .setCustomId('notes')
         .setLabel('Approval Notes (Optional)')
         .setStyle(TextInputStyle.Paragraph)
@@ -1311,19 +1311,19 @@ module.exports.buttons = {
       const infractionId = args[0];
       
       // Create a modal to collect reason
-      const modal = new Modal()
+      const modal = new ModalBuilder()
         .setCustomId(`infraction:denyModal:${infractionId}`)
         .setTitle('Deny Infraction');
       
-      const reasonInput = new TextInputComponent()
+      const reasonInput = new TextInputBuilder()
         .setCustomId('reason')
         .setLabel('Reason for Denial')
-        .setStyle('PARAGRAPH')
+        .setStyle(TextInputStyle.Paragraph)
         .setRequired(true)
         .setPlaceholder('Enter the reason for denying this infraction...')
         .setMaxLength(1000);
       
-      const firstActionRow = new MessageActionRow().addComponents(reasonInput);
+      const firstActionRow = new ActionRowBuilder().addComponents(reasonInput);
       modal.addComponents(firstActionRow);
       
       await interaction.showModal(modal);
