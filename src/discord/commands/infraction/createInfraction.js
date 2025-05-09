@@ -645,12 +645,15 @@ async function handleApprove(interaction) {
             inline: true 
           });
         }
-        
-        await announcementChannel.send({ embeds: [announcementEmbed] });
+        await announcementChannel.send({
+          content: `<@${infraction.targetUserId}>`,
+          embeds: [announcementEmbed]
+        });
       }
     } catch (error) {
       logger.warn(`Could not send announcement: ${error.message}`);
     }
+
   } catch (error) {
     logger.error(`Error approving infraction: ${error.message}`);
     await interaction.editReply({
