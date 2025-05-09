@@ -23,7 +23,7 @@ const InfractionSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['Warning', 'Suspension', 'Demotion', 'Blacklist', 'Under Investigation'],
+    enum: ['Warning', 'Suspension', 'Demotion', 'Termination', 'Blacklist', 'Under Investigation'],
     index: true
   },
   reason: {

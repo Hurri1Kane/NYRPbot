@@ -8,6 +8,7 @@ const ErrorHandler = require('./utils/errorHandler');
 const SuspensionChecker = require('./discord/utils/suspensionChecker');
 const { deployCommands } = require('./discord/utils/deployCommands');
 const { createBackgroundTasks } = require('./discord/utils/backgroundTasks');
+require('dotenv').config();
 
 // === EXPRESS SETUP FOR RENDER ===
 const app = express();
