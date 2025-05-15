@@ -41,18 +41,13 @@ function initializePromotionPaths() {
   promotionPaths.set(roleIds.TrialInternalAffairs, [roleIds.InternalAffairs]);
   promotionPaths.set(roleIds.InternalAffairs, [roleIds.InternalAffairsDirector, roleIds.StaffSupervisorInTraining]);
   promotionPaths.set(roleIds.InternalAffairsDirector, [roleIds.StaffSupervisorInTraining]);
-  
-  // Supervision path
-  promotionPaths.set(roleIds.StaffSupervisorInTraining, [roleIds.StaffSupervisor]);
-  promotionPaths.set(roleIds.StaffSupervisor, [roleIds.LeadStaffSupervisor, roleIds.TrialManager]);
-  promotionPaths.set(roleIds.LeadStaffSupervisor, [roleIds.TrialManager]);
-  
+
   // Management path
   promotionPaths.set(roleIds.TrialManager, [roleIds.Manager]);
   promotionPaths.set(roleIds.Manager, [roleIds.SeniorManager]);
-  promotionPaths.set(roleIds.SeniorManager, [roleIds.AssistantDirector]);
   
-  // Directive path
+  // Dir  ective path
+   promotionPaths.set(roleIds.SeniorManager, [roleIds.AssistantDirector]);
   promotionPaths.set(roleIds.AssistantDirector, [roleIds.LeadAssistantDirector]);
   promotionPaths.set(roleIds.LeadAssistantDirector, [roleIds.ViceDeputyDirector]);
   promotionPaths.set(roleIds.ViceDeputyDirector, [roleIds.DeputyDirector]);
@@ -282,9 +277,9 @@ module.exports = {
       
       const promotionRecord = new Promotion({
         userId: user.id,
-        username: user.username,
+        username: user.username || user.tag || 'Unknown',  // Ensure username is provided
         promotedBy: interaction.user.id,
-        promotedByUsername: interaction.user.username,
+        promotedByUsername: interaction.user.username || interaction.user.tag || 'Unknown',  // Ensure promotedByUsername is provided
         previousRank: currentRoleName,
         previousRankId: currentRoleId,
         newRank: newRoleName,
@@ -300,12 +295,15 @@ module.exports = {
       if (!userRecord) {
         userRecord = new User({
           userId: user.id,
-          username: user.username,
+          username: user.username || user.tag || `User_${user.id}`,  // Ensure username is provided with fallbacks
           currentRank: currentRoleName,
           rankId: currentRoleId,
           joinedAt: new Date(),
           isActive: true
         });
+      } else if (!userRecord.username) {
+        // Make sure the username is set even for existing users
+        userRecord.username = user.username || user.tag || `User_${user.id}`;
       }
       
       // Update the user record with new rank and add previous rank to history
@@ -367,7 +365,7 @@ module.exports = {
           await member.roles.remove(roleIds.SeniorHighRank);
         }
       } catch (roleError) {
-        logger.error(`Failed to update roles for ${user.tag}: ${roleError.message}`);
+        logger.error(`Failed to update roles for ${user.tag || user.id}: ${roleError.message}`);
         
         // Respond with partial success
         await safeReply(interaction, {
@@ -383,11 +381,11 @@ module.exports = {
         actionType: 'Promotion_Executed',
         performedBy: {
           userId: interaction.user.id,
-          username: interaction.user.username
+          username: interaction.user.username || interaction.user.tag || 'Unknown'  // Ensure username is provided
         },
         targetUser: {
           userId: user.id,
-          username: user.username
+          username: user.username || user.tag || 'Unknown'  // Ensure username is provided
         },
         details: {
           previousRank: currentRoleName,
@@ -421,12 +419,26 @@ module.exports = {
                 { name: 'Staff Member', value: `${user}`, inline: false },
                 { name: 'Previous Rank', value: currentRoleName, inline: true },
                 { name: 'New Rank', value: newRoleName, inline: true },
-                { name: 'Reason', value: reason, inline: false },
-                { name: 'Promoted By', value: `${interaction.user}`, inline: true }
               )
-              .setTimestamp();
-            
-            const announcementMsg = await announceChannel.send({ embeds: [announcementEmbed] });
+              .setTimestamp()
+
+              // Create the non-interactive button/label
+            const promotedByButton = new ButtonBuilder()
+              .setCustomId('promoted-by')
+              .setLabel(`Promoted by: ${interaction.member.displayName}`)
+              .setStyle(ButtonStyle.Secondary)
+              .setDisabled(true); // This makes it non-interactive
+
+            // Add the button to an action row
+            const actionRow = new ActionRowBuilder()
+              .addComponents(promotedByButton);
+
+            // Send the announcement with both the embed and the action row
+            const announcementMsg = await announceChannel.send({ 
+              embeds: [announcementEmbed],
+              components: [actionRow]
+            });
+          
             
             // Update the promotion record with the announcement message ID
             promotionRecord.announcementMessageId = announcementMsg.id;
@@ -446,13 +458,17 @@ module.exports = {
             .setDescription(`Congratulations! You have been promoted from ${currentRoleName} to ${newRoleName}.`)
             .addFields(
               { name: 'Reason', value: reason, inline: false },
-              { name: 'Promoted By', value: interaction.user.username, inline: true }
+              { name: 'Promoted By', value: interaction.user.username || interaction.user.tag || 'A director', inline: true }
             )
             .setTimestamp();
-          
+
+          await user.send({ 
+            embeds: [dmEmbed],
+          });
+                    
           await user.send({ embeds: [dmEmbed] });
         } catch (dmError) {
-          logger.warn(`Failed to send promotion DM to ${user.tag}: ${dmError.message}`);
+          logger.warn(`Failed to send promotion DM to ${user.tag || user.id}: ${dmError.message}`);
         }
       }
     } catch (error) {

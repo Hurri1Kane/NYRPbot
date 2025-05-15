@@ -546,6 +546,21 @@ async function handleApprove(interaction) {
           { name: 'Appealable', value: infraction.appealable ? 'Yes' : 'No' }
         )
         .setTimestamp();
+
+        // Create button/label for DM
+      const promotedByButtonDM = new ButtonBuilder()
+        .setCustomId('Issued-by-dm')
+        .setLabel(`Issued by: ${interaction.member.displayName}`)
+        .setStyle(ButtonStyle.Secondary)
+        .setDisabled(true);
+
+      const actionRowDM = new ActionRowBuilder()
+        .addComponents(promotedByButtonDM);
+
+      await user.send({ 
+        embeds: [dmEmbed],
+        components: [actionRowDM]
+      });
       
       // Add evidence to DM if available - make sure we're checking correctly
       if (infraction.evidence && infraction.evidence.length > 0) {
@@ -617,12 +632,21 @@ async function handleApprove(interaction) {
           .setDescription(`A staff member has received a ${infraction.type.toLowerCase()}.`)
           .addFields(
             { name: 'Staff Member', value: `<@${infraction.targetUserId}> (${infraction.targetUsername})`, inline: false },
-            { name: 'Type', value: infraction.type, inline: true },
+            { name: 'Action', value: infraction.type, inline: true },
             { name: 'Reason', value: infraction.reason, inline: false },
-            { name: 'Issued By', value: `<@${infraction.issuerUserId}> (${infraction.issuerUsername})`, inline: true },
-            { name: 'Approved By', value: `<@${interaction.user.id}> (${interaction.user.username})`, inline: true }
           )
-          .setTimestamp();
+          .setTimestamp()
+          
+          // Non Interactive Button
+        const promotedByButton = new ButtonBuilder()
+          .setCustomId('issued-by')
+          .setLabel(`Issued by: ${interaction.member.displayName}`)
+          .setStyle(ButtonStyle.Secondary)
+          .setDisabled(true); // Makes it non interactive | Switch to False if you want it to be interactive
+
+          // Add the button to an action row
+        const actionRow = new ActionRowBuilder()
+          .addComponents(promotedByButton);
 
           // Add evidence to announcement if available
         if (infraction.evidence && infraction.evidence.length > 0) {
@@ -647,7 +671,8 @@ async function handleApprove(interaction) {
         }
         await announcementChannel.send({
           content: `<@${infraction.targetUserId}>`,
-          embeds: [announcementEmbed]
+          embeds: [announcementEmbed],
+          components: [actionRow]
         });
       }
     } catch (error) {

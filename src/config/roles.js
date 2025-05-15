@@ -1,7 +1,6 @@
 // src/config/roles.js
 /**
- * Role IDs configuration for the NYRP Staff Management Bot
- * These IDs are referenced throughout the application for permissions and role management
+ * These IDs are referenced throughout the application for permissions and role management DO NOT DELETE!
  */
 const roleIds = {
     // Moderation Team Roles
@@ -19,17 +18,17 @@ const roleIds = {
     // Internal Affairs Team Roles
     TrialInternalAffairs: '1357029738115240142',
     InternalAffairs: '1357029738115240143',
-    InternalAffairsDirector: '1357029738115240144',
-  
-    // Supervision Team Roles
-    StaffSupervisorInTraining: '1357029738115240146',
-    StaffSupervisor: '1357029738115240147',
-    LeadStaffSupervisor: '1357029738115240148',
-  
+    HeadInternalAffairs: '1372661260516200581',
+    InternalAffairsSupervisor: '1357029738115240144',
+  //   
     // Management Team Roles
     TrialManager: '1357029738144727272',
     Manager: '1357029738144727273',
     SeniorManager: '1357029738144727274',
+    
+    // Staff Overseer Roles
+    TrialStaffOverseer: '1370825197090767049',
+    StaffOverseer: '1370825278045032639',
   
     // Directive Team Roles
     AssistantDirector: '1357029738157179175',
@@ -73,17 +72,17 @@ const roleIds = {
     // Internal Affairs Team Roles
     [roleIds.TrialInternalAffairs]: 'Trial Internal Affairs',
     [roleIds.InternalAffairs]: 'Internal Affairs',
-    [roleIds.InternalAffairsDirector]: 'Internal Affairs Director',
-  
-    // Supervision Team Roles
-    [roleIds.StaffSupervisorInTraining]: 'Staff Supervisor in Training',
-    [roleIds.StaffSupervisor]: 'Staff Supervisor',
-    [roleIds.LeadStaffSupervisor]: 'Lead Staff Supervisor',
+    [roleIds.HeadInternalAffairs]: 'Head Internal Affairs',
+    [roleIds.InternalAffairsSupervisor]: 'Internal Affairs Supervisor',
   
     // Management Team Roles
     [roleIds.TrialManager]: 'Trial Manager',
     [roleIds.Manager]: 'Manager',
     [roleIds.SeniorManager]: 'Senior Manager',
+
+    // Staff Overseer Roles
+    [roleIds.TrialStaffOverseer]: 'Trial Staff Overseer',
+    [roleIds.StaffOverseer]: 'Staff Overseer',
   
     // Directive Team Roles
     [roleIds.AssistantDirector]: 'Assistant Director',
@@ -165,19 +164,19 @@ const roleIds = {
     internalAffairsTeam: [
       roleIds.TrialInternalAffairs,
       roleIds.InternalAffairs,
-      roleIds.InternalAffairsDirector
-    ],
-    
-    supervisionTeam: [
-      roleIds.StaffSupervisorInTraining,
-      roleIds.StaffSupervisor,
-      roleIds.LeadStaffSupervisor
+      roleIds.HeadInternalAffairs,
+      roleIds.InternalAffairsSupervisor
     ],
     
     managementTeam: [
       roleIds.TrialManager,
       roleIds.Manager,
       roleIds.SeniorManager
+    ],
+
+    StaffOverseerTeam: [
+      roleIds.TrialStaffOverseer,
+      roleIds.StaffOverseer
     ],
     
     directiveTeam: [
