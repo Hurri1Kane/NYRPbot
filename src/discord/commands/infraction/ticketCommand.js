@@ -84,6 +84,49 @@ const {
     }
   }
   
+  // Function to get permissions based on ticket category
+  async function getTicketPermissions(interaction, category) {
+    const basePermissions = [
+      {
+        id: interaction.guild.roles.everyone.id,
+        deny: [PermissionFlagsBits.ViewChannel]
+      },
+      {
+        id: interaction.user.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.AttachFiles
+        ]
+      },
+      {
+        id: interaction.client.user.id,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.ManageChannels,
+          PermissionFlagsBits.ManageMessages
+        ]
+      }
+    ];
+
+    // Add category-specific permissions
+    const requiredRole = getRequiredRoleForCategory(category);
+    basePermissions.push({
+      id: requiredRole,
+      allow: [
+        PermissionFlagsBits.ViewChannel,
+        PermissionFlagsBits.SendMessages,
+        PermissionFlagsBits.ReadMessageHistory,
+        PermissionFlagsBits.AttachFiles
+      ]
+    });
+
+    return basePermissions;
+  }
+  
   module.exports = {
     data: new SlashCommandBuilder()
       .setName('ticket')
@@ -313,75 +356,37 @@ const {
       // Generate a channel name
       const channelName = `ticket-${ticketCounter}-${interaction.user.username.toLowerCase().replace(/[^a-z0-9]/g, '')}`;
       
-      // Create the ticket channel
-      const guild = interaction.guild;
-      const ticketCategory = await guild.channels.fetch(channelIds.ticketCategory);
-      
-      if (!ticketCategory) {
+      // Get the correct category ID from the configuration
+      const categoryId = channelConfig.ticketCategories[category];
+      if (!categoryId) {
         return await safeReply(interaction, {
-          content: 'Ticket category channel not found. Please contact an administrator.',
+          content: `Invalid ticket category: ${category}. Please contact an administrator.`,
           ephemeral: true
         }, interactionKey);
       }
       
-      // Set up permissions for the channel
-      const permissionOverwrites = [
-        // Default permissions (everyone can't see the channel)
-        {
-          id: guild.roles.everyone.id,
-          deny: [PermissionFlagsBits.ViewChannel]
-        },
-        // Creator can see the channel
-        {
-          id: interaction.user.id,
-          allow: [
-            PermissionFlagsBits.ViewChannel,
-            PermissionFlagsBits.SendMessages,
-            PermissionFlagsBits.ReadMessageHistory,
-            PermissionFlagsBits.AttachFiles
-          ]
-        },
-        // Bot can see and manage the channel
-        {
-          id: interaction.client.user.id,
-          allow: [
-            PermissionFlagsBits.ViewChannel,
-            PermissionFlagsBits.SendMessages,
-            PermissionFlagsBits.ReadMessageHistory,
-            PermissionFlagsBits.ManageChannels,
-            PermissionFlagsBits.ManageMessages
-          ]
-        }
-      ];
+      // Create the ticket channel
+      const guild = interaction.guild;
       
-      // Add permissions for staff based on category
-      const requiredRole = getRequiredRoleForCategory(category);
-      permissionOverwrites.push({
-        id: requiredRole,
-        allow: [
-          PermissionFlagsBits.ViewChannel,
-          PermissionFlagsBits.SendMessages,
-          PermissionFlagsBits.ReadMessageHistory,
-          PermissionFlagsBits.AttachFiles
-        ]
-      });
+      // Set up permissions for the channel
+      const permissionOverwrites = await getTicketPermissions(interaction, category);
       
       // Create the channel
       const channel = await guild.channels.create({
         name: channelName,
         type: ChannelType.GuildText,
-        parent: ticketCategory,
+        parent: categoryId,
         permissionOverwrites: permissionOverwrites,
         topic: `Support Ticket | ID: ${ticketId} | Creator: ${interaction.user.tag} (${interaction.user.id}) | Category: ${category}`
       });
       
-      // Create the ticket in the database
-      const ticketData = {
+      // Create the ticket in database
+      const ticket = new Ticket({
         ticketId,
         channelId: channel.id,
         creator: {
           userId: interaction.user.id,
-          username: interaction.user.username
+          username: interaction.user.tag
         },
         category,
         subject,
@@ -394,11 +399,11 @@ const {
           addedAt: new Date()
         }],
         lastActivity: new Date()
-      };
+      });
       
       // Add staff report data if applicable
       if (isStaffReport) {
-        ticketData.staffReport = {
+        ticket.staffReport = {
           isStaffReport: true,
           reportedStaffId,
           reportedStaffRank,
@@ -408,15 +413,14 @@ const {
       
       // Add in-game report data if applicable
       if (isInGameReport) {
-        ticketData.inGameReport = {
+        ticket.inGameReport = {
           isInGameReport: true,
-          reportedPlayer: null, // Will be filled in when user answers questions
+          reportedPlayer: null,
           hasActiveStaffHelper: false,
           activeStaffHelper: null
         };
       }
       
-      const ticket = new Ticket(ticketData);
       await ticket.save();
       
       // Create audit log entry
@@ -440,11 +444,11 @@ const {
       
       await logEntry.save();
       
-      // Send welcome message in the ticket channel
+      // Send welcome message
       const welcomeEmbed = new EmbedBuilder()
         .setColor(getTicketCategoryColor(category))
         .setTitle(`New Ticket: ${subject}`)
-        .setDescription(getWelcomeMessage(category, interaction.user.username))
+        .setDescription(getWelcomeMessage(category, interaction.user.toString()))
         .addFields(
           { name: 'Ticket ID', value: ticketId, inline: true },
           { name: 'Category', value: category, inline: true },
@@ -453,8 +457,7 @@ const {
         .setFooter({ text: 'Please be patient while staff reviews your ticket.' })
         .setTimestamp();
       
-      // Add buttons for ticket management
-      const actionRow = new ActionRowBuilder()
+      const buttonRow = new ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
             .setCustomId(`ticket:claim:${ticketId}`)
@@ -466,25 +469,29 @@ const {
             .setStyle(ButtonStyle.Danger)
         );
       
-      await channel.send({ embeds: [welcomeEmbed], components: [actionRow] });
+      await channel.send({
+        content: `${interaction.user.toString()} Welcome to your ticket!`,
+        embeds: [welcomeEmbed],
+        components: [buttonRow]
+      });
       
-      // Also send the description as a separate message from the user
+      // Also send the description as a separate message
       if (description) {
         await channel.send({
           content: `**Ticket Description from ${interaction.user}**:\n\n${description}`
         });
       }
       
-      // Notify the user that the ticket has been created
+      // Send confirmation to user
       await safeReply(interaction, {
-        content: `Your ticket has been created successfully. Please proceed to ${channel} to continue.`,
+        content: `Your ticket has been created in ${channel.toString()}`,
         ephemeral: true
       }, interactionKey);
       
       // Ping staff for high priority tickets
       if (priority === 'High') {
         await channel.send({
-          content: `<@&${requiredRole}> This is a **high priority** ticket that requires immediate attention.`
+          content: `<@&${getRequiredRoleForCategory(category)}> This is a **high priority** ticket that requires immediate attention.`
         });
       }
     } catch (error) {
