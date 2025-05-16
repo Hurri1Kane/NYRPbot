@@ -2902,3 +2902,5 @@
 {"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-15T21:14:02.544Z"}
 {"level":"info","message":"Infraction evidence: [\"fdsafdfsda\"]","service":"nyrp-staff-bot","timestamp":"2025-05-15T21:14:40.071Z"}
 {"level":"warn","message":"Could not send DM to hurri1kane: user is not defined","service":"nyrp-staff-bot","timestamp":"2025-05-15T21:14:40.212Z"}
+{"level":"error","message":"Failed to update roles for red_mirage982: Missing Permissions","service":"nyrp-staff-bot","timestamp":"2025-05-15T21:16:47.288Z"}
+{"level":"info","message":"Shutting down...","service":"nyrp-staff-bot","timestamp":"2025-05-15T21:17:13.375Z"}
