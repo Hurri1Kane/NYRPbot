@@ -52,6 +52,38 @@ const {
   // Initialize the counter
   initTicketCounter();
   
+  // Function to get welcome message based on category
+  function getWelcomeMessage(category, username) {
+    switch (category) {
+      case 'General Support':
+        return `Hello ${username}, please state your inquiry below and wait for a Staff Member to help you.`;
+      case 'Staff Report':
+        return `Hello ${username}, please wait patiently until a high ranked staff member is there to help you with your report.`;
+      case 'In-game Report':
+        return `Hello ${username}, Please wait until a Staff Member on duty is taking your report.\n\nPlease answer these questions:\n1. Who are you reporting?\n2. Is there someone in game helping you already?`;
+      case 'Ownership Support':
+        return `Hello ${username}, please wait patiently until a Server Owner is ready to help you with your inquiry, while you wait please state your inquiry!`;
+      default:
+        return `Hello ${username}, thank you for creating a ticket. A staff member will assist you shortly.`;
+    }
+  }
+  
+  // Function to get required role for category
+  function getRequiredRoleForCategory(category) {
+    switch (category) {
+      case 'General Support':
+        return roleIds.TrialAdministrator; // TA+
+      case 'Staff Report':
+        return roleIds.TrialInternalAffairs; // TIA+
+      case 'In-game Report':
+        return roleIds.TrialManager; // TM+
+      case 'Ownership Support':
+        return roleIds.ViceDeputyDirector; // VDD+
+      default:
+        return roleIds.TrialModerator; // Default to TM+
+    }
+  }
+  
   module.exports = {
     data: new SlashCommandBuilder()
       .setName('ticket')
@@ -67,8 +99,9 @@ const {
               .setRequired(true)
               .addChoices(
                 { name: 'General Support', value: 'General Support' },
-                { name: 'In-Game Reports', value: 'In-Game Reports' },
-                { name: 'Staff Reports', value: 'Staff Reports' }
+                { name: 'Staff Report', value: 'Staff Report' },
+                { name: 'In-game Report', value: 'In-game Report' },
+                { name: 'Ownership Support', value: 'Ownership Support' }
               )
           )
           .addStringOption(option => 
@@ -163,6 +196,7 @@ const {
               .addChoices(
                 { name: 'All Categories', value: 'all' },
                 { name: 'General Support', value: 'General Support' },
+                { name: 'Staff Reports', value: 'Staff Reports' },
                 { name: 'In-Game Reports', value: 'In-Game Reports' },
                 { name: 'Staff Reports', value: 'Staff Reports' }
               )
@@ -250,10 +284,10 @@ const {
       const priority = interaction.options.getString('priority') || 'Medium';
       
       // Check if user has reached the maximum number of active tickets
-        const activeTickets = await Ticket.countDocuments({
+      const activeTickets = await Ticket.countDocuments({
         'creator.userId': interaction.user.id,
         status: 'Open'
-        });
+      });
       
       const maxTickets = config.ticketSettings?.maxActivePerUser || 1;
       
@@ -264,8 +298,9 @@ const {
         }, interactionKey);
       }
       
-      // Special handling for staff reports
-      const isStaffReport = category === 'Staff Reports';
+      // Special handling for staff reports and in-game reports
+      const isStaffReport = category === 'Staff Report';
+      const isInGameReport = category === 'In-game Report';
       let reportedStaffId = null;
       let reportedStaffRank = null;
       
@@ -320,37 +355,16 @@ const {
       ];
       
       // Add permissions for staff based on category
-      if (category === 'General Support' || category === 'In-Game Reports') {
-        // For general tickets, all moderators+ can see
-        permissionOverwrites.push({
-          id: roleIds.ModerationCategory,
-          allow: [
-            PermissionFlagsBits.ViewChannel,
-            PermissionFlagsBits.SendMessages,
-            PermissionFlagsBits.ReadMessageHistory,
-            PermissionFlagsBits.AttachFiles
-          ]
-        });
-      } else if (category === 'Staff Reports') {
-        // For staff reports, only internal affairs team and directors can see
-        permissionOverwrites.push({
-          id: roleIds.InternalAffairsCategory,
-          allow: [
-            PermissionFlagsBits.ViewChannel,
-            PermissionFlagsBits.SendMessages,
-            PermissionFlagsBits.ReadMessageHistory,
-            PermissionFlagsBits.AttachFiles
-          ]
-        }, {
-          id: roleIds.DirectiveTeam,
-          allow: [
-            PermissionFlagsBits.ViewChannel,
-            PermissionFlagsBits.SendMessages,
-            PermissionFlagsBits.ReadMessageHistory,
-            PermissionFlagsBits.AttachFiles
-          ]
-        });
-      }
+      const requiredRole = getRequiredRoleForCategory(category);
+      permissionOverwrites.push({
+        id: requiredRole,
+        allow: [
+          PermissionFlagsBits.ViewChannel,
+          PermissionFlagsBits.SendMessages,
+          PermissionFlagsBits.ReadMessageHistory,
+          PermissionFlagsBits.AttachFiles
+        ]
+      });
       
       // Create the channel
       const channel = await guild.channels.create({
@@ -392,6 +406,16 @@ const {
         };
       }
       
+      // Add in-game report data if applicable
+      if (isInGameReport) {
+        ticketData.inGameReport = {
+          isInGameReport: true,
+          reportedPlayer: null, // Will be filled in when user answers questions
+          hasActiveStaffHelper: false,
+          activeStaffHelper: null
+        };
+      }
+      
       const ticket = new Ticket(ticketData);
       await ticket.save();
       
@@ -420,12 +444,11 @@ const {
       const welcomeEmbed = new EmbedBuilder()
         .setColor(getTicketCategoryColor(category))
         .setTitle(`New Ticket: ${subject}`)
-        .setDescription(`Thank you for creating a ticket. Our staff will assist you as soon as possible.`)
+        .setDescription(getWelcomeMessage(category, interaction.user.username))
         .addFields(
           { name: 'Ticket ID', value: ticketId, inline: true },
           { name: 'Category', value: category, inline: true },
-          { name: 'Priority', value: priority, inline: true },
-          { name: 'Description', value: description }
+          { name: 'Priority', value: priority, inline: true }
         )
         .setFooter({ text: 'Please be patient while staff reviews your ticket.' })
         .setTimestamp();
@@ -446,9 +469,11 @@ const {
       await channel.send({ embeds: [welcomeEmbed], components: [actionRow] });
       
       // Also send the description as a separate message from the user
-      await channel.send({
-        content: `**Ticket Description from ${interaction.user}**:\n\n${description}`
-      });
+      if (description) {
+        await channel.send({
+          content: `**Ticket Description from ${interaction.user}**:\n\n${description}`
+        });
+      }
       
       // Notify the user that the ticket has been created
       await safeReply(interaction, {
@@ -458,15 +483,8 @@ const {
       
       // Ping staff for high priority tickets
       if (priority === 'High') {
-        let roleToPing;
-        if (category === 'Staff Reports') {
-          roleToPing = roleIds.InternalAffairsCategory;
-        } else {
-          roleToPing = roleIds.ModerationCategory;
-        }
-        
         await channel.send({
-          content: `<@&${roleToPing}> This is a **high priority** ticket that requires immediate attention.`
+          content: `<@&${requiredRole}> This is a **high priority** ticket that requires immediate attention.`
         });
       }
     } catch (error) {
@@ -1209,10 +1227,12 @@ function getTicketCategoryColor(category) {
   switch (category) {
     case 'General Support':
       return '#0099ff'; // Blue
-    case 'In-Game Reports':
-      return '#ff9900'; // Orange
-    case 'Staff Reports':
+    case 'Staff Report':
       return '#ff0000'; // Red
+    case 'In-game Report':
+      return '#ff9900'; // Orange
+    case 'Ownership Support':
+      return '#00ff00'; // Green
     default:
       return '#00cc99'; // Teal
   }

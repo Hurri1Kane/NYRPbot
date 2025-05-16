@@ -54,15 +54,28 @@ module.exports = {
         .setTitle(title)
         .setDescription(description)
         .addFields(
-          { name: 'General Support', value: 'For general questions, bug reports, or other non-urgent issues.' },
-          { name: 'In-Game Reports', value: 'For reporting in-game issues, rule violations, or player concerns.' },
-          { name: 'Staff Reports', value: 'For reporting staff members or issues with staff.' }
+          { 
+            name: 'General Support (TA+)', 
+            value: 'For General Questions, redeem purchases and giveaway prizes.' 
+          },
+          { 
+            name: 'Staff Report (TIA+)', 
+            value: 'Report a Staff Member of New York Roleplay, remember to have evidence!' 
+          },
+          { 
+            name: 'In-game Report (TM+)', 
+            value: 'To show evidence for in-game violations.' 
+          },
+          { 
+            name: 'Ownership Support (VDD+)', 
+            value: 'Partnerships, Paid Ads, High ranking Staff Report, Important Inquiries.' 
+          }
         )
         .setFooter({ text: 'NYRP Staff Management System' })
         .setTimestamp();
       
       // Create buttons
-      const buttonRow = new ActionRowBuilder()
+      const buttonRow1 = new ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
             .setCustomId('ticket:create:General Support')
@@ -70,34 +83,41 @@ module.exports = {
             .setStyle(ButtonStyle.Primary)
             .setEmoji('📝'),
           new ButtonBuilder()
-            .setCustomId('ticket:create:In-Game Reports')
-            .setLabel('In-Game Reports')
+            .setCustomId('ticket:create:Staff Report')
+            .setLabel('Staff Report')
+            .setStyle(ButtonStyle.Danger)
+            .setEmoji('🛡️')
+        );
+
+      const buttonRow2 = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('ticket:create:In-game Report')
+            .setLabel('In-game Report')
             .setStyle(ButtonStyle.Secondary)
             .setEmoji('🎮'),
           new ButtonBuilder()
-            .setCustomId('ticket:create:Staff Reports')
-            .setLabel('Staff Reports')
-            .setStyle(ButtonStyle.Danger)
-            .setEmoji('🛡️')
+            .setCustomId('ticket:create:Ownership Support')
+            .setLabel('Ownership Support')
+            .setStyle(ButtonStyle.Success)
+            .setEmoji('👑')
         );
       
       // Send the panel
       await targetChannel.send({
         embeds: [ticketEmbed],
-        components: [buttonRow]
+        components: [buttonRow1, buttonRow2]
       });
       
-      // Confirm to user
+      // Send confirmation
       await interaction.editReply({
-        content: `Ticket panel successfully deployed to ${targetChannel}!`,
+        content: 'Ticket panel has been created successfully!',
         ephemeral: true
       });
-      
-      logger.info(`Ticket panel deployed to ${targetChannel.name} (${targetChannel.id}) by ${interaction.user.tag}`);
     } catch (error) {
-      logger.error(`Error deploying ticket panel: ${error.message}`);
+      logger.error(`Error creating ticket panel: ${error.message}`);
       await interaction.editReply({
-        content: 'An error occurred while deploying the ticket panel. Please check the logs.',
+        content: 'An error occurred while creating the ticket panel.',
         ephemeral: true
       });
     }

@@ -26,7 +26,7 @@ const TicketSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['General Support', 'In-Game Reports', 'Staff Reports'],
+    enum: ['General Support', 'Staff Report', 'In-game Report', 'Ownership Support'],
     index: true
   },
   subject: {
@@ -66,6 +66,18 @@ const TicketSchema = new mongoose.Schema({
     reportedStaffRank: String,
     elevatedTo: String,
     originallyVisibleTo: [String]
+  },
+  inGameReport: {
+    isInGameReport: {
+      type: Boolean,
+      default: false
+    },
+    reportedPlayer: String,
+    hasActiveStaffHelper: {
+      type: Boolean,
+      default: false
+    },
+    activeStaffHelper: String
   },
   lastActivity: {
     type: Date,
@@ -147,6 +159,13 @@ TicketSchema.statics.findActiveTickets = function(userId) {
 TicketSchema.statics.findStaffReports = function() {
   return this.find({ 
     'staffReport.isStaffReport': true,
+    status: 'Open'
+  });
+};
+
+TicketSchema.statics.findInGameReports = function() {
+  return this.find({
+    'inGameReport.isInGameReport': true,
     status: 'Open'
   });
 };
