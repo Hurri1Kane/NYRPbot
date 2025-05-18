@@ -245,11 +245,47 @@ const {
         }
       }
       
+      // Get the latest office counter from DB to ensure we have the most up-to-date value
+      const latestOffice = await Office.findOne({}).sort({ officeId: -1 }).limit(1);
+      if (latestOffice) {
+        const match = latestOffice.officeId.match(/CASE-(\d+)/);
+        if (match && match[1]) {
+          officeCounter = Math.max(officeCounter, parseInt(match[1], 10));
+        }
+      }
+      
       // Increment the office counter
       officeCounter++;
       
       // Generate a unique office ID
-      const officeId = `CASE-${officeCounter}`;
+      let officeId = `CASE-${officeCounter}`;
+      
+      // Verify the office ID doesn't already exist
+      let idExists = true;
+      let attempts = 0;
+      const maxAttempts = 5;
+      
+      while (idExists && attempts < maxAttempts) {
+        // Check if the ID already exists
+        const existingOffice = await Office.findOne({ officeId });
+        
+        if (!existingOffice) {
+          idExists = false;
+        } else {
+          // If it exists, increment and try again
+          logger.warn(`Office ID ${officeId} already exists, incrementing...`);
+          officeCounter++;
+          officeId = `CASE-${officeCounter}`;
+          attempts++;
+        }
+      }
+      
+      if (attempts >= maxAttempts) {
+        return await safeReply(interaction, {
+          content: 'Failed to generate a unique office ID after multiple attempts. Please try again later.',
+          ephemeral: true
+        }, interactionKey);
+      }
       
       // Generate a channel name
       const channelName = config.officeSettings.nameFormat

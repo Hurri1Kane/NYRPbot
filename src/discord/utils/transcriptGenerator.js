@@ -1,7 +1,5 @@
 // src/discord/utils/transcriptGenerator.js
 const { EmbedBuilder } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
 const logger = require('../../utils/logger');
 const ErrorHandler = require('../../utils/errorHandler');
 const { channelConfig } = require('../../config/channels');
@@ -325,24 +323,6 @@ async function saveTranscript(html, channel, contextData, transcriptChannelId) {
     const id = isTicket ? contextData.ticketId : contextData.officeId;
     const filename = `${id.replace(/[^a-z0-9]/gi, '-').toLowerCase()}-${Date.now()}.html`;
     
-    // Create transcripts directory if it doesn't exist
-    const transcriptsDir = path.join(process.cwd(), 'transcripts');
-    if (!fs.existsSync(transcriptsDir)) {
-      fs.mkdirSync(transcriptsDir, { recursive: true });
-    }
-    
-    // Create type-specific directory
-    const typeDir = path.join(transcriptsDir, isTicket ? 'tickets' : 'offices');
-    if (!fs.existsSync(typeDir)) {
-      fs.mkdirSync(typeDir, { recursive: true });
-    }
-    
-    // Save to local file
-    const filePath = path.join(typeDir, filename);
-    fs.writeFileSync(filePath, html);
-    
-    logger.debug(`Transcript saved to ${filePath}`);
-    
     // If we have a transcript channel ID, post there
     let messageUrl = null;
     if (transcriptChannelId) {
@@ -385,18 +365,20 @@ async function saveTranscript(html, channel, contextData, transcriptChannelId) {
             // Return the URL of the transcript message
             messageUrl = message.url;
             logger.info(`Transcript posted to channel ${transcriptChannel.name} (${transcriptChannel.id})`);
+            return messageUrl;
           } catch (sendError) {
-            // If send fails (e.g., due to file size), try with just the embed and a link
+            // If send fails (e.g., due to file size), try with just the embed
             logger.warn(`Error sending transcript attachment: ${sendError.message}`);
             
             // Add a note about the failure
             embed.addFields({
               name: 'Note',
-              value: 'Transcript file was too large to attach. Available in local storage only.'
+              value: 'Transcript file was too large to attach.'
             });
             
             const message = await transcriptChannel.send({ embeds: [embed] });
             messageUrl = message.url;
+            return messageUrl;
           }
         }
       } catch (channelError) {
@@ -408,8 +390,8 @@ async function saveTranscript(html, channel, contextData, transcriptChannelId) {
       }
     }
     
-    // Return local path if we couldn't post to a channel or the message URL if we could
-    return messageUrl || `file://${filePath}`;
+    // Return a placeholder if we couldn't post to a channel
+    return "No transcript URL available";
   } catch (error) {
     const errorId = ErrorHandler.handleBackgroundError(
       error,

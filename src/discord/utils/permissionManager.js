@@ -19,13 +19,13 @@ const roleHierarchy = [
   roleIds.Manager,
   roleIds.TrialManager,
   
-  // Supervision Team
-  roleIds.LeadStaffSupervisor,
-  roleIds.StaffSupervisor,
-  roleIds.StaffSupervisorInTraining,
+  // Staff Overseer Team
+  roleIds.StaffOverseer,
+  roleIds.TrialStaffOverseer,
   
   // Internal Affairs Team
-  roleIds.InternalAffairsDirector,
+  roleIds.InternalAffairsSupervisor,
+  roleIds.HeadInternalAffairs,
   roleIds.InternalAffairs,
   roleIds.TrialInternalAffairs,
   
@@ -99,7 +99,7 @@ function getPermissionHierarchyIndex(permission) {
     case PERMISSION_PRESETS.INTERNAL_AFFAIRS_PLUS:
       return roleHierarchyIndexMap[roleIds.TrialInternalAffairs];
     case PERMISSION_PRESETS.SUPERVISOR_PLUS:
-      return roleHierarchyIndexMap[roleIds.StaffSupervisorInTraining];
+      return roleHierarchyIndexMap[roleIds.TrialStaffOverseer];
     case PERMISSION_PRESETS.MANAGER_PLUS:
       return roleHierarchyIndexMap[roleIds.TrialManager];
     case PERMISSION_PRESETS.DIRECTOR_PLUS:

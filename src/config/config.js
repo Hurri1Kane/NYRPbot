@@ -88,7 +88,7 @@ const config = {
       [roleIds.TrialModerator]: 'moderator',
       [roleIds.TrialAdministrator]: 'administrator',
       [roleIds.TrialInternalAffairs]: 'internal_affairs',
-      [roleIds.StaffSupervisorInTraining]: 'supervisor',
+      [roleIds.TrialStaffOverseer]: 'supervisor',
       [roleIds.TrialManager]: 'manager',
       [roleIds.AssistantDirector]: 'director'
     }

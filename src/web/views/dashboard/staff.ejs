@@ -1,0 +1,170 @@
+<%- include('../layouts/main', { title: title, user: user }) %>
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard/servers">Servers</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard/servers/<%= guild.id %>"><%= guild.name %></a></li>
+            <li class="breadcrumb-item active" aria-current="page">Staff Management</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Staff Management</h1>
+        <div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                <i class="bi bi-person-plus"></i> Add Staff
+            </button>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Staff Members</h5>
+                <div class="input-group input-group-sm" style="max-width: 300px;">
+                    <input type="text" class="form-control" placeholder="Search staff..." id="staffSearch">
+                    <button class="btn btn-light" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <% if (staffMembers && staffMembers.length > 0) { %>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Member</th>
+                                <th>Role</th>
+                                <th>Last Active</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% staffMembers.forEach(staff => { %>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="<%= staff.avatar %>" alt="<%= staff.username %>" class="rounded-circle me-2" width="32" height="32">
+                                            <span><%= staff.username %></span>
+                                        </div>
+                                    </td>
+                                    <td><%= staff.role %></td>
+                                    <td><%= staff.lastActive %></td>
+                                    <td>
+                                        <% if (staff.status === 'active') { %>
+                                            <span class="badge bg-success">Active</span>
+                                        <% } else { %>
+                                            <span class="badge bg-danger">Inactive</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#viewStaffModal" data-staff-id="<%= staff.id %>">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#removeStaffModal" data-staff-id="<%= staff.id %>">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <div class="text-center py-5">
+                    <i class="bi bi-people fs-1 text-muted mb-3"></i>
+                    <p class="mb-0">No staff members found.</p>
+                    <p class="text-muted">Add staff members to start tracking their activity.</p>
+                    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addStaffModal">
+                        <i class="bi bi-person-plus"></i> Add Staff
+                    </button>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<!-- Add Staff Modal -->
+<div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStaffModalLabel">Add Staff Member</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addStaffForm">
+                    <div class="mb-3">
+                        <label for="staffMember" class="form-label">Select Member</label>
+                        <select class="form-select" id="staffMember" name="staffMember" required>
+                            <option value="" selected disabled>Select a member</option>
+                            <!-- Members would be populated dynamically -->
+                            <option value="member1">Member 1</option>
+                            <option value="member2">Member 2</option>
+                            <option value="member3">Member 3</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="staffRole" class="form-label">Staff Role</label>
+                        <select class="form-select" id="staffRole" name="staffRole" required>
+                            <option value="" selected disabled>Select a role</option>
+                            <!-- Roles would be populated dynamically -->
+                            <option value="role1">Staff</option>
+                            <option value="role2">Moderator</option>
+                            <option value="role3">Admin</option>
+                        </select>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="trackActivity" name="trackActivity" checked>
+                        <label class="form-check-label" for="trackActivity">Track Activity</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="addStaffBtn">Add Staff</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Remove Staff Modal -->
+<div class="modal fade" id="removeStaffModal" tabindex="-1" aria-labelledby="removeStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="removeStaffModalLabel">Remove Staff Member</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this staff member?</p>
+                <p class="text-danger">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="removeStaffBtn">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('addStaffBtn').addEventListener('click', function() {
+    // Here you would handle the form submission with fetch or axios
+    alert('Staff member added!');
+    document.getElementById('addStaffModal').querySelector('.btn-close').click();
+});
+
+document.getElementById('removeStaffBtn').addEventListener('click', function() {
+    // Here you would handle the staff removal with fetch or axios
+    alert('Staff member removed!');
+    document.getElementById('removeStaffModal').querySelector('.btn-close').click();
+});
+</script> 

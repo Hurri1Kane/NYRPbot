@@ -1,0 +1,119 @@
+<%- include('../layouts/main', { title: title, user: user }) %>
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/dashboard/servers">Servers</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%= guild.name %></li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex align-items-center">
+            <% if (guild.icon) { %>
+                <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="<%= guild.name %>" class="rounded-circle me-3" width="64" height="64">
+            <% } else { %>
+                <div class="rounded-circle bg-secondary text-white me-3 d-flex align-items-center justify-content-center" style="width: 64px; height: 64px; font-size: 24px;">
+                    <%= guild.name.charAt(0) %>
+                </div>
+            <% } %>
+            <h1 class="mb-0"><%= guild.name %></h1>
+        </div>
+        <div>
+            <a href="/dashboard/servers/<%= guild.id %>/staff" class="btn btn-primary">
+                <i class="bi bi-people-fill"></i> Staff Management
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Quick Stats</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Staff Members:</span>
+                        <span class="badge bg-primary rounded-pill">0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Active Staff:</span>
+                        <span class="badge bg-success rounded-pill">0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Inactive Staff:</span>
+                        <span class="badge bg-danger rounded-pill">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Bot Settings</h5>
+                </div>
+                <div class="card-body">
+                    <form id="botSettingsForm">
+                        <div class="mb-3">
+                            <label for="staffRole" class="form-label">Staff Role</label>
+                            <select class="form-select" id="staffRole" name="staffRole">
+                                <option selected>Select a role</option>
+                                <!-- Roles would be populated dynamically -->
+                                <option value="role1">Staff</option>
+                                <option value="role2">Moderator</option>
+                                <option value="role3">Admin</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="logChannel" class="form-label">Log Channel</label>
+                            <select class="form-select" id="logChannel" name="logChannel">
+                                <option selected>Select a channel</option>
+                                <!-- Channels would be populated dynamically -->
+                                <option value="channel1">staff-logs</option>
+                                <option value="channel2">bot-logs</option>
+                                <option value="channel3">admin-logs</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="enableStaffTracking" name="enableStaffTracking" checked>
+                            <label class="form-check-label" for="enableStaffTracking">Enable Staff Activity Tracking</label>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="inactivityThreshold" class="form-label">Inactivity Threshold (days)</label>
+                            <input type="number" class="form-control" id="inactivityThreshold" name="inactivityThreshold" value="7">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="card-title mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-center text-muted">No recent activity to display.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('botSettingsForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Here you would handle the form submission with fetch or axios
+    alert('Settings saved!');
+});
+</script> 

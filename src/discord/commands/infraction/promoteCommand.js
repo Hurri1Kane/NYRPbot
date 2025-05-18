@@ -39,8 +39,8 @@ function initializePromotionPaths() {
   
   // Internal Affairs path
   promotionPaths.set(roleIds.TrialInternalAffairs, [roleIds.InternalAffairs]);
-  promotionPaths.set(roleIds.InternalAffairs, [roleIds.InternalAffairsDirector, roleIds.StaffSupervisorInTraining]);
-  promotionPaths.set(roleIds.InternalAffairsDirector, [roleIds.StaffSupervisorInTraining]);
+  promotionPaths.set(roleIds.InternalAffairs, [roleIds.HeadInternalAffairs, roleIds.TrialStaffOverseer]);
+  promotionPaths.set(roleIds.HeadInternalAffairs, [roleIds.TrialStaffOverseer]);
 
   // Management path
   promotionPaths.set(roleIds.TrialManager, [roleIds.Manager]);

@@ -3086,3 +3086,1182 @@
 {"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-16T22:06:15.828Z"}
 {"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-16T22:06:15.828Z"}
 {"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-16T22:06:16.239Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.262Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.276Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.277Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.278Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.285Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.286Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.286Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.299Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.309Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.320Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.324Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.333Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.334Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.335Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.336Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:24.336Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.052Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.054Z"}
+{"level":"info","message":"Initialized ticket counter: 1000","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.146Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.462Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.639Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.640Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.642Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.643Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.645Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.646Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.649Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.651Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.654Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.682Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.683Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.687Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.694Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.694Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:25.695Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:26.061Z"}
+{"level":"info","message":"Starting transcript generation for ticket TICKET-1001","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:46.038Z"}
+{"level":"info","message":"Transcript posted to channel transcripts (1373059369675259964)","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:46.960Z"}
+{"level":"info","message":"Transcript successfully generated for ticket TICKET-1001","service":"nyrp-staff-bot","timestamp":"2025-05-17T09:57:46.960Z"}
+{"level":"error","message":"Error viewing infraction: Received one or more errors","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:01:40.463Z"}
+{"channelId":"1373238012510474271","commandName":"infraction","context":"Infraction view","errorId":"ERR-MAS25GUJ-VJ0AJ","interactionId":"1373239036856238090","level":"error","message":"Received one or more errors","service":"nyrp-staff-bot","stack":"Error: Received one or more errors\n    at _ArrayValidator.handle (D:\\NYRPbot\\NYRPbot\\node_modules\\@sapphire\\shapeshift\\dist\\cjs\\index.cjs:1254:70)\n    at _ArrayValidator.parse (D:\\NYRPbot\\NYRPbot\\node_modules\\@sapphire\\shapeshift\\dist\\cjs\\index.cjs:972:90)\n    at EmbedBuilder.addFields (D:\\NYRPbot\\NYRPbot\\node_modules\\@discordjs\\builders\\dist\\index.js:225:31)\n    at handleView (D:\\NYRPbot\\NYRPbot\\src\\discord\\commands\\infraction\\createInfraction.js:921:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Object.execute (D:\\NYRPbot\\NYRPbot\\src\\discord\\commands\\infraction\\createInfraction.js:221:11)\n    at async handleChatCommand (D:\\NYRPbot\\NYRPbot\\src\\discord\\events\\interactionCreate.js:153:5)\n    at async Object.execute (D:\\NYRPbot\\NYRPbot\\src\\discord\\events\\interactionCreate.js:42:9)","timestamp":"2025-05-17T10:01:40.747Z","userId":"538620090523058178"}
+{"level":"warn","message":"No handler found for button office:close:CASE-21","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:03:44.931Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.395Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.416Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.416Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.418Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.432Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.433Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.434Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.466Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.506Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.532Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.541Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.558Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.558Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.564Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.565Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:06.565Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:07.133Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:07.134Z"}
+{"level":"info","message":"Initialized ticket counter: 1001","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:07.204Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:07.418Z"}
+{"level":"info","message":"Deploying slash commands...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:14.606Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:14.609Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:14.618Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:14.619Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.013Z"}
+{"level":"info","message":"Slash commands deployed successfully.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.014Z"}
+{"level":"info","message":"Starting suspension expiration checker...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.014Z"}
+{"level":"info","message":"Starting suspension checker to run every 5 minutes","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.016Z"}
+{"level":"info","message":"Starting background tasks...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.017Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.019Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.020Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.021Z"}
+{"level":"info","message":"Started task: ticketActivityCheck","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.022Z"}
+{"level":"info","message":"Started task: officeCleanup","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.022Z"}
+{"level":"info","message":"Started task: databaseMaintenance","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.023Z"}
+{"level":"info","message":"Started 3 background tasks","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.024Z"}
+{"level":"info","message":"Bot initialization complete!","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:15.025Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.597Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.612Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.613Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.614Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.621Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.621Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.622Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.635Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.646Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.658Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.662Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.671Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.672Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.674Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.674Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:42.675Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:43.271Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:43.272Z"}
+{"level":"info","message":"Initialized ticket counter: 1001","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:43.377Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:43.631Z"}
+{"level":"info","message":"Shutting down...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:04:43.655Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.904Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.918Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.919Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.919Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.927Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.927Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.928Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.941Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.953Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.963Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.967Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.975Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.975Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.977Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.977Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:45.978Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:46.553Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:46.555Z"}
+{"level":"info","message":"Initialized ticket counter: 1001","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:46.632Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:46.905Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.191Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.192Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.192Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.192Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.193Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.193Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.195Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.196Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.196Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.202Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.203Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.204Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.204Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.205Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.205Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:08:47.491Z"}
+{"level":"info","message":"Starting transcript generation for ticket TICKET-1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:09:21.697Z"}
+{"level":"info","message":"Transcript posted to channel transcripts-not-implemented (1361678271208624189)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:09:22.434Z"}
+{"level":"info","message":"Transcript successfully generated for ticket TICKET-1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:09:22.434Z"}
+{"level":"info","message":"Starting transcript generation for ticket TICKET-1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:09:30.703Z"}
+{"level":"info","message":"Transcript posted to channel transcripts-not-implemented (1361678271208624189)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:09:31.629Z"}
+{"level":"info","message":"Transcript successfully generated for ticket TICKET-1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:09:31.629Z"}
+{"channelId":"1373240887857119302","context":"Ticket Delete Command","errorId":"ERR-MAS2FK8V-TOOZN","interactionId":"1373241008506146836","level":"error","message":"AuditLog validation failed: actionType: `Ticket_Deleted` is not a valid enum value for path `actionType`.","service":"nyrp-staff-bot","stack":"ValidationError: AuditLog validation failed: actionType: `Ticket_Deleted` is not a valid enum value for path `actionType`.\n    at Document.invalidate (D:\\NYRPbot\\NYRPbot\\node_modules\\mongoose\\lib\\document.js:3351:32)\n    at D:\\NYRPbot\\NYRPbot\\node_modules\\mongoose\\lib\\document.js:3112:17\n    at D:\\NYRPbot\\NYRPbot\\node_modules\\mongoose\\lib\\schemaType.js:1407:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:85:11)","timestamp":"2025-05-17T10:09:31.712Z","userId":"538620090523058178"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.447Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.465Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.466Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.467Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.474Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.476Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.476Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.491Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.503Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.515Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.519Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.530Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.530Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.532Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.532Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:51.532Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.148Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.148Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.204Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.458Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.639Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.640Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.640Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.641Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.641Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.641Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.642Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.642Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.643Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.648Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.649Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.650Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.651Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.651Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.651Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:12:52.961Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.716Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.733Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.734Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.735Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.742Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.743Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.743Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.757Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.770Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.781Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.784Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.793Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.794Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.796Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.796Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:08.796Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:09.621Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:09.622Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:09.684Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:09.948Z"}
+{"level":"info","message":"Deploying slash commands...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:15.727Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:15.728Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:15.739Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:15.740Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.176Z"}
+{"level":"info","message":"Slash commands deployed successfully.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.177Z"}
+{"level":"info","message":"Starting suspension expiration checker...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.178Z"}
+{"level":"info","message":"Starting suspension checker to run every 5 minutes","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.181Z"}
+{"level":"info","message":"Starting background tasks...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.186Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.187Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.187Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.188Z"}
+{"level":"info","message":"Started task: ticketActivityCheck","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.190Z"}
+{"level":"info","message":"Started task: officeCleanup","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.190Z"}
+{"level":"info","message":"Started task: databaseMaintenance","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.191Z"}
+{"level":"info","message":"Started 3 background tasks","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.191Z"}
+{"level":"info","message":"Bot initialization complete!","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:16.192Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.182Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.202Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.202Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.203Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.211Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.212Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.213Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.228Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.239Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.250Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.254Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.263Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.263Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.264Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.265Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.265Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.742Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.743Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:34.800Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.013Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.258Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.259Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.259Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.260Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.261Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.261Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.262Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.262Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.262Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.268Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.268Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.270Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.270Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.270Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.270Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:35.581Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.909Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.924Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.925Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.926Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.934Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.935Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.935Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.948Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.961Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.972Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.976Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.985Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.986Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.987Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.987Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:48.988Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.489Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.490Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.556Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.812Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.996Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.996Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.997Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.997Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.997Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.998Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.998Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.999Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:49.999Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:50.005Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:50.006Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:50.007Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:50.008Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:50.008Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:13:50.008Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.247Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.263Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.264Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.264Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.273Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.275Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.276Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.290Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.305Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.316Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.320Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.329Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.330Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.331Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.332Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.332Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.841Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.842Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:13.894Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.097Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.341Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.341Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.341Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.342Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.342Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.343Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.343Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.344Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.345Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.352Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.352Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.354Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.355Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.355Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.355Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:14.712Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.021Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.040Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.040Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.041Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.103Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.148Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.154Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.175Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.210Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.228Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.231Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.249Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.249Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.251Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.252Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.252Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.860Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.861Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:49.918Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.513Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.528Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.528Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.529Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.536Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.537Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.538Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.550Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.564Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.576Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.580Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.590Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.590Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.592Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.593Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:52.593Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.126Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.127Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.183Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.446Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.718Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.719Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.720Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.721Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.722Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.722Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.723Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.724Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.725Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.732Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.732Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.734Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.735Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.735Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:53.735Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:14:55.258Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.135Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.150Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.151Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.153Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.160Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.161Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.162Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.177Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.191Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.206Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.211Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.230Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.230Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.233Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.233Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.233Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.816Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.816Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:22.874Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.142Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.342Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.343Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.343Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.344Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.345Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.345Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.347Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.348Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.349Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.359Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.360Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.363Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.364Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.365Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.365Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:23.643Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.034Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.048Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.048Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.049Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.056Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.057Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.057Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.069Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.079Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.090Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.093Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.102Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.103Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.104Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.105Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.105Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.577Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.578Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.630Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:33.842Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.060Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.060Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.061Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.061Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.062Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.062Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.063Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.064Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.064Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.071Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.072Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.074Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.074Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.075Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.075Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:34.375Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.204Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.218Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.219Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.220Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.227Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.228Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.228Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.240Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.252Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.263Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.266Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.275Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.276Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.277Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.278Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.278Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.777Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.777Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:53.834Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.112Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.361Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.362Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.362Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.362Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.363Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.363Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.364Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.364Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.365Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.370Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.370Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.372Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.372Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.372Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.372Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:15:54.686Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.071Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.086Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.087Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.088Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.095Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.096Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.097Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.108Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.118Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.128Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.131Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.140Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.140Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.142Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.142Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.143Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.671Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.672Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:10.725Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.019Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.172Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.174Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.175Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.176Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.177Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.178Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.180Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.180Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.182Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.188Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.189Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.190Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.190Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.190Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.191Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:11.476Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.406Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.422Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.423Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.423Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.431Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.432Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.433Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.447Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.460Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.474Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.478Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.488Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.488Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.490Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.490Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.491Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.966Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:35.967Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.027Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.277Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.495Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.496Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.498Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.499Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.501Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.502Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.505Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.506Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.508Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.522Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.523Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.526Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.527Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.527Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.528Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:36.868Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.404Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.522Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.539Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.558Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.587Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.590Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.591Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.625Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.655Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.679Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.684Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.703Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.703Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.710Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.711Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:40.711Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.314Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.314Z"}
+{"level":"info","message":"Initialized ticket counter: 1002","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.377Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.587Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.825Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.826Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.826Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.826Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.827Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.827Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.827Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.828Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.828Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.833Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.833Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.835Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.835Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.835Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:41.835Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:39:42.116Z"}
+{"level":"info","message":"Starting transcript generation for ticket TICKET-1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:40:22.811Z"}
+{"level":"info","message":"Transcript posted to channel transcripts-not-implemented (1361678271208624189)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:40:23.820Z"}
+{"level":"info","message":"Transcript successfully generated for ticket TICKET-1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:40:23.821Z"}
+{"level":"info","message":"Starting transcript generation for ticket TICKET-1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:40:28.437Z"}
+{"level":"info","message":"Transcript posted to channel transcripts-not-implemented (1361678271208624189)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:40:30.615Z"}
+{"level":"info","message":"Transcript successfully generated for ticket TICKET-1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:40:30.620Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.179Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.197Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.198Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.199Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.212Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.213Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.214Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.233Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.250Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.265Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.272Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.290Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.290Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.294Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.296Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:57.298Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.131Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.132Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.186Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.508Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.678Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.678Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.679Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.679Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.680Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.680Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.681Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.681Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.682Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.688Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.689Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.690Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.690Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.691Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.691Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:45:58.995Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.618Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.645Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.645Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.647Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.655Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.659Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.660Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.689Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.706Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.723Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.730Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.750Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.751Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.759Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.762Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:10.764Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:11.318Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:11.319Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:11.381Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:11.604Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.019Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.020Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.020Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.021Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.021Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.021Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.022Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.022Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.023Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.029Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.029Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.031Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.031Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.031Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.032Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:12.353Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.141Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.159Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.160Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.160Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.170Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.172Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.173Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.195Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.209Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.224Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.229Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.240Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.240Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.242Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.243Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.243Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.734Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.735Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:45.789Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.033Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.243Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.244Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.244Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.244Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.245Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.245Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.246Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.246Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.247Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.252Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.253Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.255Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.256Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.257Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.257Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:46:46.578Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.811Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.832Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.832Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.833Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.856Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.869Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.875Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.931Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:14.968Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.004Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.037Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.072Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.073Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.075Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.075Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.076Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.635Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.636Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.686Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:15.940Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.323Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.324Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.324Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.324Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.325Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.325Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.326Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.327Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.327Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.334Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.335Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.337Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.337Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.337Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.338Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:16.628Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.253Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.294Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.296Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.300Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.333Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.334Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.338Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.367Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.422Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.526Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.541Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.572Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.574Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.578Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.579Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:42.580Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:43.217Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:43.222Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:43.449Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:43.839Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.169Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.191Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.201Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.220Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.233Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.234Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.241Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.256Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.262Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.293Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.302Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.320Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.321Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.322Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.324Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:47:44.775Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.437Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.457Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.458Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.461Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.471Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.472Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.472Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.496Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.518Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.533Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.540Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.563Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.565Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.567Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.567Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:04.567Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.187Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.199Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.258Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.519Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.870Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.871Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.872Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.872Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.872Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.873Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.874Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.875Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.876Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.888Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.889Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.892Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.893Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.893Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:05.893Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:06.263Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.004Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.023Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.024Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.025Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.041Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.047Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.048Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.068Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.088Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.103Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.110Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.132Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.146Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.148Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.149Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.150Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.752Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.752Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:12.813Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.183Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.277Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.278Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.278Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.278Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.279Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.279Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.280Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.281Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.281Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.288Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.289Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.291Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.292Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.292Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:13.294Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.659Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.687Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.688Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.688Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.700Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.701Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.702Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.729Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.763Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.778Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.793Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.812Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.812Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.817Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.818Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:29.819Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:30.490Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:30.491Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:30.542Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:30.874Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.032Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.032Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.033Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.033Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.033Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.034Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.034Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.036Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.039Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.047Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.048Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.049Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.049Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.050Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.050Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:31.534Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.145Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.164Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.165Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.165Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.178Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.179Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.179Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.195Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.212Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.227Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.232Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.246Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.247Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.249Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.249Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.250Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.774Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.775Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:49.832Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.093Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.298Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.298Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.299Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.299Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.299Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.299Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.300Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.301Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.302Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.307Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.307Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.309Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.310Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.310Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:48:50.311Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T10:49:29.403Z"}
+{"channelId":"1357029740795662407","commandName":"office","context":"Office Create Command","errorId":"ERR-MAS54FJA-UAYSJ","interactionId":"1373259966370156614","level":"error","message":"E11000 duplicate key error collection: test.offices index: officeId_1 dup key: { officeId: \"CASE-10\" }","service":"nyrp-staff-bot","stack":"MongoServerError: E11000 duplicate key error collection: test.offices index: officeId_1 dup key: { officeId: \"CASE-10\" }\n    at InsertOneOperation.execute (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async tryOperation (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:207:20)\n    at async executeOperation (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:75:16)\n    at async Collection.insertOne (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\collection.js:157:16)","timestamp":"2025-05-17T11:24:51.238Z","userId":"928077046670827580"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.085Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.101Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.102Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.104Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.113Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.114Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.115Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.135Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.147Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.161Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.166Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.178Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.179Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.181Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.182Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.183Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.752Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.752Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:41.810Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.125Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.267Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.268Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.269Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.269Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.270Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.270Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.271Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.271Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.272Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.277Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.278Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.280Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.280Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.281Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:42.281Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.947Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.963Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.964Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.966Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.977Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.978Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.978Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:45.994Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.007Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.022Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.026Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.037Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.037Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.042Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.042Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.043Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.608Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.608Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.665Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:46.899Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.106Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.107Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.107Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.107Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.108Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.108Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.109Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.109Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.110Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.116Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.116Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.118Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.119Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.119Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.119Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:47.459Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.813Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.830Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.831Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.831Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.841Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.841Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.842Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.862Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.877Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.891Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.897Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.911Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.911Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.913Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.913Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:50.914Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.465Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.466Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.523Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.780Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.959Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.960Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.960Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.960Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.961Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.961Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.962Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.962Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.963Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.969Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.969Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.971Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.972Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.973Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:25:51.973Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:02.946Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.046Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.056Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.070Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.095Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.102Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.109Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.133Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.148Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.163Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.170Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.181Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.182Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.184Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.185Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.186Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.683Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.683Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.741Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:03.966Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.184Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.185Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.187Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.187Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.188Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.188Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.189Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.189Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.190Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.198Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.199Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.201Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.201Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.202Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:04.202Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.239Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.256Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.257Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.257Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.268Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.269Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.271Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.289Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.306Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.322Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.327Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.340Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.341Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.343Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.343Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.344Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.851Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.852Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:18.906Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.137Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.558Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.558Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.559Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.559Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.559Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.560Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.560Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.560Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.561Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.566Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.567Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.568Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.569Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.570Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.571Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:26:19.871Z"}
+{"channelId":"1357029738538860695","commandName":"office","context":"Office Create Command","errorId":"ERR-MAS5992L-TMYQU","interactionId":"1373260906720395346","level":"error","message":"E11000 duplicate key error collection: test.offices index: officeId_1 dup key: { officeId: \"CASE-10\" }","service":"nyrp-staff-bot","stack":"MongoServerError: E11000 duplicate key error collection: test.offices index: officeId_1 dup key: { officeId: \"CASE-10\" }\n    at InsertOneOperation.execute (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\insert.js:51:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async tryOperation (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:207:20)\n    at async executeOperation (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\operations\\execute_operation.js:75:16)\n    at async Collection.insertOne (D:\\NYRPbot\\NYRPbot\\node_modules\\mongodb\\lib\\collection.js:157:16)","timestamp":"2025-05-17T11:28:36.141Z","userId":"538620090523058178"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.888Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.917Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.917Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.931Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.963Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.966Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:06.967Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.138Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.228Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.297Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.323Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.362Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.366Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.376Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.379Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:07.381Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.056Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.057Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.116Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.405Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.556Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.558Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.559Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.560Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.561Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.561Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.562Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.562Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.563Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.571Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.571Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.573Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.574Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.574Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.574Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:31:08.838Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.900Z"}
+{"level":"info","message":"Starting NYRP Staff Management Bot...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.933Z"}
+{"level":"info","message":"Connecting to database...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.938Z"}
+{"level":"info","message":"Connecting to MongoDB (Attempt 1/5)...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.939Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.955Z"}
+{"level":"info","message":"Database connection established.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.961Z"}
+{"level":"info","message":"Loading commands and event handlers...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.965Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:17.997Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.043Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.072Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.079Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.108Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.110Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.113Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.117Z"}
+{"level":"info","message":"Logging in to Discord...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.120Z"}
+{"level":"info","message":"Successfully connected to MongoDB","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.984Z"}
+{"level":"info","message":"Connected to database","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:18.985Z"}
+{"level":"info","message":"Initialized ticket counter: 1003","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.068Z"}
+{"level":"info","message":"Initialized office counter: 9","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.343Z"}
+{"level":"info","message":"Loaded command: infraction","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.514Z"}
+{"level":"info","message":"Loaded command: promote","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.515Z"}
+{"level":"info","message":"Loaded command: ticket","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.515Z"}
+{"level":"info","message":"Loaded command: ticketpanel","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.515Z"}
+{"level":"info","message":"Loaded command: office","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.516Z"}
+{"level":"info","message":"Successfully loaded 5 commands.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.516Z"}
+{"level":"info","message":"Registered event: interactionCreate","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.516Z"}
+{"level":"info","message":"Successfully registered 1 events.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.517Z"}
+{"level":"info","message":"Loading commands for deployment...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.518Z"}
+{"level":"info","message":"Loaded 5 commands for deployment.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.523Z"}
+{"level":"info","message":"Deploying commands to guild 1357029737955983360...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.523Z"}
+{"level":"info","message":"Registered background task: ticketActivityCheck (1800000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.524Z"}
+{"level":"info","message":"Registered background task: officeCleanup (3600000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.525Z"}
+{"level":"info","message":"Registered background task: databaseMaintenance (86400000ms interval)","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.526Z"}
+{"level":"info","message":"Bot is up and running","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.527Z"}
+{"level":"info","message":"Successfully deployed 5 commands to guild 1357029737955983360.","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:19.789Z"}
+{"level":"warn","message":"Office ID CASE-10 already exists, incrementing...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:30.445Z"}
+{"level":"warn","message":"Office ID CASE-11 already exists, incrementing...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:30.481Z"}
+{"level":"warn","message":"Office ID CASE-12 already exists, incrementing...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:30.521Z"}
+{"level":"warn","message":"Office ID CASE-13 already exists, incrementing...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:30.558Z"}
+{"level":"warn","message":"Office ID CASE-14 already exists, incrementing...","service":"nyrp-staff-bot","timestamp":"2025-05-17T11:35:30.595Z"}

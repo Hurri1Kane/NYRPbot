@@ -186,6 +186,17 @@ const {
       )
       .addSubcommand(subcommand => 
         subcommand
+          .setName('delete')
+          .setDescription('Instantly delete a ticket channel (staff only)')
+          .addStringOption(option => 
+            option
+              .setName('reason')
+              .setDescription('Reason for deleting the ticket')
+              .setRequired(true)
+          )
+      )
+      .addSubcommand(subcommand => 
+        subcommand
           .setName('claim')
           .setDescription('Claim a ticket to handle it (run in the ticket channel)')
       )
@@ -248,7 +259,7 @@ const {
       .addSubcommand(subcommand => 
         subcommand
           .setName('transcript')
-          .setDescription('Generate a transcript of the ticket (run in the ticket channel)')
+          .setDescription('Generate a transcript of the current ticket')
       ),
     
     // Set permissions - Everyone can create tickets, but staff-only for management
@@ -258,6 +269,7 @@ const {
     subcommandPermissions: {
       'create': null, // Everyone can create tickets
       'close': PERMISSION_PRESETS.MODERATOR_PLUS,
+      'delete': PERMISSION_PRESETS.MODERATOR_PLUS,
       'claim': PERMISSION_PRESETS.MODERATOR_PLUS,
       'unclaim': PERMISSION_PRESETS.MODERATOR_PLUS,
       'add': PERMISSION_PRESETS.MODERATOR_PLUS,
@@ -277,6 +289,9 @@ const {
             break;
           case 'close':
             await handleCloseTicket(interaction, interactionKey);
+            break;
+          case 'delete':
+            await handleDeleteTicket(interaction, interactionKey);
             break;
           case 'claim':
             await handleClaimTicket(interaction, interactionKey);
@@ -444,7 +459,7 @@ const {
       
       await logEntry.save();
       
-      // Send welcome message
+      // Send welcome message with improved embed
       const welcomeEmbed = new EmbedBuilder()
         .setColor(getTicketCategoryColor(category))
         .setTitle(`New Ticket: ${subject}`)
@@ -454,18 +469,36 @@ const {
           { name: 'Category', value: category, inline: true },
           { name: 'Priority', value: priority, inline: true }
         )
-        .setFooter({ text: 'Please be patient while staff reviews your ticket.' })
+        .setFooter({ 
+          text: `NYRP Support System`,
+          iconURL: interaction.guild.iconURL({ dynamic: true })
+        })
+        .setTimestamp();
+      
+      // Create description embed instead of sending as plain text
+      const descriptionEmbed = new EmbedBuilder()
+        .setColor(getTicketCategoryColor(category))
+        .setTitle('Ticket Details')
+        .setDescription(description)
+        .setAuthor({ 
+          name: interaction.user.username, 
+          iconURL: interaction.user.displayAvatarURL({ dynamic: true }) 
+        })
         .setTimestamp();
       
       const buttonRow = new ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
             .setCustomId(`ticket:claim:${ticketId}`)
-            .setLabel('Claim Ticket')
+            .setLabel('Claim')
             .setStyle(ButtonStyle.Primary),
           new ButtonBuilder()
             .setCustomId(`ticket:close:${ticketId}`)
-            .setLabel('Close Ticket')
+            .setLabel('Close')
+            .setStyle(ButtonStyle.Secondary),
+          new ButtonBuilder()
+            .setCustomId(`ticket:delete:${ticketId}`)
+            .setLabel('Delete')
             .setStyle(ButtonStyle.Danger)
         );
       
@@ -475,12 +508,10 @@ const {
         components: [buttonRow]
       });
       
-      // Also send the description as a separate message
-      if (description) {
-        await channel.send({
-          content: `**Ticket Description from ${interaction.user}**:\n\n${description}`
-        });
-      }
+      // Send the description as an embed
+      await channel.send({
+        embeds: [descriptionEmbed]
+      });
       
       // Send confirmation to user
       await safeReply(interaction, {
@@ -584,14 +615,15 @@ const {
       const closureEmbed = new EmbedBuilder()
         .setColor('#FF0000')
         .setTitle('Ticket Closed')
-        .setDescription(`This ticket has been closed by ${interaction.user.username}.`)
+        .setDescription(`This ticket has been closed by ${interaction.user.toString()}.`)
         .addFields(
           { name: 'Reason', value: reason },
-          { name: 'Closed At', value: `<t:${Math.floor(Date.now() / 1000)}:F>` }
-        );
+          { name: 'Closed At', value: `<t:${Math.floor(Date.now() / 1000)}:R>` }
+        )
+        .setTimestamp();
       
       if (transcriptUrl) {
-        closureEmbed.addFields({ name: 'Transcript', value: 'A transcript has been saved automatically.' });
+        closureEmbed.addFields({ name: 'Transcript', value: 'A transcript has been saved.' });
       }
       
       // If the ticket was claimed, add that to the embed
@@ -667,6 +699,132 @@ const {
         content: `An error occurred while closing the ticket. Error ID: ${errorId}`,
         ephemeral: true
       }, interactionKey);
+    }
+  }
+  
+  /**
+   * Handle instant deletion of a ticket
+   */
+  async function handleDeleteTicket(interaction, interactionKey) {
+    await safeDefer(interaction, { ephemeral: false }, interactionKey);
+    
+    try {
+      // Check if user has permission to delete tickets
+      if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+        return await interaction.reply({
+          content: 'You do not have permission to instantly delete tickets.',
+          ephemeral: true
+        });
+      }
+      
+      const ticketId = interaction.options.getString('reason');
+      
+      // For administrators, delete instantly without showing a modal
+      if (interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
+        // Get ticket data
+        const ticketData = await Ticket.findOne({ ticketId });
+        if (!ticketData) {
+          return await interaction.reply({
+            content: 'Ticket not found.',
+            ephemeral: true
+          });
+        }
+        
+        // Generate transcript if enabled
+        let transcriptUrl = null;
+        if (config.ticketSettings?.transcriptGenerationEnabled) {
+          try {
+            transcriptUrl = await generateTranscript(interaction.channel, ticketData);
+            
+            // Update ticket with transcript URL
+            ticketData.transcriptUrl = transcriptUrl;
+            await ticketData.save();
+          } catch (transcriptError) {
+            logger.error(`Error generating transcript: ${transcriptError.message}`);
+          }
+        }
+        
+        // Update the ticket in the database
+        ticketData.status = 'Closed';
+        ticketData.closedBy = {
+          userId: interaction.user.id,
+          username: interaction.user.username,
+          closedAt: new Date(),
+          reason: `[DELETED] Instant deletion by administrator`
+        };
+        
+        await ticketData.save();
+        
+        // Create audit log entry
+        const logEntry = new AuditLog({
+          actionType: 'Ticket_Deleted',
+          performedBy: {
+            userId: interaction.user.id,
+            username: interaction.user.username
+          },
+          targetUser: {
+            userId: ticketData.creator.userId,
+            username: ticketData.creator.username
+          },
+          details: {
+            ticketId: ticketData.ticketId,
+            channelId: interaction.channelId,
+            reason: 'Instant deletion by administrator',
+            hasTranscript: !!transcriptUrl
+          },
+          relatedIds: {
+            ticketId: ticketData._id
+          }
+        });
+        
+        await logEntry.save();
+        
+        // Try to notify the creator via DM
+        try {
+          const creator = await interaction.client.users.fetch(ticketData.creator.userId);
+          
+          if (creator) {
+            const dmEmbed = new EmbedBuilder()
+              .setColor('#FF0000')
+              .setTitle('Ticket Deleted')
+              .setDescription(`Your ticket "${ticketData.subject}" has been deleted by staff.`)
+              .addFields(
+                { name: 'ID', value: ticketData.ticketId, inline: true },
+                { name: 'Category', value: ticketData.category, inline: true }
+              )
+              .setTimestamp();
+            
+            await creator.send({ embeds: [dmEmbed] }).catch(() => {
+              logger.debug(`Could not send ticket deletion DM to ${creator.tag}`);
+            });
+          }
+        } catch (dmError) {
+          logger.warn(`Failed to notify creator of ticket deletion: ${dmError.message}`);
+        }
+        
+        // Delete the channel
+        return await interaction.channel.delete(`Ticket deleted by ${interaction.user.username}`);
+      }
+      
+      // For regular staff, show the modal to collect a reason
+      const modal = new ModalBuilder()
+        .setCustomId(`ticket:deleteModal:${ticketId}`)
+        .setTitle('Delete Ticket');
+      
+      const reasonInput = new TextInputBuilder()
+        .setCustomId('reason')
+        .setLabel('Reason for deleting')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true)
+        .setPlaceholder('Reason for deletion')
+        .setMaxLength(100);
+      
+      const firstActionRow = new ActionRowBuilder().addComponents(reasonInput);
+      modal.addComponents(firstActionRow);
+      
+      await interaction.showModal(modal);
+    } catch (error) {
+      await ErrorHandler.handleInteractionError(error, interaction, 'Ticket Delete Button');
     }
   }
   
@@ -757,12 +915,8 @@ const {
       const claimEmbed = new EmbedBuilder()
         .setColor('#00FF00')
         .setTitle('Ticket Claimed')
-        .setDescription(`This ticket has been claimed by ${interaction.user}.`)
-        .addFields(
-          { name: 'Staff Member', value: interaction.user.username },
-          { name: 'Claimed At', value: `<t:${Math.floor(Date.now() / 1000)}:F>` }
-        )
-        .setFooter({ text: 'The staff member will now assist you with your issue.' });
+        .setDescription(`This ticket has been claimed by ${interaction.user.toString()}.`)
+        .setTimestamp();
       
       await interaction.channel.send({ embeds: [claimEmbed] });
       
@@ -865,14 +1019,13 @@ const {
       
       // Send unclaim message
       const unclaimEmbed = new EmbedBuilder()
-        .setColor('#FFA500')
+        .setColor('#FFFF00')
         .setTitle('Ticket Unclaimed')
-        .setDescription(`This ticket has been unclaimed by ${interaction.user}.`)
+        .setDescription(`This ticket has been unclaimed by ${interaction.user.toString()}.`)
         .addFields(
-          { name: 'Previous Staff Member', value: previousClaimer },
-          { name: 'Unclaimed At', value: `<t:${Math.floor(Date.now() / 1000)}:F>` }
+          { name: 'Note', value: 'This ticket is now available for other staff members to claim.' }
         )
-        .setFooter({ text: 'Another staff member will claim this ticket soon.' });
+        .setTimestamp();
       
       await interaction.channel.send({ embeds: [unclaimEmbed] });
     
@@ -1210,10 +1363,9 @@ async function handleGenerateTranscript(interaction, interactionKey) {
     
     // Post transcript link in the channel
     const transcriptEmbed = new EmbedBuilder()
-      .setColor(getTicketCategoryColor(ticketData.category))
+      .setColor('#00FFFF')
       .setTitle('Transcript Generated')
-      .setDescription(`A transcript of this ticket has been generated by ${interaction.user.username}.`)
-      .addFields({ name: 'Note', value: 'The transcript will be available to authorized staff members.' })
+      .setDescription(`A transcript of this ticket has been generated by ${interaction.user.toString()}.`)
       .setTimestamp();
     
     await interaction.channel.send({ embeds: [transcriptEmbed] });
@@ -1233,15 +1385,49 @@ async function handleGenerateTranscript(interaction, interactionKey) {
 function getTicketCategoryColor(category) {
   switch (category) {
     case 'General Support':
-      return '#0099ff'; // Blue
+      return '#4287f5'; // Bright blue
     case 'Staff Report':
-      return '#ff0000'; // Red
+      return '#e01e37'; // Bright red
     case 'In-game Report':
-      return '#ff9900'; // Orange
+      return '#ff9500'; // Bright orange
     case 'Ownership Support':
-      return '#00ff00'; // Green
+      return '#00b74a'; // Bright green
     default:
-      return '#00cc99'; // Teal
+      return '#6a0dad'; // Purple
+  }
+}
+
+/**
+ * Get emoji based on ticket category
+ */
+function getTicketCategoryEmoji(category) {
+  switch (category) {
+    case 'General Support':
+      return '🔹'; // Blue diamond
+    case 'Staff Report':
+      return '⚠️'; // Warning
+    case 'In-game Report':
+      return '🎮'; // Game controller
+    case 'Ownership Support':
+      return '👑'; // Crown
+    default:
+      return '🎫'; // Ticket
+  }
+}
+
+/**
+ * Get emoji based on ticket priority
+ */
+function getTicketPriorityEmoji(priority) {
+  switch (priority) {
+    case 'Low':
+      return '🟢'; // Green circle
+    case 'Medium':
+      return '🟠'; // Orange circle
+    case 'High':
+      return '🔴'; // Red circle
+    default:
+      return '⚪'; // White circle
   }
 }
 
@@ -1339,7 +1525,128 @@ module.exports.buttons = {
         ephemeral: true
       });
     }
-  }
+  },
+  
+  async delete(interaction, args) {
+    try {
+      // Check if user has permission to delete tickets
+      if (!interaction.member.permissions.has(PermissionFlagsBits.ManageChannels)) {
+        return await interaction.reply({
+          content: 'You do not have permission to instantly delete tickets.',
+          ephemeral: true
+        });
+      }
+      
+      const ticketId = args[0];
+      
+      // For administrators, delete instantly without showing a modal
+      if (interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
+        // Get ticket data
+        const ticketData = await Ticket.findOne({ ticketId });
+        if (!ticketData) {
+          return await interaction.reply({
+            content: 'Ticket not found.',
+            ephemeral: true
+          });
+        }
+        
+        // Generate transcript if enabled
+        let transcriptUrl = null;
+        if (config.ticketSettings?.transcriptGenerationEnabled) {
+          try {
+            transcriptUrl = await generateTranscript(interaction.channel, ticketData);
+            
+            // Update ticket with transcript URL
+            ticketData.transcriptUrl = transcriptUrl;
+            await ticketData.save();
+          } catch (transcriptError) {
+            logger.error(`Error generating transcript: ${transcriptError.message}`);
+          }
+        }
+        
+        // Update the ticket in the database
+        ticketData.status = 'Closed';
+        ticketData.closedBy = {
+          userId: interaction.user.id,
+          username: interaction.user.username,
+          closedAt: new Date(),
+          reason: `[DELETED] Instant deletion by administrator`
+        };
+        
+        await ticketData.save();
+        
+        // Create audit log entry
+        const logEntry = new AuditLog({
+          actionType: 'Ticket_Deleted',
+          performedBy: {
+            userId: interaction.user.id,
+            username: interaction.user.username
+          },
+          targetUser: {
+            userId: ticketData.creator.userId,
+            username: ticketData.creator.username
+          },
+          details: {
+            ticketId: ticketData.ticketId,
+            channelId: interaction.channelId,
+            reason: 'Instant deletion by administrator',
+            hasTranscript: !!transcriptUrl
+          },
+          relatedIds: {
+            ticketId: ticketData._id
+          }
+        });
+        
+        await logEntry.save();
+        
+        // Try to notify the creator via DM
+        try {
+          const creator = await interaction.client.users.fetch(ticketData.creator.userId);
+          
+          if (creator) {
+            const dmEmbed = new EmbedBuilder()
+              .setColor('#FF0000')
+              .setTitle('Ticket Deleted')
+              .setDescription(`Your ticket "${ticketData.subject}" has been deleted by staff.`)
+              .addFields(
+                { name: 'ID', value: ticketData.ticketId, inline: true },
+                { name: 'Category', value: ticketData.category, inline: true }
+              )
+              .setTimestamp();
+            
+            await creator.send({ embeds: [dmEmbed] }).catch(() => {
+              logger.debug(`Could not send ticket deletion DM to ${creator.tag}`);
+            });
+          }
+        } catch (dmError) {
+          logger.warn(`Failed to notify creator of ticket deletion: ${dmError.message}`);
+        }
+        
+        // Delete the channel
+        return await interaction.channel.delete(`Ticket deleted by ${interaction.user.username}`);
+      }
+      
+      // For regular staff, show the modal to collect a reason
+      const modal = new ModalBuilder()
+        .setCustomId(`ticket:deleteModal:${ticketId}`)
+        .setTitle('Delete Ticket');
+      
+      const reasonInput = new TextInputBuilder()
+        .setCustomId('reason')
+        .setLabel('Reason for deleting')
+        .setStyle(TextInputStyle.Short)
+        .setRequired(true)
+        .setPlaceholder('Reason for deletion')
+        .setMaxLength(100);
+      
+      const firstActionRow = new ActionRowBuilder().addComponents(reasonInput);
+      modal.addComponents(firstActionRow);
+      
+      await interaction.showModal(modal);
+    } catch (error) {
+      await ErrorHandler.handleInteractionError(error, interaction, 'Ticket Delete Button');
+    }
+  },
 };
 
 // Modal handlers for ticket inputs
@@ -1410,5 +1717,26 @@ module.exports.modals = {
         ephemeral: true
       }, interactionKey);
     }
-  }
+  },
+  
+  async deleteModal(interaction, args) {
+    try {
+      const ticketId = args[0];
+      const reason = interaction.fields.getTextInputValue('reason');
+      
+      // Set options as if it came from the command
+      interaction.options = {
+        getSubcommand: () => 'delete',
+        getString: (name) => {
+          if (name === 'reason') return reason;
+          return null;
+        }
+      };
+      
+      // Call the same handler used by the command
+      await handleDeleteTicket(interaction, `${interaction.id}-${interaction.user.id}`);
+    } catch (error) {
+      await ErrorHandler.handleInteractionError(error, interaction, 'Ticket Delete Modal');
+    }
+  },
 };

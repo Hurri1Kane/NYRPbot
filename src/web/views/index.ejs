@@ -1,0 +1,202 @@
+<%- include('layouts/main', { title: title, user: user, body: `
+<% if (!user) { %>
+<div class="auth-card">
+    <div class="auth-form">
+        <h1 class="auth-title">NYRP Staff Portal</h1>
+        <p>Welcome to the New York Roleplay Staff Management Dashboard.</p>
+        
+        <div class="social-icons">
+            <a href="/auth/discord" class="icon">
+                <i class="fab fa-discord"></i>
+            </a>
+        </div>
+        
+        <span>Login with Discord to continue</span>
+        
+        <a href="/auth/discord" class="btn btn-primary mt-4">
+            <i class="fab fa-discord me-2"></i> Login with Discord
+        </a>
+    </div>
+    
+    <div class="auth-banner">
+        <img src="/img/nyrp-logo.png" alt="NYRP Logo" class="auth-logo">
+        <h2 class="auth-title">New York Roleplay</h2>
+        <p class="auth-subtitle">Staff Management Dashboard</p>
+        <div class="auth-features">
+            <div class="feature">
+                <i class="fas fa-chart-line mb-2"></i>
+                <p>Track your activity</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users mb-2"></i>
+                <p>Manage staff members</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-file-alt mb-2"></i>
+                <p>Generate reports</p>
+            </div>
+        </div>
+    </div>
+</div>
+<% } else { %>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card welcome-card mb-4">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="welcome-avatar">
+                        <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="<%= user.username %>" class="rounded-circle">
+                    </div>
+                    <div class="welcome-text">
+                        <h2>Welcome back, <%= user.username %>!</h2>
+                        <p class="text-muted">Last login: Today at 10:30 AM</p>
+                    </div>
+                </div>
+                
+                <div class="quick-stats">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-primary-light">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>120</h3>
+                                    <p>Hours this month</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-success-light">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>85%</h3>
+                                    <p>Activity score</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-icon bg-info-light">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>15</h3>
+                                    <p>Days active</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Activity Overview</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="timeRangeDropdown" data-bs-toggle="dropdown">
+                        This Week
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">This Week</a></li>
+                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                        <li><a class="dropdown-item" href="#">Last 3 Months</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <canvas id="activityChart" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Upcoming Events</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Staff Meeting</h6>
+                            <small class="text-muted">Tomorrow</small>
+                        </div>
+                        <p class="mb-1 text-muted">8:00 PM EST</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Community Event</h6>
+                            <small class="text-muted">Saturday</small>
+                        </div>
+                        <p class="mb-1 text-muted">3:00 PM EST</p>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Performance Review</h6>
+                            <small class="text-muted">Next Week</small>
+                        </div>
+                        <p class="mb-1 text-muted">Monday, 2:00 PM EST</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Recent Announcements</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">New Staff Guidelines</h6>
+                            <small class="text-muted">2 days ago</small>
+                        </div>
+                        <p class="mb-1">Updated guidelines for staff activity tracking have been released.</p>
+                        <a href="#" class="btn btn-sm btn-link px-0">Read more</a>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">Server Update</h6>
+                            <small class="text-muted">5 days ago</small>
+                        </div>
+                        <p class="mb-1">The server will be updated with new features next week.</p>
+                        <a href="#" class="btn btn-sm btn-link px-0">Read more</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Quick Links</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    <a href="/dashboard/activity" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fas fa-chart-line me-3 text-primary"></i>
+                        <span>My Activity</span>
+                    </a>
+                    <a href="/dashboard/staff" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fas fa-users me-3 text-primary"></i>
+                        <span>Staff Management</span>
+                    </a>
+                    <a href="/dashboard/reports" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fas fa-file-alt me-3 text-primary"></i>
+                        <span>Reports</span>
+                    </a>
+                    <a href="https://discord.gg/nyrp" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <i class="fab fa-discord me-3 text-primary"></i>
+                        <span>NYRP Discord</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+` }) %> 

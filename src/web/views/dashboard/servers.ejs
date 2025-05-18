@@ -1,0 +1,54 @@
+<%- include('../layouts/main', { title: title, user: user }) %>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Manage Servers</h1>
+        <div>
+            <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=8" class="btn btn-primary" target="_blank">
+                <i class="bi bi-plus-circle"></i> Add Bot to Server
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <% if (guilds && guilds.length > 0) { %>
+            <% guilds.forEach(guild => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <% if (guild.icon) { %>
+                                    <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="<%= guild.name %>" class="rounded-circle me-3" width="48" height="48">
+                                <% } else { %>
+                                    <div class="rounded-circle bg-secondary text-white me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                        <%= guild.name.charAt(0) %>
+                                    </div>
+                                <% } %>
+                                <h5 class="card-title mb-0"><%= guild.name %></h5>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <a href="/dashboard/servers/<%= guild.id %>" class="btn btn-primary">
+                                    <i class="bi bi-gear-fill"></i> Manage
+                                </a>
+                                <a href="/dashboard/servers/<%= guild.id %>/staff" class="btn btn-outline-primary">
+                                    <i class="bi bi-people-fill"></i> Staff Management
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <p class="mb-0">You don't have any servers where you have admin permissions.</p>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=8" class="btn btn-primary" target="_blank">
+                        <i class="bi bi-plus-circle"></i> Add Bot to Server
+                    </a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div> 

@@ -127,12 +127,12 @@ const roleIds = {
       // Internal Affairs
       roleIds.TrialInternalAffairs,
       roleIds.InternalAffairs,
-      roleIds.InternalAffairsDirector,
+      roleIds.HeadInternalAffairs,
+      roleIds.InternalAffairsSupervisor,
       
-      // Supervision
-      roleIds.StaffSupervisorInTraining,
-      roleIds.StaffSupervisor,
-      roleIds.LeadStaffSupervisor,
+      // Staff Overseer
+      roleIds.TrialStaffOverseer,
+      roleIds.StaffOverseer,
       
       // Management
       roleIds.TrialManager,
@@ -207,14 +207,16 @@ const roleIds = {
     highRanks: [
       roleIds.HeadModerator,
       roleIds.HeadAdministrator,
-      roleIds.InternalAffairsDirector,
-      roleIds.LeadStaffSupervisor,
+      roleIds.HeadInternalAffairs,
+      roleIds.InternalAffairsSupervisor,
+      roleIds.StaffOverseer,
       ...this?.directiveTeam || []
     ],
     
     seniorHighRanks: [
-      roleIds.InternalAffairsDirector,
-      roleIds.LeadStaffSupervisor,
+      roleIds.HeadInternalAffairs,
+      roleIds.InternalAffairsSupervisor,
+      roleIds.StaffOverseer,
       ...this?.directiveTeam || []
     ]
   };
@@ -238,7 +240,8 @@ const roleIds = {
     // Internal Affairs Team
     [roleIds.TrialInternalAffairs]: roleIds.InternalAffairsCategory,
     [roleIds.InternalAffairs]: roleIds.InternalAffairsCategory,
-    [roleIds.InternalAffairsDirector]: roleIds.InternalAffairsCategory,
+    [roleIds.HeadInternalAffairs]: roleIds.InternalAffairsCategory,
+    [roleIds.InternalAffairsSupervisor]: roleIds.InternalAffairsCategory,
     
     // Management Team
     [roleIds.TrialManager]: roleIds.ManagementCategory,
@@ -253,9 +256,8 @@ const roleIds = {
     [roleIds.Director]: roleIds.DirectiveTeam,
     
     // Supervision Team (no specific category in the current config)
-    [roleIds.StaffSupervisorInTraining]: null,
-    [roleIds.StaffSupervisor]: null,
-    [roleIds.LeadStaffSupervisor]: null
+    [roleIds.TrialStaffOverseer]: null,
+    [roleIds.StaffOverseer]: null
   };
   
   module.exports = {

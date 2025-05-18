@@ -20,6 +20,7 @@ const AuditLogSchema = new mongoose.Schema({
       'Ticket_Created',
       'Ticket_Claimed',
       'Ticket_Closed',
+      'Ticket_Deleted',
       'System_Error'
     ],
     index: true

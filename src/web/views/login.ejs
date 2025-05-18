@@ -1,0 +1,40 @@
+<%- include('layouts/main', { title: title, user: user, body: `
+<div class="auth-card">
+    <div class="auth-form">
+        <h1 class="auth-title">NYRP Staff Login</h1>
+        <p>Login with your Discord account to access the staff dashboard.</p>
+        
+        <div class="social-icons">
+            <a href="/auth/discord" class="icon">
+                <i class="fab fa-discord"></i>
+            </a>
+        </div>
+        
+        <span>Login with Discord to continue</span>
+        
+        <a href="/auth/discord" class="btn btn-primary mt-4">
+            <i class="fab fa-discord me-2"></i> Login with Discord
+        </a>
+    </div>
+    
+    <div class="auth-banner">
+        <img src="/img/nyrp-logo.png" alt="NYRP Logo" class="auth-logo">
+        <h2 class="auth-title">New York Roleplay</h2>
+        <p class="auth-subtitle">Staff Management Dashboard</p>
+        <div class="auth-features">
+            <div class="feature">
+                <i class="fas fa-chart-line mb-2"></i>
+                <p>Track your activity</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users mb-2"></i>
+                <p>Manage staff members</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-file-alt mb-2"></i>
+                <p>Generate reports</p>
+            </div>
+        </div>
+    </div>
+</div>
+` }) %> 
